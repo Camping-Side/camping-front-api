@@ -1,4 +1,4 @@
-package com.commerce.config;
+package com.commerce.song.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.context.annotation.Bean;

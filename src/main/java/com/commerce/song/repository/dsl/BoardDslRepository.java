@@ -1,18 +1,14 @@
-package com.commerce.repository.dsl;
+package com.commerce.song.repository.dsl;
 
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.suwon.corona.domain.Corona;
-import com.suwon.corona.domain.dto.CoronaSearch;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
-
-import static com.suwon.corona.domain.QCorona.corona;
 
 @Repository
 @RequiredArgsConstructor
