@@ -1,9 +1,7 @@
 package com.commerce.song.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,6 +10,7 @@ import java.util.Set;
 
 @Entity
 @Getter
+@Setter
 @ToString(exclude = {"userRoles"})
 @EqualsAndHashCode(of = "id", callSuper = false)
 public class Account extends BaseEntity implements Serializable {
@@ -43,4 +42,6 @@ public class Account extends BaseEntity implements Serializable {
             inverseJoinColumns = { @JoinColumn(name = "role_id")}
     )
     private Set<Role> userRoles = new HashSet<>();
+
+
 }

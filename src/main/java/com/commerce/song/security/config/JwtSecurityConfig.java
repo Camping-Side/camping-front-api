@@ -6,12 +6,16 @@ import com.commerce.song.security.handler.JwtAccessDeniedHandler;
 import com.commerce.song.security.provider.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
@@ -21,7 +25,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtTokenProvider jwtTokenProvider;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
-    private final PasswordEncoder passwordEncoder;
+//    private final PasswordEncoder passwordEncoder;
+
+    @Override
+    public void configure(WebSecurity web) {
+        web.ignoring()
+                .antMatchers(
+                        "/h2-console/**",
+                        "/favicon.ico"
+                );
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -39,12 +52,17 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
                 .authorizeRequests()
-                .antMatchers("/api/v1/authenticate").permitAll()
+                .antMatchers("/h2-console/**","/api/v1/accounts", "/api/v1/accounts/*","/api/v1/accounts/**").permitAll()
                 .antMatchers("/api/v1/account/test").hasRole("USER")
                 .anyRequest()
                 .authenticated()
         .and()
                 .apply(new JwtAdapter(jwtTokenProvider));
 
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }
