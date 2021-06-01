@@ -22,6 +22,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 
+//@CrossOrigin(origins = "http://localhost:3030")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/accounts")
