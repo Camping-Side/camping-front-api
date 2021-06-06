@@ -11,6 +11,9 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString(exclude = {"userRoles"})
 @EqualsAndHashCode(of = "id", callSuper = false)
 public class Account extends BaseEntity implements Serializable {
