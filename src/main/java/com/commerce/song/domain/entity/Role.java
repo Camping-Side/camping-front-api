@@ -5,11 +5,14 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "ROLE")
 @Getter
 @Builder
+@ToString(exclude = {"users","resourcesSet"})
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id", callSuper = false)
@@ -28,4 +31,7 @@ public class Role extends BaseEntity implements Serializable {
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "userRoles")
     private Set<Account> accounts = new HashSet<>();
 
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roleSet")
+    @OrderBy("orderNum desc")
+    private Set<Resources> resourcesSet = new LinkedHashSet<>();
 }

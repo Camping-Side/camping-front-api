@@ -1,8 +1,10 @@
 package com.commerce.song.security.listener;
 
 import com.commerce.song.domain.entity.Account;
+import com.commerce.song.domain.entity.Resources;
 import com.commerce.song.domain.entity.Role;
 import com.commerce.song.repository.AccountRepository;
+import com.commerce.song.repository.ResourcesRepository;
 import com.commerce.song.repository.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationListener;
@@ -13,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 @Component
@@ -20,8 +23,11 @@ import java.util.Set;
 public class SetupDataLoader implements ApplicationListener<ContextRefreshedEvent> {
     private final RoleRepository roleRepository;
     private final AccountRepository accountRepository;
+    private final ResourcesRepository resourcesRepository;
     private final PasswordEncoder passwordEncoder;
     private boolean alreadySetup = false;
+
+    private static AtomicInteger count = new AtomicInteger(0);
 
     @Override
     @Transactional
@@ -41,6 +47,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         adminRoleSet.add(adminRole);
         adminRoleSet.add(managerRole);
         adminRoleSet.add(userRole);
+        createResourceIfNotFound("/admin/**", "", adminRoleSet, "url");
 
         Set<Role> managerRoleSet = new HashSet<>();
         managerRoleSet.add(managerRole);
@@ -54,6 +61,22 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         Account userAccount = createAccountIfNotFound("user", "1111", "user@gmail.com", 20, userRoleSet);
 
 
+    }
+
+    @Transactional
+    public Resources createResourceIfNotFound(String resourceName, String httpMethod, Set<Role> roleSet, String resourceType) {
+        Resources resources = resourcesRepository.findByResourceNameAndHttpMethod(resourceName, httpMethod);
+
+        if (resources == null) {
+            resources = Resources.builder()
+                    .resourceName(resourceName)
+                    .roleSet(roleSet)
+                    .httpMethod(httpMethod)
+                    .resourceType(resourceType)
+                    .orderNum(count.incrementAndGet())
+                    .build();
+        }
+        return resourcesRepository.save(resources);
     }
 
     @Transactional
