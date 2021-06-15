@@ -45,9 +45,10 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
         Set<Role> adminRoleSet = new HashSet<>();
         adminRoleSet.add(adminRole);
+        createResourceIfNotFound("/api/v1/admin/test", "", adminRoleSet, "url");
         adminRoleSet.add(managerRole);
         adminRoleSet.add(userRole);
-        createResourceIfNotFound("/admin/**", "", adminRoleSet, "url");
+
 
         Set<Role> managerRoleSet = new HashSet<>();
         managerRoleSet.add(managerRole);

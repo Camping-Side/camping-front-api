@@ -1,5 +1,7 @@
 package com.commerce.song.security.provider;
 
+import com.commerce.song.domain.entity.Account;
+import com.commerce.song.security.common.AccountContext;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -42,6 +44,7 @@ public class JwtTokenProvider implements InitializingBean {
     }
 
     public String createToken(Authentication authentication) {
+        // 권한들 가져오기
         String authorities = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
@@ -72,6 +75,7 @@ public class JwtTokenProvider implements InitializingBean {
                 Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
                         .map(SimpleGrantedAuthority::new)
                         .collect(Collectors.toList());
+
 
         User principal = new User(claims.getSubject(), "", authorities);
 

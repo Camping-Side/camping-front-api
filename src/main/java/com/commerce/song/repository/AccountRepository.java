@@ -8,5 +8,7 @@ import java.util.Optional;
 
 public interface AccountRepository extends JpaRepository<Account, Long> {
     int countByUsername(String username);
+    int countByEmail(String email);
     Account findByUsername(String username);
+    Account findByEmail(String email);
 }

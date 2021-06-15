@@ -16,17 +16,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Service("userDetailsService")
+@Service
 @RequiredArgsConstructor
 public class CustomUserDetailService implements UserDetailsService {
     private final AccountRepository userRepository;
 
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        Account account = userRepository.findByUsername(username);
+        Account account = userRepository.findByEmail(email);
         if (account == null) {
-            if (userRepository.countByUsername(username) == 0) {
-                throw new UsernameNotFoundException("No user found with username: " + username);
+            if (userRepository.countByEmail(email) == 0) {
+                throw new UsernameNotFoundException("No user found with email: " + email);
             }
         }
         List<GrantedAuthority> collect = account.getUserRoles()

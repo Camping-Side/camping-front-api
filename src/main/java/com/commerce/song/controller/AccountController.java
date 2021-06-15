@@ -45,7 +45,7 @@ public class AccountController {
     public ResponseEntity<TokenDto> authorize(@Valid @RequestBody AccountDto accountDto) {
 
         UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(accountDto.getUsername(), accountDto.getPassword());
+                new UsernamePasswordAuthenticationToken(accountDto.getEmail(), accountDto.getPassword());
 
         Authentication authenticate =
                 authenticationManagerBuilder.getObject().authenticate(authenticationToken);

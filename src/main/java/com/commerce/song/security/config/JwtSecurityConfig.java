@@ -34,6 +34,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -98,6 +99,7 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
         permitAllFilter.setSecurityMetadataSource(urlFilterInvocationSecurityMetadataSource());
         permitAllFilter.setAccessDecisionManager(affirmativeBased());
         permitAllFilter.setAuthenticationManager(authenticationManagerBean());
+
         return permitAllFilter;
     }
 
@@ -107,7 +109,9 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private List<AccessDecisionVoter<? extends Object>> getAccessDecisionVoters() {
-        return Arrays.asList(new RoleVoter());
+        List<AccessDecisionVoter<? extends Object>> accessDecisionVoters = new ArrayList<>();
+        accessDecisionVoters.add(new RoleVoter());
+        return accessDecisionVoters;
     }
 
     @Bean
