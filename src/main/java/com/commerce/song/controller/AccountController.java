@@ -3,6 +3,7 @@ package com.commerce.song.controller;
 import com.commerce.song.domain.dto.AccountDto;
 import com.commerce.song.domain.dto.TokenDto;
 import com.commerce.song.domain.entity.Account;
+import com.commerce.song.security.common.AccountContext;
 import com.commerce.song.security.filter.JwtFilter;
 import com.commerce.song.security.provider.JwtTokenProvider;
 import com.commerce.song.service.AccountService;
@@ -52,13 +53,14 @@ public class AccountController {
         SecurityContextHolder.getContext().setAuthentication(authenticate);
         // 인증정보를 기반으로 토큰정보 가져옴
         String jwt = jwtTokenProvider.createToken(authenticate);
+        AccountContext principal = (AccountContext) authenticate.getPrincipal();
 
         // 토큰 정보를 헤더에 넣어줌
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
 
         // Dto 활용해서 Body에도 넣어줌줌
-        return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
+        return new ResponseEntity<>(new TokenDto(principal, jwt), httpHeaders, HttpStatus.OK);
 
     }
 

@@ -3,7 +3,7 @@ Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 
 {
-  "username": "admin@gmail.com",
+  "email": "admin@gmail.com",
   "password": "1111"
 }
 
