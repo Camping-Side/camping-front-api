@@ -1,7 +1,6 @@
 package com.commerce.song.domain.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -9,10 +8,12 @@ import java.util.List;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Menu {
     @Id
     @GeneratedValue
-    @Column(name = "menu_id")
+//    @Column(name = "menu_id")
     private Long id;
 
     @Column(name = "menu_name")
@@ -47,5 +48,14 @@ public class Menu {
     }
     private void setParent(Menu menu) {
         this.parent = menu;
+    }
+
+    public Menu(String menuName, String icon, String path, Integer menuSeq, Integer menuLevel, String menuUseYn) {
+        this.menuName = menuName;
+        this.icon = icon;
+        this.path = path;
+        this.menuSeq = menuSeq;
+        this.menuLevel = menuLevel;
+        this.menuUseYn = menuUseYn;
     }
 }

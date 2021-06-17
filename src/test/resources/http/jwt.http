@@ -25,3 +25,7 @@ X-Requested-With: XMLHttpRequest
 GET http://localhost:9090/api/v1/accounts/1
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
+
+###
+GET http://localhost:9090/api/v1/admin/test
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfTUFOQUdFUixST0xFX1VTRVIiLCJleHAiOjE2MjQwMjI0ODZ9.cOrT85SeHefXLuzF3ZQoJSLoFqeJpYadljus4OgJeaira0NG_GSE7hmYMaNlVJ4QemBPLZstp6Ef_zDi4uVYpA

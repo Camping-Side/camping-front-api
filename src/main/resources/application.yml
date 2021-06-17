@@ -7,12 +7,30 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     properties:
       hibernate:
         #        show_sql: ture
         format_sql: true
         # 여러개 쿼리 나가야할 것을 in으로 한번에 가져옴
         default_batch_fetch_size: 100
+
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+
+jwt:
+  header: Authorization
+  secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10
+  token-validity-in-seconds: 86400
+
+logging:
+  level:
+    root: info
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
+
 server:
-  port: 8080
+  port: 9090
