@@ -8,12 +8,14 @@ import com.commerce.song.repository.custom.MenuRepositoryCustom;
 import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.commerce.song.domain.entity.QMenu.*;
 
@@ -38,7 +40,8 @@ public class MenuRepositoryImpl implements MenuRepositoryCustom {
                 .orderBy(parent.menuSeq.asc(), child.menuSeq.asc())
                 .fetchResults();
 
-
         return new PageImpl<>(result.getResults(), pageable, result.getTotal());
     }
+
+
 }

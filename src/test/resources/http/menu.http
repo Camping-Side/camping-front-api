@@ -1,0 +1,39 @@
+###
+GET http://localhost:9090/api/v1/menus?page=0&size=3
+Content-Type: application/json
+X-Requested-With: XMLHttpRequest
+Accept: application/json
+
+###
+POST http://localhost:9090/api/v1/menus
+Content-Type: application/json
+X-Requested-With: XMLHttpRequest
+
+{
+"menuName": "menu1",
+"icon": "icon1",
+"path" : "path1",
+"menuSeq" : 1,
+"menuLevel" : 1,
+"menuUseYn" : "Y"
+}
+
+###
+DELETE http://localhost:9090/api/v1/menus/17
+Content-Type: application/json
+X-Requested-With: XMLHttpRequest
+
+###
+PUT http://localhost:9090/api/v1/menus/17
+Content-Type: application/json
+X-Requested-With: XMLHttpRequest
+
+{
+  "id" : 17,
+  "menuName": "menu1",
+  "icon": "icon1",
+  "path" : "path1",
+  "menuSeq" : 1,
+  "menuLevel" : 1,
+  "menuUseYn" : "Y"
+}

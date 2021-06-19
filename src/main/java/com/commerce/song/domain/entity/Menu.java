@@ -46,7 +46,7 @@ public class Menu {
         this.child.add(child);
         child.setParent(this);
     }
-    private void setParent(Menu menu) {
+    public void setParent(Menu menu) {
         this.parent = menu;
     }
 
@@ -57,5 +57,14 @@ public class Menu {
         this.menuSeq = menuSeq;
         this.menuLevel = menuLevel;
         this.menuUseYn = menuUseYn;
+    }
+
+    public void updateMenu(Menu menu) {
+        this.menuName = menu.menuName;
+        this.menuUseYn = menu.menuUseYn;
+        this.icon = menu.icon;
+        this.menuSeq = menu.menuSeq;
+        this.menuLevel = menu.menuSeq;
+        this.path = menu.path;
     }
 }

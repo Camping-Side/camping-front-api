@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@Builder
 @NoArgsConstructor
 public class MenuDto {
     private Long id;
@@ -17,6 +16,7 @@ public class MenuDto {
     private Integer menuLevel;
     private String menuUseYn;
     private MenuDto parent;
+    private Long parentId;
     private List<MenuDto> child = new ArrayList<>();
 
     @QueryProjection
