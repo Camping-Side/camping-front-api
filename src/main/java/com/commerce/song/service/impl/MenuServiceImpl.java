@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,8 +19,12 @@ public class MenuServiceImpl implements MenuService {
     private final MenuRepository menuRepository;
 
     @Override
-    public Page<Menu> getAllMenu(PageRequest pageRequest) {
-        return menuRepository.findAllToDto(pageRequest);
+    public Page<Menu> getAllMenuPage(PageRequest pageRequest) {
+        return menuRepository.findAllToDtoPage(pageRequest);
+    }
+    @Override
+    public List<Menu> getAllMenu() {
+        return menuRepository.findAllToDto();
     }
 
     @Override

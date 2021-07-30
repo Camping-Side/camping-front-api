@@ -6,6 +6,7 @@ import com.commerce.song.domain.entity.Role;
 import com.commerce.song.repository.AccountRepository;
 import com.commerce.song.repository.RoleRepository;
 import com.commerce.song.service.AccountService;
+import com.commerce.song.util.CustomUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -72,8 +73,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Transactional
-    public List<Account> getUsers() {
-        return accountRepository.findAll();
+    public List<AccountDto.ResList> findAll(AccountDto.ReqList requestDto) {
+        return accountRepository.findAll()
+                .stream()
+                .map(account -> CustomUtil.convertClass(account, AccountDto.ResList.class))
+                .collect(Collectors.toList());
     }
 
     @Override

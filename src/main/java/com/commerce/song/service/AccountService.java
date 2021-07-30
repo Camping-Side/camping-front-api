@@ -10,7 +10,7 @@ public interface AccountService {
 
     void modifyUser(AccountDto accountDto);
 
-    List<Account> getUsers();
+    List<AccountDto.ResList> findAll(AccountDto.ReqList requestDto);
 
     AccountDto getUser(Long id);
 

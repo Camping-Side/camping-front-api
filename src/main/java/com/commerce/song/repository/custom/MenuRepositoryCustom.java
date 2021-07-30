@@ -8,5 +8,6 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface MenuRepositoryCustom {
-    Page<Menu> findAllToDto(Pageable pageable);
+    Page<Menu> findAllToDtoPage(Pageable pageable);
+    List<Menu> findAllToDto();
 }

@@ -8,7 +8,8 @@ import org.springframework.data.domain.PageRequest;
 import java.util.List;
 
 public interface MenuService {
-    Page<Menu> getAllMenu(PageRequest pageRequest);
+    Page<Menu> getAllMenuPage(PageRequest pageRequest);
+    List<Menu> getAllMenu();
     Menu save(Menu menu, Long parentId);
     void delete(Long id);
     void update(Long id, Menu menu, Long parentId);

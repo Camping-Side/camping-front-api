@@ -1,9 +1,6 @@
 package com.commerce.song.domain.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -18,4 +15,23 @@ public class AccountDto {
     private String email;
     private int age;
     private List<String> roles;
+
+    @Getter
+    @Setter
+    public static class ReqList {
+        private String email;
+        private String username;
+        private List<String> roles;
+    }
+    @Getter
+    @Setter
+    public static class ResList {
+        private String id;
+        private String username;
+        private String password;
+        private String email;
+        private int age;
+        private List<String> roles;
+    }
+
 }

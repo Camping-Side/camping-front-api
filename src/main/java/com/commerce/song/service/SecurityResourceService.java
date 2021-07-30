@@ -30,7 +30,7 @@ public class SecurityResourceService {
             re.getRoleSet().forEach(role -> {
                 configAttributeList.add(new SecurityConfig(role.getRoleName()));
             });
-            result.put(new AntPathRequestMatcher(re.getResourceName()), configAttributeList);
+            result.put(new AntPathRequestMatcher(re.getResourceName(), re.getHttpMethod()), configAttributeList);
         });
 
         return result;

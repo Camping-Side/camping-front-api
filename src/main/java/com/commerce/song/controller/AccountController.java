@@ -1,6 +1,7 @@
 package com.commerce.song.controller;
 
 import com.commerce.song.domain.dto.AccountDto;
+import com.commerce.song.domain.dto.ResultVo;
 import com.commerce.song.domain.dto.TokenDto;
 import com.commerce.song.domain.entity.Account;
 import com.commerce.song.security.common.AccountContext;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 //@CrossOrigin(origins = "http://localhost:3030")
 @RestController
@@ -34,12 +36,19 @@ public class AccountController {
     private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Account> retrieveAccount(@PathVariable Long id) {
+    public ResponseEntity<Account> findById(@PathVariable Long id) {
         AccountDto user = accountService.getUser(id);
         ModelMapper modelmapper = new ModelMapper();
         Account account = modelmapper.map(user, Account.class);
 
         return ResponseEntity.ok(account);
+    }
+
+    @GetMapping()
+    public ResponseEntity<ResultVo> findAll(AccountDto.ReqList requestDto) {
+        List<AccountDto.ResList> allAccount = accountService.findAll(requestDto);
+
+        return ResponseEntity.ok(new ResultVo(allAccount));
     }
 
     @PostMapping("/authenticate")

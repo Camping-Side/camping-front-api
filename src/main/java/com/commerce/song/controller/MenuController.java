@@ -17,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,10 +25,16 @@ import java.net.URI;
 public class MenuController {
     private final MenuService menuService;
 
+//    @GetMapping
+//    public ResponseEntity<ResultVo> findAllPage(@ModelAttribute PageVo pageVo) {
+//        PageRequest pageRequest = PageRequest.of(pageVo.getPage(), pageVo.getSize());
+//        Page<Menu> allMenu = menuService.getAllMenu(pageRequest);
+//        return new ResponseEntity<>(new ResultVo(allMenu), HttpStatus.OK);
+//    }
+
     @GetMapping
-    public ResponseEntity<ResultVo> findAll(@ModelAttribute PageVo pageVo) {
-        PageRequest pageRequest = PageRequest.of(pageVo.getPage(), pageVo.getSize());
-        Page<Menu> allMenu = menuService.getAllMenu(pageRequest);
+    public ResponseEntity<ResultVo> findAll() {
+        List<Menu> allMenu = menuService.getAllMenu();
         return new ResponseEntity<>(new ResultVo(allMenu), HttpStatus.OK);
     }
 

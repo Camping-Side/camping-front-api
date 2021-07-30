@@ -25,7 +25,7 @@ public class MenuRepositoryImpl implements MenuRepositoryCustom {
     private final JPAQueryFactory query;
 
     @Override
-    public Page<Menu> findAllToDto(Pageable pageable) {
+    public Page<Menu> findAllToDtoPage(Pageable pageable) {
         QMenu parent = new QMenu("parent");
         QMenu child = new QMenu("child");
         QueryResults<Menu> result = query
@@ -41,6 +41,23 @@ public class MenuRepositoryImpl implements MenuRepositoryCustom {
                 .fetchResults();
 
         return new PageImpl<>(result.getResults(), pageable, result.getTotal());
+    }
+
+    @Override
+    public List<Menu> findAllToDto() {
+        QMenu parent = new QMenu("parent");
+        QMenu child = new QMenu("child");
+        return query
+                .select(parent)
+                .from(parent)
+                .distinct()
+                .leftJoin(parent.child, child)
+                .fetchJoin()
+                .where(
+                        parent.parent().isNull()
+                )
+                .orderBy(parent.menuSeq.asc(), child.menuSeq.asc())
+                .fetch();
     }
 
 
