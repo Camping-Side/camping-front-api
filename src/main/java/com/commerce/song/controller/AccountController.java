@@ -8,8 +8,11 @@ import com.commerce.song.security.common.AccountContext;
 import com.commerce.song.security.filter.JwtFilter;
 import com.commerce.song.security.provider.JwtTokenProvider;
 import com.commerce.song.service.AccountService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +29,7 @@ import java.net.URI;
 import java.util.List;
 
 //@CrossOrigin(origins = "http://localhost:3030")
+@Api(tags= { " 회원 rest api "})
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/accounts")
@@ -44,11 +48,10 @@ public class AccountController {
         return ResponseEntity.ok(account);
     }
 
-    @GetMapping()
-    public ResponseEntity<ResultVo> findAll(AccountDto.ReqList requestDto) {
-        List<AccountDto.ResList> allAccount = accountService.findAll(requestDto);
-
-        return ResponseEntity.ok(new ResultVo(allAccount));
+    @ApiOperation(value="사용자 리스트 조회", notes="사용자 리스트 조회")
+    @GetMapping
+    public ResponseEntity<ResultVo> findAll(@Valid @ModelAttribute AccountDto.ReqList requestDto) {
+        return ResponseEntity.ok(new ResultVo(accountService.findAll(requestDto)));
     }
 
     @PostMapping("/authenticate")

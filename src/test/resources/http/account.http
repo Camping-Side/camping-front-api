@@ -1,0 +1,4 @@
+GET http://localhost:9090/api/v1/accounts?page=0&size=6
+Content-Type: application/json
+X-Requested-With: XMLHttpRequest
+Accept: application/json

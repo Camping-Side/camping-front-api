@@ -15,6 +15,7 @@
     <description>commerce server</description>
     <properties>
         <java.version>11</java.version>
+        <swagger.version>2.9.2</swagger.version>
     </properties>
     <dependencies>
         <dependency>
@@ -99,6 +100,19 @@
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-jackson</artifactId>
             <version>0.11.2</version>
+        </dependency>
+
+        <!--   swagger     -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
         </dependency>
 
     </dependencies>

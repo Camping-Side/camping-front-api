@@ -10,14 +10,13 @@ import com.commerce.song.util.CustomUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -44,10 +43,10 @@ public class AccountServiceImpl implements AccountService {
         ModelMapper modelMapper = new ModelMapper();
         Account account = modelMapper.map(accountDto, Account.class);
 
-        if(accountDto.getRoles() != null){
+        if(accountDto.getUserRoles() != null){
             Set<Role> roles = new HashSet<>();
-            accountDto.getRoles().forEach(role -> {
-                Role r = roleRepository.findByRoleName(role);
+            accountDto.getUserRoles().forEach(role -> {
+                Role r = roleRepository.findByRoleName(role.getRoleName());
                 roles.add(r);
             });
             account.setUserRoles(roles);
@@ -62,22 +61,13 @@ public class AccountServiceImpl implements AccountService {
         Account account = accountRepository.findById(id).orElse(new Account());
         ModelMapper modelMapper = new ModelMapper();
         AccountDto accountDto = modelMapper.map(account, AccountDto.class);
-
-        List<String> roles = account.getUserRoles()
-                .stream()
-                .map(role -> role.getRoleName())
-                .collect(Collectors.toList());
-
-        accountDto.setRoles(roles);
+        accountDto.setUserRoles(account.getUserRoles());
         return accountDto;
     }
 
     @Transactional
-    public List<AccountDto.ResList> findAll(AccountDto.ReqList requestDto) {
-        return accountRepository.findAll()
-                .stream()
-                .map(account -> CustomUtil.convertClass(account, AccountDto.ResList.class))
-                .collect(Collectors.toList());
+    public Page<AccountDto.ResList> findAll(AccountDto.ReqList requestDto) {
+        return accountRepository.findAllToDtoPage(CustomUtil.convertPageVo(requestDto), requestDto);
     }
 
     @Override

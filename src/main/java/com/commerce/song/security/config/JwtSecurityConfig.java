@@ -47,7 +47,8 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
     private final SecurityResourceService securityResourceService;
     private final String corsOrigin="http://localhost:3030";
-    private String[] permitAllResources = {"/h2-console/**","/api/v1/test", "/api/v1/accounts/*","/api/v1/accounts/**"};
+    private String[] permitAllResources = {"/h2-console/**", "/swagger-ui.html/**", "/swagger-resources/**", "/api/v1/test"
+            , "/api/v1/accounts/*","/api/v1/accounts/**"};
 
 //    private final PasswordEncoder passwordEncoder;
 
