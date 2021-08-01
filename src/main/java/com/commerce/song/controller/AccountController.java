@@ -1,6 +1,7 @@
 package com.commerce.song.controller;
 
 import com.commerce.song.domain.dto.AccountDto;
+import com.commerce.song.domain.dto.ResultDto;
 import com.commerce.song.domain.dto.ResultVo;
 import com.commerce.song.domain.dto.TokenDto;
 import com.commerce.song.domain.entity.Account;
@@ -50,8 +51,8 @@ public class AccountController {
 
     @ApiOperation(value="사용자 리스트 조회", notes="사용자 리스트 조회")
     @GetMapping
-    public ResponseEntity<ResultVo> findAll(@Valid @ModelAttribute AccountDto.ReqList requestDto) {
-        return ResponseEntity.ok(new ResultVo(accountService.findAll(requestDto)));
+    public ResponseEntity<ResultDto<Page<AccountDto.ResList>>> findAll(@Valid @ModelAttribute AccountDto.ReqList requestDto) {
+        return ResponseEntity.ok(ResultDto.res(200, "성공",accountService.findAll(requestDto)));
     }
 
     @PostMapping("/authenticate")
