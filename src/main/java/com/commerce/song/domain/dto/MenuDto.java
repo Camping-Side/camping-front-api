@@ -31,4 +31,18 @@ public class MenuDto {
         this.parent = parent;
         this.child = child;
     }
+
+    @Data
+    public static class ResList {
+        private Long id;
+        private String menuName;
+        private String icon;
+        private String path;
+        private Integer menuSeq;
+        private Integer menuLevel;
+        private String menuUseYn;
+        private MenuDto parent;
+        private Long parentId;
+        private List<MenuDto> child = new ArrayList<>();
+    }
 }

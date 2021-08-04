@@ -2,13 +2,13 @@ package com.commerce.song.controller;
 
 import com.commerce.song.domain.dto.AccountDto;
 import com.commerce.song.domain.dto.ResultDto;
-import com.commerce.song.domain.dto.ResultVo;
 import com.commerce.song.domain.dto.TokenDto;
 import com.commerce.song.domain.entity.Account;
 import com.commerce.song.security.common.AccountContext;
 import com.commerce.song.security.filter.JwtFilter;
 import com.commerce.song.security.provider.JwtTokenProvider;
 import com.commerce.song.service.AccountService;
+import com.commerce.song.util.HttpCode;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -52,7 +52,7 @@ public class AccountController {
     @ApiOperation(value="사용자 리스트 조회", notes="사용자 리스트 조회")
     @GetMapping
     public ResponseEntity<ResultDto<Page<AccountDto.ResList>>> findAll(@Valid @ModelAttribute AccountDto.ReqList requestDto) {
-        return ResponseEntity.ok(ResultDto.res(200, "성공",accountService.findAll(requestDto)));
+        return ResponseEntity.ok(ResultDto.res(HttpStatus.OK, HttpCode.getMessage(HttpStatus.OK),accountService.findAll(requestDto)));
     }
 
     @PostMapping("/authenticate")

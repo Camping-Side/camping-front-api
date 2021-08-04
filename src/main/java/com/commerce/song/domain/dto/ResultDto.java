@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.http.HttpStatus;
 
 @Data
 @AllArgsConstructor
@@ -12,23 +13,23 @@ import lombok.Data;
 @ApiModel
 public class ResultDto<T> {
     @ApiModelProperty(value = "결과 코드")
-    private int statusCode;
+    private HttpStatus statusCode;
     @ApiModelProperty(value = "결과 메시지")
     private String resultMsg;
     @ApiModelProperty(value = "결과 데이터")
     private T resultData;
 
-    public ResultDto(final int statusCode, final String resultMsg) {
+    public ResultDto(final HttpStatus statusCode, final String resultMsg) {
         this.statusCode = statusCode;
         this.resultMsg = resultMsg;
         this.resultData = null;
     }
 
-    public static<T> ResultDto<T> res(final int statusCode, final String resultMsg) {
+    public static<T> ResultDto<T> res(final HttpStatus statusCode, final String resultMsg) {
         return res(statusCode, resultMsg, null);
     }
 
-    public static<T> ResultDto<T> res(final int statusCode, final String resultMsg, final T t) {
+    public static<T> ResultDto<T> res(final HttpStatus statusCode, final String resultMsg, final T t) {
         return ResultDto.<T>builder()
                 .resultData(t)
                 .statusCode(statusCode)
