@@ -1,5 +1,6 @@
 package com.commerce.song.domain.dto;
 
+import com.commerce.song.util.HttpCode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,14 @@ public class ResultDto<T> {
         this.statusCode = statusCode;
         this.resultMsg = resultMsg;
         this.resultData = null;
+    }
+
+    public static<T> ResultDto<T> res(final HttpStatus statusCode) {
+        return res(statusCode, HttpCode.getMessage(statusCode), null);
+    }
+
+    public static<T> ResultDto<T> res(final HttpStatus statusCode, final T t) {
+        return res(statusCode, HttpCode.getMessage(statusCode), t);
     }
 
     public static<T> ResultDto<T> res(final HttpStatus statusCode, final String resultMsg) {

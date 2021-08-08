@@ -78,7 +78,7 @@ public class AccountController {
     }
 
     @PostMapping
-    public ResponseEntity<Account> signup(@Valid @RequestBody AccountDto accountDto) {
+    public ResponseEntity<ResultDto> signup(@Valid @RequestBody AccountDto accountDto) {
         ModelMapper modelmapper = new ModelMapper();
         accountDto.setPassword(passwordEncoder.encode(accountDto.getPassword()));
         Account account = modelmapper.map(accountDto, Account.class);
@@ -88,7 +88,8 @@ public class AccountController {
                 .buildAndExpand(account.getId())
                 .toUri();
 
-        return ResponseEntity.created(location)
-                .build().ok(accountService.createUser(account));
+        ResponseEntity.created(location)
+                .build();
+        return ResponseEntity.ok(ResultDto.res(HttpStatus.OK));
     }
 }

@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @Data
 @RequiredArgsConstructor
-public class PageVo {
+public class PageDto {
     Integer page;
     Integer size;
 }

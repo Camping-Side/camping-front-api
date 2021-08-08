@@ -1,12 +1,7 @@
 package com.commerce.song.domain.dto;
 
 import com.commerce.song.domain.entity.Account;
-import com.commerce.song.domain.entity.QRole;
 import com.commerce.song.domain.entity.Role;
-import com.querydsl.core.annotations.QueryProjection;
-import com.querydsl.core.types.dsl.NumberPath;
-import com.querydsl.core.types.dsl.SetPath;
-import com.querydsl.core.types.dsl.StringPath;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
@@ -20,7 +15,7 @@ import java.util.stream.Collectors;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AccountDto extends PageVo{
+public class AccountDto extends PageDto {
     private Long id;
     private String username;
     private String password;
@@ -30,10 +25,10 @@ public class AccountDto extends PageVo{
 
     @Data
     @ToString(callSuper=true, includeFieldNames=true)
-    public static class ReqList extends PageVo{
+    public static class ReqList extends PageDto {
         private String email;
         private String username;
-        private List<String> roles;
+        private List<String> roles = new ArrayList<>();
     }
 
     @Data
@@ -49,15 +44,6 @@ public class AccountDto extends PageVo{
         @ApiModelProperty(value = "회원 권한 리스트")
         private Set<RoleDto.ResAccountRole> userRoles = new HashSet<>();
 
-//        @QueryProjection
-//        public ResList(Long id, String username, String email, int age, Set<Role> userRoles) {
-//            this.id = id;
-//            this.username = username;
-//            this.email = email;
-//            this.age = age;
-//            this.userRoles = userRoles;
-//        }
-
         public ResList(Account account){
             this.id = account.getId();
             this.username = account.getUsername();
@@ -67,6 +53,15 @@ public class AccountDto extends PageVo{
                 .map(RoleDto.ResAccountRole::new)
                 .collect(Collectors.toSet());
         }
+    }
+
+    @Data
+    public static class Res {
+        private Long id;
+        private String email;
+        private String username;
+        private int age;
+        private List<String> roles = new ArrayList<>();
     }
 
 }
