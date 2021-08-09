@@ -13,8 +13,8 @@ import org.springframework.util.StringUtils;
 @Repository
 @RequiredArgsConstructor
 public class BoardDslRepository {
-    private final JPAQueryFactory query;
-
+//    private final JPAQueryFactory query;
+//
 //    public Page<Corona> findAll(CoronaSearch coronaSearch, Pageable pageable) {
 //        QueryResults<Corona> coronaQueryResults = query.selectFrom(corona)
 //                .where(dynamicWhere(coronaSearch), periodBetween(coronaSearch))

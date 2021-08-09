@@ -4,7 +4,9 @@ import com.commerce.song.domain.dto.AccountDto;
 import com.commerce.song.domain.dto.QAccountDto_ResList;
 import com.commerce.song.domain.entity.Account;
 import com.commerce.song.repository.custom.AccountRepositoryCustom;
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.QueryResults;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -16,6 +18,7 @@ import java.util.stream.Collectors;
 
 import static com.commerce.song.domain.entity.QAccount.account;
 import static com.commerce.song.domain.entity.QRole.role;
+import static org.springframework.util.StringUtils.hasText;
 
 @RequiredArgsConstructor
 public class AccountRepositoryImpl implements AccountRepositoryCustom {
@@ -28,6 +31,10 @@ public class AccountRepositoryImpl implements AccountRepositoryCustom {
                 .select(account)
                 .from(account)
                 .leftJoin(account.userRoles, role)
+                .where(emailEq(reqDto.getEmail()),
+                        usernameEq(reqDto.getUsername()),
+                        userRoleEq(reqDto.getRoles())
+                        )
                 .distinct()
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -41,4 +48,15 @@ public class AccountRepositoryImpl implements AccountRepositoryCustom {
 
         return new PageImpl<>(content, pageable, total);
     }
+
+    private BooleanExpression emailEq(String email) {
+        return hasText(email) ? account.email.contains(email) : null;
+    }
+    private BooleanExpression usernameEq(String username) {
+        return hasText(username) ? account.username.contains(username) : null;
+    }
+    private BooleanExpression userRoleEq(List<String> userRoles) {
+        return userRoles.size() != 0 ? account.userRoles.any().roleName.in(userRoles) : null;
+    }
+
 }

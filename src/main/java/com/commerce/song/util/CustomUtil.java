@@ -1,6 +1,6 @@
 package com.commerce.song.util;
 
-import com.commerce.song.domain.dto.PageVo;
+import com.commerce.song.domain.dto.PageDto;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.config.Configuration;
 import org.springframework.data.domain.PageRequest;
@@ -14,7 +14,7 @@ public class CustomUtil {
         return modelMapper.map(entity, clazz);
     }
 
-    public static PageRequest convertPageVo(PageVo vo) {
+    public static PageRequest convertPageVo(PageDto vo) {
         return PageRequest.of(vo.getPage(), vo.getSize());
     }
 }
