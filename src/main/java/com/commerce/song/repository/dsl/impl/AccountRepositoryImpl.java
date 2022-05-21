@@ -1,10 +1,8 @@
-package com.commerce.song.repository.dsl;
+package com.commerce.song.repository.dsl.impl;
 
 import com.commerce.song.domain.dto.AccountDto;
-import com.commerce.song.domain.dto.QAccountDto_ResList;
 import com.commerce.song.domain.entity.Account;
-import com.commerce.song.repository.custom.AccountRepositoryCustom;
-import com.querydsl.core.BooleanBuilder;
+import com.commerce.song.repository.dsl.AccountRepositoryCustom;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;

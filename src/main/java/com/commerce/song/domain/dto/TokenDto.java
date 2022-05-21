@@ -9,11 +9,11 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TokenDto {
-    private String token;
+    private String grantType;
+    private String accessToken;
+    private String refreshToken;
     private String username;
+    private Long accessTokenExpiresIn;
 
-    public TokenDto(AccountContext principal, String token) {
-        this.token = token;
-        this.username = principal.getUsername();
-    }
+
 }

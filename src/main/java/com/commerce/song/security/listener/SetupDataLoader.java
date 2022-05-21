@@ -35,7 +35,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         if(alreadySetup) {
             return;
         }
-        setupSecurityResources();
+//        setupSecurityResources();
     }
 
     private void setupSecurityResources() {

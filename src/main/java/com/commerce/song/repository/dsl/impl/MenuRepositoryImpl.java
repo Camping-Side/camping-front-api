@@ -1,21 +1,17 @@
-package com.commerce.song.repository.dsl;
+package com.commerce.song.repository.dsl.impl;
 
-import com.commerce.song.domain.dto.MenuDto;
 import com.commerce.song.domain.dto.QMenuDto;
 import com.commerce.song.domain.entity.Menu;
 import com.commerce.song.domain.entity.QMenu;
-import com.commerce.song.repository.custom.MenuRepositoryCustom;
+import com.commerce.song.repository.dsl.MenuRepositoryCustom;
 import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.commerce.song.domain.entity.QMenu.*;
 

@@ -20,17 +20,22 @@ import java.io.IOException;
 public class JwtFilter extends GenericFilterBean {
     private static final Logger logger = LoggerFactory.getLogger(JwtFilter.class);
     public static final String AUTHORIZATION_HEADER = "Authorization";
+    public static final String BEARER_PREFIX = "Bearer ";
     private final JwtTokenProvider jwtTokenProvider;
 
     // jwt 토큰 인증정보를 securitycontext에 저장하는 역할 수행행
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
+        // accessToken을 꺼내고 검사함
         String jwt= resolveToken(httpServletRequest);
         String requestURI = httpServletRequest.getRequestURI();
 
         if(StringUtils.hasText(jwt) && jwtTokenProvider.validateToken(jwt)) {
             Authentication authentication = jwtTokenProvider.getAuthentication(jwt);
+
+            // 유저 정보를 SecurityContext에 저장
+            // 정상적으로 Controller까지 넘어간다면 SecurityContext에 member id 있음
             SecurityContextHolder.getContext().setAuthentication(authentication);
             logger.debug("Security Context에 '{}' 인증정보를 저장했습니다. uri : {}",authentication.getName(), requestURI);
         } else {
@@ -41,7 +46,7 @@ public class JwtFilter extends GenericFilterBean {
 
     private String resolveToken(HttpServletRequest request) {
         String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
-        if(StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
+        if(StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_PREFIX)) {
             return bearerToken.substring(7);
         }
         return null;

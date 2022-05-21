@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.commerce.song.domain.mapper.AccountMapper">
+    <select id="findPostTarget" resultType="Account" parameterType="map">
+        select account_idx
+             , account_id
+             , password
+             , status
+             , post_delay
+             , post_count
+             , start_dt
+             , cii.inet as ip
+             , cia.reg_dt
+             , udt_dt
+             , cia.reg_idx
+             , udt_idx
+             , craw_wave_count
+             , last_active_server_info
+             , last_post_dt
+             , login_term
+             , percent
+             , target_tag_list
+             , comment_delay
+             , last_comment_dt
+             , last_follower_index
+             , follower_count
+            ,  cia.dm_max_count
+            , last_pw_chg_dt
+            , dm_today_send
+            , mutation_day
+            , point
+            , note
+        from ci_account cia
+                 left outer join ci_ip cii on cia.ip = cii.ip_idx
+        where  timestampDiff(HOUR, ifnull(cia.last_post_dt, date_sub(now(), interval cia.post_delay HOUR)), now()) >= cia.post_delay
+          and cia.status = 0
+          and cii.inet = #{ip}
+        order by cia.last_post_dt
+         limit 1
+    </select>
+
+    <select id = "findTarget" resultType="Account" parameterType="map">
+        select account_idx
+             , account_id
+             , password
+             , status
+             , post_delay
+             , post_count
+             , start_dt
+             , cii.inet as ip
+             , cia.reg_dt
+             , udt_dt
+             , cia.reg_idx
+             , udt_idx
+             , craw_wave_count
+             , last_active_server_info
+             , last_post_dt
+             , login_term
+             , percent
+             , target_tag_list
+             , comment_delay
+             , last_comment_dt
+             , last_follower_index
+             , follower_count
+             ,  cia.dm_max_count
+             , last_pw_chg_dt
+             , dm_today_send
+             , mutation_day
+             , point
+             , note
+        from ci_account cia
+         left outer join ci_ip cii on cia.ip = cii.ip_idx
+        where timestampDiff(HOUR, ifnull(cia.last_comment_dt, date_sub(now(), interval cia.comment_delay HOUR)), now()) >= cia.comment_delay
+          and cia.status = 0
+          and cii.inet = #{ip}
+          and cia.target_tag_list is not null
+        order by cia.last_comment_dt
+        limit 1
+    </select>
+
+</mapper>

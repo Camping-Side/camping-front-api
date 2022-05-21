@@ -7,6 +7,7 @@ import com.commerce.song.repository.AccountRepository;
 import com.commerce.song.repository.RoleRepository;
 import com.commerce.song.service.AccountService;
 import com.commerce.song.util.CustomUtil;
+import com.commerce.song.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -55,14 +56,17 @@ public class AccountServiceImpl implements AccountService {
         accountRepository.save(account);
     }
 
-    @Transactional
-    public AccountDto getUser(Long id) {
-
-        Account account = accountRepository.findById(id).orElse(new Account());
-        ModelMapper modelMapper = new ModelMapper();
-        AccountDto accountDto = modelMapper.map(account, AccountDto.class);
-        accountDto.setUserRoles(account.getUserRoles());
-        return accountDto;
+    @Transactional(readOnly = true)
+    public AccountDto.Res getUser(Long id) {
+        return accountRepository.findById(id)
+                .map(AccountDto.Res::new)
+                .orElseThrow(() -> new RuntimeException("유저 정보가 없습니다."));
+    }
+    @Transactional(readOnly = true)
+    public AccountDto.Res getMyInfo() {
+        return accountRepository.findById(SecurityUtil.getCurrentMemberId())
+                .map(AccountDto.Res::new)
+                .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다."));
     }
 
     @Transactional

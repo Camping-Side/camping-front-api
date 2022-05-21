@@ -1,5 +1,6 @@
 package com.commerce.song;
 
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -22,9 +23,4 @@ public class SongApplication {
     public AuditorAware<String> auditorProvider() {
         return () -> Optional.of(UUID.randomUUID().toString());
     }
-
-//    @Bean
-//    JPAQueryFactory jpaQueryFactory(EntityManager em) {
-//        return new JPAQueryFactory(em);
-//    }
 }

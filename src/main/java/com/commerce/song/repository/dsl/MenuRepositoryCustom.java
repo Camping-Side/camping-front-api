@@ -1,4 +1,4 @@
-package com.commerce.song.repository.custom;
+package com.commerce.song.repository.dsl;
 
 import com.commerce.song.domain.dto.MenuDto;
 import com.commerce.song.domain.entity.Menu;

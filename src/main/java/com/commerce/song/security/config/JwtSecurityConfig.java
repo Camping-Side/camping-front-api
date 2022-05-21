@@ -45,10 +45,11 @@ import java.util.List;
 public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtTokenProvider jwtTokenProvider;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final SecurityResourceService securityResourceService;
     private final String corsOrigin="http://localhost:3030";
-    private String[] permitAllResources = {"/h2-console/**", "/swagger-ui.html/**", "/swagger-resources/**", "/api/v1/test"
-            , "/api/v1/accounts/*","/api/v1/accounts/**"};
+    private String[] permitAllResources = {"/h2-console/**", "/swagger-ui.html/**", "/swagger-resources/**"
+            , "/api/v1/test", "/api/v1/accounts/*","/api/v1/accounts/**"};
 
 //    private final PasswordEncoder passwordEncoder;
 
@@ -75,7 +76,7 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
                 .csrf().disable()
                 .exceptionHandling()
-                .authenticationEntryPoint(new JwtAuthenticationEntryPoint())
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .accessDeniedHandler(jwtAccessDeniedHandler)
         .and()
                 .headers()
@@ -90,7 +91,8 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
         .and()
                 .addFilterBefore(customFilterSecurityInterceptor(), FilterSecurityInterceptor.class)
-                .apply(new JwtAdapter(jwtTokenProvider));
+                .apply(new JwtAdapter(jwtTokenProvider))
+        ;
 
     }
 

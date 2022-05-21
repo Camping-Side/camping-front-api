@@ -57,11 +57,26 @@ public class AccountDto extends PageDto {
 
     @Data
     public static class Res {
+        @ApiModelProperty(value = "회원 번호")
         private Long id;
-        private String email;
+        @ApiModelProperty(value = "회원 이름")
         private String username;
+        @ApiModelProperty(value = "회원 이메일")
+        private String email;
+        @ApiModelProperty(value = "회원 나이")
         private int age;
-        private List<String> roles = new ArrayList<>();
+        @ApiModelProperty(value = "회원 권한 리스트")
+        private Set<RoleDto.ResAccountRole> userRoles = new HashSet<>();
+
+        public Res(Account account) {
+            this.id = account.getId();
+            this.email = account.getEmail();
+            this.username = account.getUsername();
+            this.age = account.getAge();
+            this.userRoles = account.getUserRoles().stream()
+                    .map(RoleDto.ResAccountRole::new)
+                    .collect(Collectors.toSet());
+        }
     }
 
 }

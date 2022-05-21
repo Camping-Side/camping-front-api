@@ -1,4 +1,4 @@
-package com.commerce.song.repository.custom;
+package com.commerce.song.repository.dsl;
 
 import com.commerce.song.domain.dto.AccountDto;
 import org.springframework.data.domain.Page;

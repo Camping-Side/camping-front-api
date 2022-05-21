@@ -11,7 +11,9 @@ public interface AccountService {
 
     Page<AccountDto.ResList> findAll(AccountDto.ReqList requestDto);
 
-    AccountDto getUser(Long id);
+    AccountDto.Res getUser(Long id);
+    AccountDto.Res getMyInfo();
+
 
     void deleteUser(Long idx);
 

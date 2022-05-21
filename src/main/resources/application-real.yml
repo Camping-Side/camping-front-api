@@ -7,7 +7,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
       # 기본키 생성전략
       use-new-id-generator-mappings: false
     database-platform: org.hibernate.dialect.MySQL5Dialect

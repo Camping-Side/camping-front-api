@@ -7,13 +7,20 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
+      # 기본키 생성전략
+      use-new-id-generator-mappings: false
+    database-platform: org.hibernate.dialect.MySQL5Dialect
     properties:
       hibernate:
         #        show_sql: ture
         format_sql: true
         # 여러개 쿼리 나가야할 것을 in으로 한번에 가져옴
         default_batch_fetch_size: 100
+        jdbc.batch_size: 50
+        # bulk
+        order_inserts: true
+        order_updates: true
 
   devtools:
     livereload:
@@ -24,7 +31,10 @@ spring:
 jwt:
   header: Authorization
   secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10
-  token-validity-in-seconds: 86400
+  # 30분
+  access-token-expire-time: 1800
+  # 1일
+  refresh-token-expire-time: 86400
 
 logging:
   level:
@@ -33,4 +43,18 @@ logging:
     org.hibernate.type: trace
 
 server:
-  port: 9090
+  port: 9080
+
+mybatis:
+  #   위치 설정
+  mapper-locations: mapper/*.xml
+  #  camel case
+  configuration:
+    map-underscore-to-camel-case: true
+  #  패키지명 생략
+  type-aliases-package: com.tgc.instaautoserver.domain.entity.mapper
+# mapper log level
+
+# 로그파일 저장 위치
+logserver:
+  path: C:\log

@@ -41,12 +41,13 @@ public class AccountController {
     private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Account> findById(@PathVariable Long id) {
-        AccountDto user = accountService.getUser(id);
-        ModelMapper modelmapper = new ModelMapper();
-        Account account = modelmapper.map(user, Account.class);
+    public ResponseEntity<AccountDto.Res> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(accountService.getUser(id));
+    }
 
-        return ResponseEntity.ok(account);
+    @GetMapping("/me")
+    public ResponseEntity<AccountDto.Res> findMyInfo() {
+        return ResponseEntity.ok(accountService.getMyInfo());
     }
 
     @ApiOperation(value="사용자 리스트 조회", notes="사용자 리스트 조회")
@@ -65,7 +66,7 @@ public class AccountController {
                 authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authenticate);
         // 인증정보를 기반으로 토큰정보 가져옴
-        String jwt = jwtTokenProvider.createToken(authenticate);
+        TokenDto tokenDto = jwtTokenProvider.createToken(authenticate);
         AccountContext principal = (AccountContext) authenticate.getPrincipal();
 
         // 토큰 정보를 헤더에 넣어줌
@@ -73,7 +74,7 @@ public class AccountController {
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
 
         // Dto 활용해서 Body에도 넣어줌줌
-        return new ResponseEntity<>(new TokenDto(principal, jwt), httpHeaders, HttpStatus.OK);
+        return new ResponseEntity<>(tokenDto, httpHeaders, HttpStatus.OK);
 
     }
 

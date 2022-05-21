@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+             xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+    <persistence-unit name="jpa-mysql"> <!-- 이름 -->
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" /> <!-- DB고유 기능 사용 -->
+            <property name="hibernate.show_sql" value="true" /> <!-- 콘솔창에 실행되는 SQL문 출력 -->
+            <property name="hibernate.format_sql" value="true" /> <!-- SQL출력시 보기 쉽게 정렬 -->
+            <property name="hibernate.use_sql_comments" value="true" /> <!-- SQL출력 시 주석도 같이 출력 -->
+            <property name="hibernate.id.new_generator_mappings" value="true" /> <!-- JPA표준에 맞춘 새로운 키 생성 전략 설정 -->
+        </properties>
+    </persistence-unit>
+</persistence>
