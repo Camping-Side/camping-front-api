@@ -8,6 +8,7 @@ import com.commerce.song.security.common.AccountContext;
 import com.commerce.song.security.filter.JwtFilter;
 import com.commerce.song.security.provider.JwtTokenProvider;
 import com.commerce.song.service.AccountService;
+import com.commerce.song.service.AuthService;
 import com.commerce.song.util.HttpCode;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,33 +28,48 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
 
 //@CrossOrigin(origins = "http://localhost:3030")
-@Api(tags= { " 회원 rest api "})
+@Api(tags= { " 인증 rest api "})
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/accounts")
-public class AccountController {
+@RequestMapping("/api/v1/auth")
+public class AuthController {
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final AccountService accountService;
-    private final PasswordEncoder passwordEncoder;
+    private final AuthService authService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<AccountDto.Res> findById(@PathVariable Long id) {
-        return ResponseEntity.ok(accountService.getUser(id));
+
+    @PostMapping("/authenticate")
+    public ResponseEntity<TokenDto> authorize(@Valid @RequestBody AccountDto accountDto) {
+
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(accountDto.getEmail(), accountDto.getPassword());
+
+        Authentication authenticate =
+                authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+        SecurityContextHolder.getContext().setAuthentication(authenticate);
+        // 인증정보를 기반으로 토큰정보 가져옴
+        TokenDto tokenDto = jwtTokenProvider.createToken(authenticate);
+        AccountContext principal = (AccountContext) authenticate.getPrincipal();
+
+        // 토큰 정보를 헤더에 넣어줌
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
+
+        // Dto 활용해서 Body에도 넣어줌줌
+        return new ResponseEntity<>(tokenDto, httpHeaders, HttpStatus.OK);
+
     }
 
-    @GetMapping("/me")
-    public ResponseEntity<AccountDto.Res> findMyInfo() {
-        return ResponseEntity.ok(accountService.getMyInfo());
+    @PostMapping
+    public ResponseEntity<ResultDto<Long>> signup(@Valid @RequestBody AccountDto accountDto) {
+        ResultDto<Long> result = authService.signup(accountDto);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(result.getResultData())
+                .toUri();
+        return ResponseEntity.created(location).body(result);
     }
-
-    @ApiOperation(value="사용자 리스트 조회", notes="사용자 리스트 조회")
-    @GetMapping
-    public ResponseEntity<ResultDto<Page<AccountDto.ResList>>> findAll(@Valid @ModelAttribute AccountDto.ReqList requestDto) {
-        return ResponseEntity.ok(ResultDto.res(HttpStatus.OK, HttpCode.getMessage(HttpStatus.OK),accountService.findAll(requestDto)));
-    }
-
 }
