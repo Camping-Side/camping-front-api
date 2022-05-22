@@ -53,7 +53,7 @@ public class AccountController {
     @ApiOperation(value="사용자 리스트 조회", notes="사용자 리스트 조회")
     @GetMapping
     public ResponseEntity<ResultDto<Page<AccountDto.ResList>>> findAll(@Valid @ModelAttribute AccountDto.ReqList requestDto) {
-        return ResponseEntity.ok(ResultDto.res(HttpStatus.OK, HttpCode.getMessage(HttpStatus.OK),accountService.findAll(requestDto)));
+        return ResponseEntity.ok(ResultDto.res(HttpStatus.OK, accountService.findAll(requestDto)));
     }
 
 }

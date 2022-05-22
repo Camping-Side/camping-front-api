@@ -79,4 +79,12 @@ public class AccountDto extends PageDto {
         }
     }
 
+    @Data
+    public static class LoginReq {
+        @ApiModelProperty(value = "회원 이메일")
+        private String email;
+        @ApiModelProperty(value = "회원 비밀번호")
+        private String password;
+    }
+
 }
