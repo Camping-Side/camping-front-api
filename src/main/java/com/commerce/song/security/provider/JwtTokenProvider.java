@@ -77,6 +77,7 @@ public class JwtTokenProvider implements InitializingBean {
                 .accessToken(accessToken)
                 .accessTokenExpiresIn(accessTokenExpiresIn.getTime())
                 .refreshToken(refreshToken)
+                .username(authentication.getName())
                 .build();
 
     }

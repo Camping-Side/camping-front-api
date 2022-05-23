@@ -5,8 +5,10 @@ import com.commerce.song.domain.dto.ResultDto;
 import com.commerce.song.domain.dto.TokenDto;
 import com.commerce.song.domain.entity.Account;
 import com.commerce.song.domain.entity.RefreshToken;
+import com.commerce.song.domain.entity.Role;
 import com.commerce.song.repository.AccountRepository;
 import com.commerce.song.repository.RefreshTokenRepository;
+import com.commerce.song.repository.RoleRepository;
 import com.commerce.song.security.provider.JwtTokenProvider;
 import com.commerce.song.service.AccountService;
 import com.commerce.song.service.AuthService;
@@ -21,6 +23,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
+import java.util.Set;
 
 @Slf4j
 @Service
@@ -30,6 +34,7 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final JwtTokenProvider jwtTokenProvider;
+    private final RoleRepository roleRepository;
     private final RefreshTokenRepository refreshTokenRepository;
 
     @Transactional
@@ -37,12 +42,16 @@ public class AuthServiceImpl implements AuthService {
         if(accountRepository.existsByEmail(reqDto.getEmail())) {
             throw new RuntimeException("이미 가입되어 있는 유저입니다.");
         }
+        Role role = roleRepository.findByRoleName("ROLE_USER");
+        Set<Role> roles = new HashSet<>();
+        roles.add(role);
         Account account = Account.builder()
                 .username(reqDto.getUsername())
                 .email(reqDto.getEmail())
                 .password(passwordEncoder.encode(reqDto.getPassword()))
                 .age(reqDto.getAge())
                 .activated(true)
+                .userRoles(roles)
                 .build();
 
         Account savedAccount = accountRepository.save(account);

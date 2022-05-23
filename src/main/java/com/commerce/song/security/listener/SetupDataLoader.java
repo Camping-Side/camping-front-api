@@ -35,7 +35,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         if(alreadySetup) {
             return;
         }
-//        setupSecurityResources();
+        setupSecurityResources();
     }
 
     private void setupSecurityResources() {
@@ -82,7 +82,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
     @Transactional
     public Account createAccountIfNotFound(String userName, String password, String email, int age, Set<Role> role) {
-        Account account = accountRepository.findByUsername(userName);
+        Account account = accountRepository.findByEmail(email);
 
         if(account == null) {
             account = Account.builder()

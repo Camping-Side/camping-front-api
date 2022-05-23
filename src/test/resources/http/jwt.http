@@ -1,23 +1,24 @@
-POST http://localhost:9090/api/v1/accounts/authenticate
+# 로그인
+POST http://localhost:9060/api/v1/auth/login
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 
 {
-  "email": "admin@gmail.com",
+  "email": "test@naver.com",
   "password": "1111"
 }
 
-### eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOIiwiZXhwIjoxNjE0NDg4MzQ0fQ.ixtCR8pv4JDD-nIIvSbrZJfIsLXvacZr-FLqGDPwk1jSuf2nx5Q4ROUBQVSf8HJEjN2zbaIqXooLroaNr36LDw
-POST http://localhost:9090/api/v1/accounts
+
+### 회원가입 eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOIiwiZXhwIjoxNjE0NDg4MzQ0fQ.ixtCR8pv4JDD-nIIvSbrZJfIsLXvacZr-FLqGDPwk1jSuf2nx5Q4ROUBQVSf8HJEjN2zbaIqXooLroaNr36LDw
+POST http://localhost:9060/api/v1/auth/sign
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 
 {
   "username": "admin",
   "password": "1111",
-  "email" : "test2@naver.com",
+  "email" : "test@naver.com",
   "age" : "15",
-  "userRoles" : ["ROLE_ADMIN"],
   "activated" : "false"
 }
 

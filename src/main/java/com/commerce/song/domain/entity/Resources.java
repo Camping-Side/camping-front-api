@@ -15,7 +15,7 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Resources implements Serializable {
+public class Resources extends BaseEntity implements Serializable {
     @Id
     @GeneratedValue
     @Column(name = "resource_id")

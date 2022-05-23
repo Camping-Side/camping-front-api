@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Menu {
+public class Menu extends BaseEntity{
     @Id
     @GeneratedValue
 //    @Column(name = "menu_id")

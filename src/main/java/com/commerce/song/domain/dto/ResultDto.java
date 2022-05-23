@@ -14,14 +14,14 @@ import org.springframework.http.HttpStatus;
 @ApiModel
 public class ResultDto<T> {
     @ApiModelProperty(value = "결과 코드")
-    private HttpStatus statusCode;
+    private Integer statusCode;
     @ApiModelProperty(value = "결과 메시지")
     private String resultMsg;
     @ApiModelProperty(value = "결과 데이터")
     private T resultData;
 
     public ResultDto(final HttpStatus statusCode, final String resultMsg) {
-        this.statusCode = statusCode;
+        this.statusCode = statusCode.value();
         this.resultMsg = resultMsg;
         this.resultData = null;
     }
@@ -41,7 +41,7 @@ public class ResultDto<T> {
     public static<T> ResultDto<T> res(final HttpStatus statusCode, final String resultMsg, final T t) {
         return ResultDto.<T>builder()
                 .resultData(t)
-                .statusCode(statusCode)
+                .statusCode(statusCode.value())
                 .resultMsg(resultMsg)
                 .build();
     }
