@@ -74,4 +74,5 @@ public class AuthController {
         // Dto 활용해서 Body에도 넣어줌줌
         return new ResponseEntity<>(result, httpHeaders, HttpStatus.OK);
     }
+
 }

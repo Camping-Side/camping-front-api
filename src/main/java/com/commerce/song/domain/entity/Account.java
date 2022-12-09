@@ -28,6 +28,9 @@ public class Account extends BaseEntity implements Serializable {
     @Column(unique = true)
     private String email;
 
+    @Column(unique = true)
+    private String phone;
+
     @Column
     private int age;
 

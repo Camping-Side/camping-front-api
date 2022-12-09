@@ -108,4 +108,5 @@ public class AuthServiceImpl implements AuthService {
 
         return ResultDto.res(HttpStatus.OK, token);
     }
+
 }
