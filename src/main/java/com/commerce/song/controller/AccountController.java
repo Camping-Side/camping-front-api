@@ -68,6 +68,10 @@ public class AccountController {
         return ResponseEntity.ok(accountService.resetPassword());
     }
 
+    @PostMapping("/checkEmailDup")
+    public ResponseEntity<AccountDto.CheckEmailDupRes> checkEmailDup(@Valid @RequestBody AccountDto.CheckEmailDupReq reqDto) {
+        return ResponseEntity.ok(accountService.checkEmailDup(reqDto.getEmail()));
+    }
     @PostMapping("/checkPhoneDup")
     public ResponseEntity<AccountDto.CheckPhoneDupRes> checkPhoneDup(@Valid @RequestBody AccountDto.CheckPhoneDupReq reqDto) {
         return ResponseEntity.ok(accountService.checkPhoneDup(reqDto.getPhone()));

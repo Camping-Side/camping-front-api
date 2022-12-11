@@ -65,6 +65,8 @@ public class AccountDto extends PageDto {
         private Long id;
         @ApiModelProperty(value = "회원 이름")
         private String username;
+        @ApiModelProperty(value = "회원 휴대폰번호")
+        private String phone;
         @ApiModelProperty(value = "회원 이메일")
         private String email;
         @ApiModelProperty(value = "회원 나이")
@@ -91,6 +93,20 @@ public class AccountDto extends PageDto {
         private String password;
     }
 
+    @Data
+    public static class CheckEmailDupReq {
+        @ApiModelProperty(value = "중복체크 이메일")
+        private String email;
+    }
+
+    @Data
+    public static class CheckEmailDupRes {
+        @ApiModelProperty(value = "이메일 중복여부")
+        private Boolean isDup;
+        public CheckEmailDupRes(Boolean isDup) {
+            this.isDup = isDup;
+        }
+    }
     @Data
     public static class CheckPhoneDupReq {
         @ApiModelProperty(value = "중복체크 휴대폰번호")

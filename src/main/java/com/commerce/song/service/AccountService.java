@@ -14,6 +14,7 @@ public interface AccountService {
 
     AccountDto.Res getUser(Long id);
     AccountDto.Res getMyInfo();
+    AccountDto.CheckEmailDupRes checkEmailDup(String email);
     AccountDto.CheckPhoneDupRes checkPhoneDup(String phone);
     AccountDto.FindEmailRes findEmail();
     ResultDto<Long> resetPassword();

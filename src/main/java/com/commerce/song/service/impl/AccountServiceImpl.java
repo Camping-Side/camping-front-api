@@ -80,7 +80,11 @@ public class AccountServiceImpl implements AccountService {
         accountRepository.deleteById(id);
     }
 
-    @Transactional
+    @Override
+    public AccountDto.CheckEmailDupRes checkEmailDup(String email) {
+        return new AccountDto.CheckEmailDupRes(accountRepository.existsByEmail(email));
+    }
+
     @Override
     public AccountDto.CheckPhoneDupRes checkPhoneDup(String phone) {
         return new AccountDto.CheckPhoneDupRes(accountRepository.existsByPhone(phone));
