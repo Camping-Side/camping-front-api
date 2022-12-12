@@ -32,7 +32,7 @@ public class Account extends BaseEntity implements Serializable {
     private String phone;
 
     @Column
-    private int age;
+    private String birth;
 
     @JsonIgnore
     @Column

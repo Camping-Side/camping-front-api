@@ -50,7 +50,7 @@ public class AuthServiceImpl implements AuthService {
                 .phone(reqDto.getPhone())
                 .email(reqDto.getEmail())
                 .password(passwordEncoder.encode(reqDto.getPassword()))
-                .age(reqDto.getAge())
+                .birth(reqDto.getBirth())
                 .activated(true)
                 .userRoles(roles)
                 .build();

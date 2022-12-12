@@ -57,9 +57,9 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         Set<Role> userRoleSet = new HashSet<>();
         userRoleSet.add(userRole);
 
-        Account adminAccount = createAccountIfNotFound("admin", "1111", "admin@gmail.com", 10, adminRoleSet);
-        Account managerAccount = createAccountIfNotFound("manager", "1111", "manager@gmail.com", 20, managerRoleSet);
-        Account userAccount = createAccountIfNotFound("user", "1111", "user@gmail.com", 20, userRoleSet);
+        Account adminAccount = createAccountIfNotFound("admin", "1111", "admin@gmail.com", "19911205", adminRoleSet);
+        Account managerAccount = createAccountIfNotFound("manager", "1111", "manager@gmail.com", "19921205", managerRoleSet);
+        Account userAccount = createAccountIfNotFound("user", "1111", "user@gmail.com", "19931205", userRoleSet);
 
 
     }
@@ -81,14 +81,14 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     }
 
     @Transactional
-    public Account createAccountIfNotFound(String userName, String password, String email, int age, Set<Role> role) {
+    public Account createAccountIfNotFound(String userName, String password, String email, String birth, Set<Role> role) {
         Account account = accountRepository.findByEmail(email);
 
         if(account == null) {
             account = Account.builder()
                     .username(userName)
                     .email(email)
-                    .age(age)
+                    .birth(birth)
                     .password(passwordEncoder.encode(password))
                     .userRoles(role)
                     .build();

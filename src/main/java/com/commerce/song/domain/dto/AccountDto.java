@@ -21,7 +21,7 @@ public class AccountDto extends PageDto {
     private String password;
     private String email;
     private String phone;
-    private int age;
+    private String birth;
     private Set<Role> userRoles = new HashSet<>();
 
     @Data
@@ -42,8 +42,8 @@ public class AccountDto extends PageDto {
         private String email;
         @ApiModelProperty(value = "회원 휴대폰번호")
         private String phone;
-        @ApiModelProperty(value = "회원 나이")
-        private int age;
+        @ApiModelProperty(value = "회원 생년월일")
+        private String birth;
         @ApiModelProperty(value = "회원 권한 리스트")
         private Set<RoleDto.ResAccountRole> userRoles = new HashSet<>();
 
@@ -51,7 +51,7 @@ public class AccountDto extends PageDto {
             this.id = account.getId();
             this.username = account.getUsername();
             this.email = account.getEmail();
-            this.age = account.getAge();
+            this.birth = account.getBirth();
             this.phone = account.getPhone();
             this.userRoles = account.getUserRoles().stream()
                 .map(RoleDto.ResAccountRole::new)
@@ -69,8 +69,8 @@ public class AccountDto extends PageDto {
         private String phone;
         @ApiModelProperty(value = "회원 이메일")
         private String email;
-        @ApiModelProperty(value = "회원 나이")
-        private int age;
+        @ApiModelProperty(value = "회원 생년월일")
+        private String birth;
         @ApiModelProperty(value = "회원 권한 리스트")
         private Set<RoleDto.ResAccountRole> userRoles = new HashSet<>();
 
@@ -78,7 +78,7 @@ public class AccountDto extends PageDto {
             this.id = account.getId();
             this.email = account.getEmail();
             this.username = account.getUsername();
-            this.age = account.getAge();
+            this.birth = account.getBirth();
             this.userRoles = account.getUserRoles().stream()
                     .map(RoleDto.ResAccountRole::new)
                     .collect(Collectors.toSet());
