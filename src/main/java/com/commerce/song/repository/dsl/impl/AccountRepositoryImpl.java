@@ -47,6 +47,12 @@ public class AccountRepositoryImpl implements AccountRepositoryCustom {
         return new PageImpl<>(content, pageable, total);
     }
 
+    @Override
+    public Long updatePassword(AccountDto.ResetPasswordReq reqDto) {
+
+        return update.set(account.password).where(emailEq(reqDto.getEmail()), usernameEq(reqDto.getPhone())).execute();;
+    }
+
     private BooleanExpression emailEq(String email) {
         return hasText(email) ? account.email.contains(email) : null;
     }

@@ -139,4 +139,12 @@ public class AccountDto extends PageDto {
         }
     }
 
+    @Data
+    public static class ResetPasswordReq {
+        @ApiModelProperty(value = "회원 이메일")
+        private String email;
+        @ApiModelProperty(value = "회원 휴대폰번호")
+        private String phone;
+    }
+
 }
