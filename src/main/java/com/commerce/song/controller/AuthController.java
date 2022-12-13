@@ -64,7 +64,7 @@ public class AuthController {
     }
 
     @PostMapping("/reissue")
-    public ResponseEntity<ResultDto<TokenDto>> reissue(@Valid @RequestBody TokenDto.TokenRequestDto reqDto) {
+    public ResponseEntity<ResultDto<TokenDto>> reissue(@Valid @RequestBody TokenDto.TokenRequestDto reqDto) throws Exception {
         ResultDto<TokenDto> result = authService.reissue(reqDto);
 
         // 토큰 정보를 헤더에 넣어줌

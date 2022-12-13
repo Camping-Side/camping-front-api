@@ -25,6 +25,13 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return super.handleExceptionInternal(e, es, headers, status, request);
     }
 
+    @ExceptionHandler(JwtNotAvailbleException.class)
+    protected ResponseEntity<ExceptionResponse> handler(JwtNotAvailbleException e, WebRequest request) {
+        logger.warn("request : " + request.getDescription(false) + " // status :  " + HttpStatus.UNAUTHORIZED  + " // details : " + e.getMessage(), e);
+        ExceptionResponse es = new ExceptionResponse(LocalDateTime.now(), e.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(es, HttpStatus.UNAUTHORIZED);
+    }
+
     @ExceptionHandler(BusinessException.class)
     protected ResponseEntity<ExceptionResponse> handler(BusinessException e, WebRequest request) {
         logger.warn("request : " + request.getDescription(false) + " // status :  " + HttpStatus.INTERNAL_SERVER_ERROR  + " // details : " + e.getMessage(), e);

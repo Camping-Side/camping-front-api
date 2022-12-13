@@ -71,7 +71,7 @@ public class AuthServiceImpl implements AuthService {
         TokenDto tokenDto = jwtTokenProvider.createToken(authenticate);
 
         RefreshToken refreshToken = RefreshToken.builder()
-                .key(authenticate.getName())
+                .key(reqDto.getEmail())
                 .value(tokenDto.getRefreshToken())
                 .build();
 
@@ -82,10 +82,9 @@ public class AuthServiceImpl implements AuthService {
 
     // 토큰 재발급급
    @Transactional
-    public ResultDto<TokenDto> reissue(TokenDto.TokenRequestDto reqDto) {
-        if(!jwtTokenProvider.validateToken(reqDto.getRefreshToken())) {
-            throw new RuntimeException("Refresh Token이 유효하지 않습니다.");
-        }
+    public ResultDto<TokenDto> reissue(TokenDto.TokenRequestDto reqDto) throws Exception {
+        // 토큰 유효성 체크, 검증 안되면 exception
+        jwtTokenProvider.validateToken(reqDto.getRefreshToken());
 
         // access token 에서 member id 가져옴
         Authentication authentication = jwtTokenProvider.getAuthentication(reqDto.getAccessToken());

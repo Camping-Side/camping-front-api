@@ -33,8 +33,10 @@ jwt:
   secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10
   # 30분
   access-token-expire-time: 1800
+#  access-token-expire-time: 10
   # 1일
   refresh-token-expire-time: 86400
+#  refresh-token-expire-time: 10
 
 logging:
   level:
