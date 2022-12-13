@@ -10,7 +10,6 @@ import com.commerce.song.repository.AccountRepository;
 import com.commerce.song.repository.RefreshTokenRepository;
 import com.commerce.song.repository.RoleRepository;
 import com.commerce.song.security.provider.JwtTokenProvider;
-import com.commerce.song.service.AccountService;
 import com.commerce.song.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -49,7 +48,8 @@ public class AuthServiceImpl implements AuthService {
                 .username(reqDto.getUsername())
                 .email(reqDto.getEmail())
                 .password(passwordEncoder.encode(reqDto.getPassword()))
-                .age(reqDto.getAge())
+                .birth(reqDto.getBirth())
+                .phone(reqDto.getPhone())
                 .activated(true)
                 .userRoles(roles)
                 .build();
