@@ -46,6 +46,7 @@ public class AuthServiceImpl implements AuthService {
         roles.add(role);
         Account account = Account.builder()
                 .username(reqDto.getUsername())
+                .phone(reqDto.getPhone())
                 .email(reqDto.getEmail())
                 .password(passwordEncoder.encode(reqDto.getPassword()))
                 .birth(reqDto.getBirth())
@@ -107,4 +108,5 @@ public class AuthServiceImpl implements AuthService {
 
         return ResultDto.res(HttpStatus.OK, token);
     }
+
 }

@@ -56,7 +56,6 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
         Set<Role> userRoleSet = new HashSet<>();
         userRoleSet.add(userRole);
-
         Account adminAccount = createAccountIfNotFound("admin", "1111", "admin@gmail.com", "19941126", adminRoleSet, "01011111111");
         Account managerAccount = createAccountIfNotFound("manager", "1111", "manager@gmail.com", "19931111", managerRoleSet, "01011111111");
         Account userAccount = createAccountIfNotFound("user", "1111", "user@gmail.com", "19921122", userRoleSet, "01011111111");

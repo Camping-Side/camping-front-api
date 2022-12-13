@@ -1,6 +1,7 @@
 package com.commerce.song.service.impl;
 
 import com.commerce.song.domain.dto.AccountDto;
+import com.commerce.song.domain.dto.ResultDto;
 import com.commerce.song.domain.entity.Account;
 import com.commerce.song.domain.entity.Role;
 import com.commerce.song.repository.AccountRepository;
@@ -79,4 +80,23 @@ public class AccountServiceImpl implements AccountService {
         accountRepository.deleteById(id);
     }
 
+    @Override
+    public AccountDto.CheckEmailDupRes checkEmailDup(String email) {
+        return new AccountDto.CheckEmailDupRes(accountRepository.existsByEmail(email));
+    }
+
+    @Override
+    public AccountDto.CheckPhoneDupRes checkPhoneDup(String phone) {
+        return new AccountDto.CheckPhoneDupRes(accountRepository.existsByPhone(phone));
+    }
+
+    @Override
+    public AccountDto.FindEmailRes findEmail() {
+        return null;
+    }
+
+    @Override
+    public ResultDto<Long> resetPassword() {
+        return null;
+    }
 }

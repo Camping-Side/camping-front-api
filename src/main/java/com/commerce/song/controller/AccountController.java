@@ -56,4 +56,25 @@ public class AccountController {
         return ResponseEntity.ok(ResultDto.res(HttpStatus.OK, accountService.findAll(requestDto)));
     }
 
+    @ApiOperation(value="계정찾기", notes="이름+휴대폰번호로 계정찾기")
+    @GetMapping("/findEmail")
+    public ResponseEntity<AccountDto.FindEmailRes> findEmail() {
+        return ResponseEntity.ok(accountService.findEmail());
+    }
+
+    @ApiOperation(value="비밀번호재설정", notes="아이디+휴대폰번호로 비밀번호 재설정 (재설정 비밀번호 1111)")
+    @GetMapping("/resetPassword")
+    public ResponseEntity<ResultDto<Long>> resetPassword() {
+        return ResponseEntity.ok(accountService.resetPassword());
+    }
+
+    @PostMapping("/checkEmailDup")
+    public ResponseEntity<AccountDto.CheckEmailDupRes> checkEmailDup(@Valid @RequestBody AccountDto.CheckEmailDupReq reqDto) {
+        return ResponseEntity.ok(accountService.checkEmailDup(reqDto.getEmail()));
+    }
+    @PostMapping("/checkPhoneDup")
+    public ResponseEntity<AccountDto.CheckPhoneDupRes> checkPhoneDup(@Valid @RequestBody AccountDto.CheckPhoneDupReq reqDto) {
+        return ResponseEntity.ok(accountService.checkPhoneDup(reqDto.getPhone()));
+    }
+
 }
