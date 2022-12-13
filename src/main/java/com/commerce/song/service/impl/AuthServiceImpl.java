@@ -10,7 +10,6 @@ import com.commerce.song.repository.AccountRepository;
 import com.commerce.song.repository.RefreshTokenRepository;
 import com.commerce.song.repository.RoleRepository;
 import com.commerce.song.security.provider.JwtTokenProvider;
-import com.commerce.song.service.AccountService;
 import com.commerce.song.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -51,6 +50,7 @@ public class AuthServiceImpl implements AuthService {
                 .email(reqDto.getEmail())
                 .password(passwordEncoder.encode(reqDto.getPassword()))
                 .birth(reqDto.getBirth())
+                .phone(reqDto.getPhone())
                 .activated(true)
                 .userRoles(roles)
                 .build();
@@ -72,7 +72,7 @@ public class AuthServiceImpl implements AuthService {
         TokenDto tokenDto = jwtTokenProvider.createToken(authenticate);
 
         RefreshToken refreshToken = RefreshToken.builder()
-                .key(authenticate.getName())
+                .key(reqDto.getEmail())
                 .value(tokenDto.getRefreshToken())
                 .build();
 
@@ -83,10 +83,9 @@ public class AuthServiceImpl implements AuthService {
 
     // 토큰 재발급급
    @Transactional
-    public ResultDto<TokenDto> reissue(TokenDto.TokenRequestDto reqDto) {
-        if(!jwtTokenProvider.validateToken(reqDto.getRefreshToken())) {
-            throw new RuntimeException("Refresh Token이 유효하지 않습니다.");
-        }
+    public ResultDto<TokenDto> reissue(TokenDto.TokenRequestDto reqDto) throws Exception {
+        // 토큰 유효성 체크, 검증 안되면 exception
+        jwtTokenProvider.validateToken(reqDto.getRefreshToken());
 
         // access token 에서 member id 가져옴
         Authentication authentication = jwtTokenProvider.getAuthentication(reqDto.getAccessToken());

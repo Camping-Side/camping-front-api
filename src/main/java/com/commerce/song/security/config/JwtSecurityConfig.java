@@ -3,6 +3,8 @@ package com.commerce.song.security.config;
 import com.commerce.song.security.adapter.JwtAdapter;
 import com.commerce.song.security.common.JwtAuthenticationEntryPoint;
 import com.commerce.song.security.factory.UrlResourcesMapFactoryBean;
+import com.commerce.song.security.filter.JwtExceptionFilter;
+import com.commerce.song.security.filter.JwtFilter;
 import com.commerce.song.security.filter.PermitAllFilter;
 import com.commerce.song.security.handler.JwtAccessDeniedHandler;
 import com.commerce.song.security.metadatasource.UrlFilterInvocationSecurityMetadataSource;
@@ -49,7 +51,8 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
     private final SecurityResourceService securityResourceService;
     private final String corsOrigin="http://localhost:3030";
     private String[] permitAllResources = {"/h2-console/**", "/swagger-ui.html/**", "/swagger-resources/**"
-            , "/api/v1/test", "/api/v1/accounts/*","/api/v1/accounts/**"};
+            , "/api/v1/test", "/api/v1/accounts/*","/api/v1/accounts/**"
+            , "/api/v1/auth/login", "/api/v1/auth/sign", "/api/v1/auth/reissue"};
 
 //    private final PasswordEncoder passwordEncoder;
 
@@ -92,6 +95,8 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
                 .addFilterBefore(customFilterSecurityInterceptor(), FilterSecurityInterceptor.class)
                 .apply(new JwtAdapter(jwtTokenProvider))
+
+
         ;
 
     }

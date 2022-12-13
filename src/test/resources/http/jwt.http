@@ -4,7 +4,7 @@ Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 
 {
-  "email": "test@naver.com",
+  "email": "user@gmail.com",
   "password": "1111"
 }
 
@@ -28,5 +28,15 @@ Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 
 ###
-GET http://localhost:9090/api/v1/admin/test
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfTUFOQUdFUixST0xFX1VTRVIiLCJleHAiOjE2MjQwMjI0ODZ9.cOrT85SeHefXLuzF3ZQoJSLoFqeJpYadljus4OgJeaira0NG_GSE7hmYMaNlVJ4QemBPLZstp6Ef_zDi4uVYpA
+GET http://localhost:9060/api/v1/admin/test
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY3MDkzMzgzMH0.vqrihkiLv4NOxD1_tv5E88enyzxd1UjVih6C1YginK0C7jHaMkykOdGAOoz7llsoDLSXp700IL7OopRa6gx6kg
+
+###
+POST http://localhost:9060/api/v1/auth/reissue
+Content-Type: application/json
+X-Requested-With: XMLHttpRequest
+
+{
+  "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY3MDkzMzgzMH0.vqrihkiLv4NOxD1_tv5E88enyzxd1UjVih6C1YginK0C7jHaMkykOdGAOoz7llsoDLSXp700IL7OopRa6gx6kg",
+  "refreshToken": "eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NzA5MzM4MzB9.aFULpWTaRZ5hE0uq1XSTW7gxpWQ5Ri480GBjy01lfQRf6Fv14l7_AailIlpnG1G-_XVGLbmOdzUpuWOcD3BkOg"
+}
