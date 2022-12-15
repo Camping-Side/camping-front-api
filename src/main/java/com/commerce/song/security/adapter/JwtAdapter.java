@@ -1,5 +1,6 @@
 package com.commerce.song.security.adapter;
 
+import com.commerce.song.security.filter.JwtExceptionFilter;
 import com.commerce.song.security.filter.JwtFilter;
 import com.commerce.song.security.provider.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,12 @@ public class JwtAdapter extends SecurityConfigurerAdapter<DefaultSecurityFilterC
 
     @Override
     public void configure(HttpSecurity http) {
+
+        JwtExceptionFilter jwtExceptionFilter = new JwtExceptionFilter();
+        http.addFilterBefore(jwtExceptionFilter, UsernamePasswordAuthenticationFilter.class);
+
         JwtFilter customFilter = new JwtFilter(jwtTokenProvider);
         http.addFilterBefore(customFilter, UsernamePasswordAuthenticationFilter.class);
+
     }
 }

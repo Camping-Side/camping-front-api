@@ -2,6 +2,7 @@ package com.commerce.song.security.provider;
 
 import com.commerce.song.domain.dto.TokenDto;
 import com.commerce.song.domain.entity.Account;
+import com.commerce.song.exception.JwtNotAvailbleException;
 import com.commerce.song.security.common.AccountContext;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
@@ -109,14 +110,17 @@ public class JwtTokenProvider implements InitializingBean {
             return true;
         } catch(io.jsonwebtoken.security.SecurityException  | MalformedJwtException e) {
             logger.info("잘못된 JWT 서명입니다.");
+            throw new JwtNotAvailbleException("잘못된 JWT 서명입니다.");
         } catch (ExpiredJwtException e) {
             logger.info("만료된 JWT 토큰입니다.");
+            throw new JwtNotAvailbleException("만료된 JWT 토큰입니다.");
         } catch (UnsupportedJwtException e) {
             logger.info("지원되지 않는 JWT 토큰입니다.");
+            throw new JwtNotAvailbleException("지원되지 않는 JWT 토큰입니다.");
         } catch (IllegalArgumentException e) {
             logger.info("JWT 토큰이 잘못되었습니다.");
+            throw new JwtNotAvailbleException("JWT 토큰이 잘못되었습니다.");
         }
-        return false;
     }
 
     private Claims parseClaims(String accessToken) {

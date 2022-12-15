@@ -1,6 +1,5 @@
 package com.commerce.song.domain.entity;
 
-import com.commerce.song.domain.dto.AccountDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -28,11 +27,11 @@ public class Account extends BaseEntity implements Serializable {
     @Column(unique = true)
     private String email;
 
-    @Column(unique = true)
-    private String phone;
-
-    @Column
+    @Column(length = 8)
     private String birth;
+
+    @Column(length = 12)
+    private String phone;
 
     @JsonIgnore
     @Column

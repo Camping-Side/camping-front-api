@@ -14,4 +14,10 @@ public class ExceptionResponse {
     private LocalDateTime timestamp;
     private String message;
     private String detail;
+
+    public ExceptionResponse(LocalDateTime timestamp, String message) {
+        this.timestamp = timestamp;
+        this.message = message;
+        this.detail = "";
+    }
 }
