@@ -10,7 +10,7 @@ public class AccountContext extends User {
     private final Account account;
     // 생성 시 account와 권한정보 받아옴
     public AccountContext(Account account, Collection<? extends GrantedAuthority> authorities) {
-        super(account.getUsername(), account.getPassword(), authorities);
+        super(account.getEmail(), account.getPassword(), authorities);
         this.account = account;
     }
 
