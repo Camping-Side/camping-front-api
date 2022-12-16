@@ -5,10 +5,7 @@ import com.commerce.song.domain.entity.Role;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Data
@@ -138,6 +135,14 @@ public class AccountDto extends PageDto {
         public FindEmailRes(Account account) {
             this.email = account.getEmail();
         }
+    }
+
+    @Data
+    public static class ResetPasswordReq {
+        @ApiModelProperty(value = "회원 이메일")
+        private String email;
+        @ApiModelProperty(value = "회원 휴대폰번호")
+        private String phone;
     }
 
 }
