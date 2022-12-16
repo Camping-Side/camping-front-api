@@ -5,10 +5,7 @@ import com.commerce.song.domain.entity.Role;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Data
@@ -69,8 +66,6 @@ public class AccountDto extends PageDto {
         private String phone;
         @ApiModelProperty(value = "회원 이메일")
         private String email;
-        @ApiModelProperty(value = "휴대폰번호")
-        private String phone;
         @ApiModelProperty(value = "회원 생년월일")
         private String birth;
         @ApiModelProperty(value = "회원 권한 리스트")

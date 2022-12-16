@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,7 +22,7 @@ import static org.springframework.util.StringUtils.hasText;
 @RequiredArgsConstructor
 public class AccountRepositoryImpl implements AccountRepositoryCustom {
     private final JPAQueryFactory query;
-
+    private final PasswordEncoder passwordEncoder;
     @Override
     public Page<AccountDto.ResList> findAllToDtoPage(Pageable pageable, AccountDto.ReqList reqDto) {
 
@@ -49,11 +50,14 @@ public class AccountRepositoryImpl implements AccountRepositoryCustom {
 
     @Override
     public Long updatePassword(AccountDto.ResetPasswordReq reqDto) {
-        return null;
+        return query.update(account).set(account.password, passwordEncoder.encode("111111")).where(emailEq(reqDto.getEmail()),phoneEq(reqDto.getPhone())).execute();
     }
 
     private BooleanExpression emailEq(String email) {
         return hasText(email) ? account.email.contains(email) : null;
+    }
+    private BooleanExpression phoneEq(String phone) {
+        return hasText(phone) ? account.phone.contains(phone) : null;
     }
     private BooleanExpression usernameEq(String username) {
         return hasText(username) ? account.username.contains(username) : null;

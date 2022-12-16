@@ -93,9 +93,16 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AccountDto.FindEmailRes findEmail(AccountDto.FindEmailReq reqDto) {
-        return new AccountDto.FindEmailRes(accountRepository.findByUsernameAndPhone(reqDto.getUsername(), reqDto.getPhone()));
+        AccountDto.FindEmailRes resDto = new AccountDto.FindEmailRes(new Account());
+        try {
+            resDto.setEmail(accountRepository.findByUsernameAndPhone(reqDto.getUsername(), reqDto.getPhone()).getEmail());
+        } catch (Exception e) {
+            throw new RuntimeException("유저 정보가 없습니다.");
+        }
+        return resDto;
     }
 
+    @Transactional
     @Override
     public ResultDto<Long> resetPassword(AccountDto.ResetPasswordReq reqDto) {
         return ResultDto.res(HttpStatus.OK, accountRepository.updatePassword(reqDto));
