@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "RESOURCES")
+@Table(name = "resources")
 @Data
 @ToString(exclude = {"roleSet"})
 @EqualsAndHashCode(of = "id")

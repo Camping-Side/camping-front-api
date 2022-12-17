@@ -9,7 +9,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "ROLE")
+@Table(name = "role")
 @Getter
 @Builder
 @ToString(exclude = {"users","resourcesSet"})
