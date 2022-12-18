@@ -3,11 +3,11 @@ spring:
     url: jdbc:mysql://localhost:3306/task_agile?characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
     username: scott
     password: 1234
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
       # 기본키 생성전략
       use-new-id-generator-mappings: false
     database-platform: org.hibernate.dialect.MySQL5Dialect
@@ -33,8 +33,10 @@ jwt:
   secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10
   # 30분
   access-token-expire-time: 1800
+#  access-token-expire-time: 10
   # 1일
   refresh-token-expire-time: 86400
+#  refresh-token-expire-time: 10
 
 logging:
   level:
@@ -43,7 +45,7 @@ logging:
     org.hibernate.type: trace
 
 server:
-  port: 9080
+  port: 9060
 
 mybatis:
   #   위치 설정

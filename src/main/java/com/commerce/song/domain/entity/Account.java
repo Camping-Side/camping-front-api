@@ -19,7 +19,7 @@ import java.util.Set;
 @EqualsAndHashCode(of = "id", callSuper = false)
 public class Account extends BaseEntity implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column

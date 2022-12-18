@@ -18,7 +18,7 @@ import java.util.Set;
 @EqualsAndHashCode(of = "id", callSuper = false)
 public class Role extends BaseEntity implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
     private Long id;
 

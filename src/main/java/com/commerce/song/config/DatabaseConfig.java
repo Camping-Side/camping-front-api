@@ -58,7 +58,7 @@ public class DatabaseConfig {
         entityManagerFactory.setPackagesToScan("com.commerce.song.domain.entity");
         entityManagerFactory.setJpaVendorAdapter(vendorAdapter);
         entityManagerFactory.afterPropertiesSet();
-        entityManagerFactory.setJpaProperties(jpaProperties());
+//        entityManagerFactory.setJpaProperties(jpaProperties());
 
         return entityManagerFactory;
     }
