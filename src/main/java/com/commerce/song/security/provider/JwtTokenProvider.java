@@ -2,30 +2,41 @@ package com.commerce.song.security.provider;
 
 import com.commerce.song.domain.dto.TokenDto;
 import com.commerce.song.domain.entity.Account;
+import com.commerce.song.domain.entity.Role;
 import com.commerce.song.exception.JwtNotAvailbleException;
+import com.commerce.song.repository.AccountRepository;
 import com.commerce.song.security.common.AccountContext;
+import com.commerce.song.security.domain.UserContextDto;
+import com.commerce.song.security.token.CustomContextToken;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
 public class JwtTokenProvider implements InitializingBean {
+    @Autowired
+    private AccountRepository accountRepository;
     private final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
     private static final String AUTHORITIES_KEY = "auth";
     private static final String BEARER_TYPE = "bearer";
@@ -92,15 +103,22 @@ public class JwtTokenProvider implements InitializingBean {
             throw new RuntimeException("권한 정보가 없는 토큰입니다.");
         }
 
-        Collection<? extends GrantedAuthority> authorities =
-                Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
-                        .map(SimpleGrantedAuthority::new)
-                        .collect(Collectors.toList());
+        Account account = accountRepository.findByEmail(claims.getSubject());
 
+        if(!account.isActivated()) {
+            throw new JwtNotAvailbleException("expired account");
+        }
 
-        User principal = new User(claims.getSubject(), "", authorities);
+        Set<Role> userRoles = account.getUserRoles();
+        Set<String> roleSet = userRoles.stream().map(Role::getRoleName).collect(Collectors.toSet());
 
-        return new UsernamePasswordAuthenticationToken(principal, "", authorities);
+        UserContextDto user = UserContextDto.builder()
+                .account(account)
+                .username(account.getEmail())
+                .password(account.getPassword())
+                .roles(roleSet).build();
+
+        return CustomContextToken.getTokenFromAccountContext(user);
     }
 
     // 토큰 유효성 검사

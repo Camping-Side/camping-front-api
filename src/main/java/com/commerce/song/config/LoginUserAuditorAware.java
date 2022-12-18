@@ -13,12 +13,12 @@ import java.util.Optional;
 public class LoginUserAuditorAware implements AuditorAware<Long> {
     @Override
     public Optional<Long> getCurrentAuditor() {
-        Long memberId = null;
+        Long accountId = null;
         try {
-            memberId = SecurityUtil.getCurrentMemberId();
+            accountId = SecurityUtil.getCurrentAccountId();
         } catch(SecurityContextAvailbleException e) {
-            memberId = 0L;
+            accountId = 0L;
         }
-        return Optional.of(memberId);
+        return Optional.of(accountId);
     }
 }

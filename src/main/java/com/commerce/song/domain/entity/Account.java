@@ -2,6 +2,7 @@ package com.commerce.song.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -39,8 +40,9 @@ public class Account extends BaseEntity implements Serializable {
     private String password;
 
     @JsonIgnore
-    @Column(name = "activated")
-    private boolean activated;
+    @Column(name = "activated", columnDefinition="tinyint(1) default 1")
+    @Builder.Default
+    private boolean activated = true;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade={CascadeType.ALL})
     @JoinTable(

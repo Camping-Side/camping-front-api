@@ -64,8 +64,9 @@ public class AccountController {
 
     @ApiOperation(value="비밀번호재설정", notes="아이디+휴대폰번호로 비밀번호 재설정 (재설정 비밀번호 1111)")
     @PostMapping("/resetPassword")
-    public ResponseEntity<ResultDto<Long>> resetPassword(@Valid @RequestBody AccountDto.ResetPasswordReq reqDto) {
-        return ResponseEntity.ok(accountService.resetPassword(reqDto));
+    public ResponseEntity<Object> resetPassword(@Valid @RequestBody AccountDto.ResetPasswordReq reqDto) {
+        accountService.resetPassword(reqDto);
+        return ResponseEntity.ok(null);
     }
 
     @ApiOperation(value="이메일중복체크", notes="이메일 중복체크")

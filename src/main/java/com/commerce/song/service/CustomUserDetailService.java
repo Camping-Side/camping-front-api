@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Service
+@Service("userDetailsService")
 @RequiredArgsConstructor
 public class CustomUserDetailService implements UserDetailsService {
     private final AccountRepository userRepository;
