@@ -6,30 +6,42 @@ import com.commerce.song.domain.dto.TokenDto;
 import com.commerce.song.domain.entity.Account;
 import com.commerce.song.domain.entity.RefreshToken;
 import com.commerce.song.domain.entity.Role;
+import com.commerce.song.exception.BadRequestException;
 import com.commerce.song.repository.AccountRepository;
 import com.commerce.song.repository.RefreshTokenRepository;
 import com.commerce.song.repository.RoleRepository;
+import com.commerce.song.security.domain.UserContextDto;
 import com.commerce.song.security.provider.JwtTokenProvider;
+import com.commerce.song.security.token.CustomContextToken;
 import com.commerce.song.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
     private final AccountRepository accountRepository;
+    private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final JwtTokenProvider jwtTokenProvider;
@@ -62,14 +74,32 @@ public class AuthServiceImpl implements AuthService {
 
     @Transactional
     public ResultDto<TokenDto> login(AccountDto.LoginReq reqDto) {
-        UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(reqDto.getEmail(), reqDto.getPassword());
 
-        Authentication authenticate =
-                authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-        SecurityContextHolder.getContext().setAuthentication(authenticate);
+        Account account = accountRepository.findByEmail(reqDto.getEmail());
+        if(account == null || !passwordEncoder.matches(reqDto.getPassword(), account.getPassword())) {
+            throw new BadCredentialsException("Invalid password");
+        }
+
+        if(!account.isActivated()) {
+            throw new BadCredentialsException("expired account");
+        }
+
+        Set<Role> userRoles = account.getUserRoles();
+        Set<String> roleSet = userRoles.stream().map(Role::getRoleName).collect(Collectors.toSet());
+
+        UserContextDto user = UserContextDto.builder()
+                .account(account)
+                .username(account.getEmail())
+                .password(account.getPassword())
+                .roles(roleSet).build();
+
+        CustomContextToken authenticationToken = CustomContextToken.getTokenFromAccountContext(user);
+
+//        Authentication authenticate =
+//                authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         // 인증정보를 기반으로 토큰정보 가져옴
-        TokenDto tokenDto = jwtTokenProvider.createToken(authenticate);
+        TokenDto tokenDto = jwtTokenProvider.createToken(authenticationToken);
 
         RefreshToken refreshToken = RefreshToken.builder()
                 .key(reqDto.getEmail())

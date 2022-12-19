@@ -2,6 +2,7 @@ package com.commerce.song.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,11 +15,12 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "account")
 @ToString(exclude = {"userRoles"})
 @EqualsAndHashCode(of = "id", callSuper = false)
 public class Account extends BaseEntity implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
@@ -38,8 +40,9 @@ public class Account extends BaseEntity implements Serializable {
     private String password;
 
     @JsonIgnore
-    @Column(name = "activated")
-    private boolean activated;
+    @Column(name = "activated", columnDefinition="tinyint(1) default 1")
+    @Builder.Default
+    private boolean activated = true;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade={CascadeType.ALL})
     @JoinTable(

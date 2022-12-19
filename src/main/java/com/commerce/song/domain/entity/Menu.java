@@ -8,11 +8,12 @@ import java.util.List;
 
 @Entity
 @Getter
+@Table(name = "menu")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Menu extends BaseEntity{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    @Column(name = "menu_id")
     private Long id;
 

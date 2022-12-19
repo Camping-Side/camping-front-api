@@ -4,6 +4,7 @@ import com.commerce.song.domain.dto.AccountDto;
 import com.commerce.song.domain.dto.ResultDto;
 import com.commerce.song.domain.entity.Account;
 import com.commerce.song.domain.entity.Role;
+import com.commerce.song.exception.BadRequestException;
 import com.commerce.song.repository.AccountRepository;
 import com.commerce.song.repository.RoleRepository;
 import com.commerce.song.service.AccountService;
@@ -66,9 +67,9 @@ public class AccountServiceImpl implements AccountService {
     }
     @Transactional(readOnly = true)
     public AccountDto.Res getMyInfo() {
-        return accountRepository.findById(SecurityUtil.getCurrentMemberId())
-                .map(AccountDto.Res::new)
-                .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다."));
+        Account account = accountRepository.findByEmail(SecurityUtil.getCurrentEmail());
+        if(account == null) throw new BadRequestException("유저 정보가 없습니다.");
+        return new AccountDto.Res(account);
     }
 
     @Transactional
@@ -104,7 +105,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Transactional
     @Override
-    public ResultDto<Long> resetPassword(AccountDto.ResetPasswordReq reqDto) {
-        return ResultDto.res(HttpStatus.OK, accountRepository.updatePassword(reqDto));
+    public void resetPassword(AccountDto.ResetPasswordReq reqDto) {
+        accountRepository.updatePassword(reqDto, passwordEncoder.encode("111111"));
     }
 }

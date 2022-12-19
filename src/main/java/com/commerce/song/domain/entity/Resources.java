@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "RESOURCES")
+@Table(name = "resources")
 @Data
 @ToString(exclude = {"roleSet"})
 @EqualsAndHashCode(of = "id")
@@ -17,7 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class Resources extends BaseEntity implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "resource_id")
     private Long id;
 
