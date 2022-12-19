@@ -25,6 +25,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Key;
 import java.util.Arrays;
@@ -96,6 +97,7 @@ public class JwtTokenProvider implements InitializingBean {
 
     // 토큰을 받아 Claim을 만들음.
     // claim에서 권한을 받아 유저객체를 만듬 최종적으론 authentication 객체 리턴
+    @Transactional(readOnly = true)
     public Authentication getAuthentication(String accessToken) {
         Claims claims = parseClaims(accessToken);
 
