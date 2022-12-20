@@ -10,4 +10,4 @@ create table resources
     created_by         bigint not null,
     last_modified_by   bigint null
 )
-    engine = MyISAM;
+    engine = InnoDB;

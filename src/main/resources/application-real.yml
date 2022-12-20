@@ -10,7 +10,7 @@ spring:
       ddl-auto: none
       # 기본키 생성전략
       use-new-id-generator-mappings: false
-    database-platform: org.hibernate.dialect.MySQL5Dialect
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     properties:
       hibernate:
         #        show_sql: ture

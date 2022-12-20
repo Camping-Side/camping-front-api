@@ -15,4 +15,4 @@ create table menu
     constraint FK_MENU_1
         foreign key (parent_id) references menu (id)
 )
-    engine = MyISAM;
+    engine = InnoDB;
