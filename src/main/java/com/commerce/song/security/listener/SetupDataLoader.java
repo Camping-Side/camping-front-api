@@ -11,6 +11,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
@@ -38,7 +39,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         setupSecurityResources();
     }
 
-    private void setupSecurityResources() {
+    @Transactional
+    void setupSecurityResources() {
         Role adminRole = createRoleIfNotFound("ROLE_ADMIN", "관리자");
         Role managerRole = createRoleIfNotFound("ROLE_MANAGER", "매니저");
         Role userRole = createRoleIfNotFound("ROLE_USER", "사용자");
@@ -63,7 +65,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Resources createResourceIfNotFound(String resourceName, String httpMethod, Set<Role> roleSet, String resourceType) {
         Resources resources = resourcesRepository.findByResourceNameAndHttpMethod(resourceName, httpMethod);
 
@@ -79,7 +81,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         return resourcesRepository.save(resources);
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Account createAccountIfNotFound(String userName, String password, String email, String birth, Set<Role> role, String phone) {
         Account account = accountRepository.findByEmail(email);
 
@@ -96,7 +98,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         return accountRepository.save(account);
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Role createRoleIfNotFound(String roleName, String roleDesc) {
         Role role = roleRepository.findByRoleName(roleName);
 

@@ -17,7 +17,7 @@ public interface AccountService {
     AccountDto.CheckEmailDupRes checkEmailDup(String email);
     AccountDto.CheckPhoneDupRes checkPhoneDup(String phone);
     AccountDto.FindEmailRes findEmail(AccountDto.FindEmailReq requestDto);
-    ResultDto<Long> resetPassword(AccountDto.ResetPasswordReq requestDto);
+    void resetPassword(AccountDto.ResetPasswordReq requestDto);
     void deleteUser(Long idx);
 
 }

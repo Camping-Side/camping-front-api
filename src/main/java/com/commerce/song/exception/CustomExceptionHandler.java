@@ -4,6 +4,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -44,6 +45,13 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         logger.warn("request : " + request.getDescription(false) + " // status :  " + HttpStatus.BAD_REQUEST  + " // details : " + e.getMessage(), e);
         ExceptionResponse es = new ExceptionResponse(LocalDateTime.now(), e.getMessage(), request.getDescription(false));
         return new ResponseEntity<>(es, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    protected ResponseEntity<ExceptionResponse> handler(BadCredentialsException e, WebRequest request) {
+        logger.warn("request : " + request.getDescription(false) + " // status :  " + HttpStatus.UNAUTHORIZED  + " // details : " + e.getMessage(), e);
+        ExceptionResponse es = new ExceptionResponse(LocalDateTime.now(), e.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(es, HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(InvalidParameterException.class)

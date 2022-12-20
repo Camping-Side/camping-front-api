@@ -22,7 +22,6 @@ import static org.springframework.util.StringUtils.hasText;
 @RequiredArgsConstructor
 public class AccountRepositoryImpl implements AccountRepositoryCustom {
     private final JPAQueryFactory query;
-    private final PasswordEncoder passwordEncoder;
     @Override
     public Page<AccountDto.ResList> findAllToDtoPage(Pageable pageable, AccountDto.ReqList reqDto) {
 
@@ -49,8 +48,8 @@ public class AccountRepositoryImpl implements AccountRepositoryCustom {
     }
 
     @Override
-    public Long updatePassword(AccountDto.ResetPasswordReq reqDto) {
-        return query.update(account).set(account.password, passwordEncoder.encode("111111")).where(emailEq(reqDto.getEmail()),phoneEq(reqDto.getPhone())).execute();
+    public Long updatePassword(AccountDto.ResetPasswordReq reqDto, String password) {
+        return query.update(account).set(account.password, password).where(emailEq(reqDto.getEmail()),phoneEq(reqDto.getPhone())).execute();
     }
 
     private BooleanExpression emailEq(String email) {
