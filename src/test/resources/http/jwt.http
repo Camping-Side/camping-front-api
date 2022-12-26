@@ -29,7 +29,7 @@ X-Requested-With: XMLHttpRequest
 
 ###
 GET http://localhost:9060/api/v1/admin/test
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY3MDkzMzgzMH0.vqrihkiLv4NOxD1_tv5E88enyzxd1UjVih6C1YginK0C7jHaMkykOdGAOoz7llsoDLSXp700IL7OopRa6gx6kg
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NzE0NTg2MjZ9.MAnxXp-sOPPyRUJ9IagR_kbOMU3GhwrafWU2EXs3EvYavAron8bEWqIBCtH24AEoTly9bUyeoYgDpOqVmFRp5g
 
 ###
 POST http://localhost:9060/api/v1/auth/reissue
@@ -37,6 +37,6 @@ Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 
 {
-  "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY3MDkzMzgzMH0.vqrihkiLv4NOxD1_tv5E88enyzxd1UjVih6C1YginK0C7jHaMkykOdGAOoz7llsoDLSXp700IL7OopRa6gx6kg",
-  "refreshToken": "eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NzA5MzM4MzB9.aFULpWTaRZ5hE0uq1XSTW7gxpWQ5Ri480GBjy01lfQRf6Fv14l7_AailIlpnG1G-_XVGLbmOdzUpuWOcD3BkOg"
+  "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NzE0NTgyNDB9.1okYsJse4FAHFOvhRXn_slJdnpuZjDE7YjcyS9YB3tpIJSCqk9dfMjydCyGKdQXRvc346amnhMFfyU1VwNidyA",
+  "refreshToken": "eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NzE1NDI4NDB9.eH5BbIwxdQiecwJ_P0YnVICwCNe6FuNFtpcIZ6tkTusIGC0UUJjORm_c3uX8gSxqH_srOJYIaClMnd6Z_waOXA"
 }
