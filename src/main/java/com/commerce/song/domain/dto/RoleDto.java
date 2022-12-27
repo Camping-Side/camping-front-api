@@ -21,6 +21,7 @@ public class RoleDto {
 
     @Data
     @AllArgsConstructor
+    @NoArgsConstructor
     public static class ResAccountRole {
         @ApiModelProperty(value = "권한 이름")
         private String roleName;

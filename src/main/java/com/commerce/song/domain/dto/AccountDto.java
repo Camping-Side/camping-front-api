@@ -39,6 +39,10 @@ public class AccountDto extends PageDto {
         private String email;
         @ApiModelProperty(value = "회원 생일")
         private String birth;
+        @ApiModelProperty(value = "활성화여부")
+        private boolean activated;
+        @ApiModelProperty(value = "마케팅수신여부")
+        private boolean marketAgree;
         @ApiModelProperty(value = "휴대폰번호")
         private String phone;
         @ApiModelProperty(value = "회원 권한 리스트")
@@ -50,6 +54,8 @@ public class AccountDto extends PageDto {
             this.email = account.getEmail();
             this.birth = account.getBirth();
             this.phone = account.getPhone();
+            this.activated = account.isActivated();
+            this.marketAgree = account.isMarketAgree();
             this.userRoles = account.getUserRoles().stream()
                 .map(RoleDto.ResAccountRole::new)
                 .collect(Collectors.toSet());
@@ -68,6 +74,10 @@ public class AccountDto extends PageDto {
         private String email;
         @ApiModelProperty(value = "회원 생년월일")
         private String birth;
+        @ApiModelProperty(value = "활성화여부")
+        private boolean activated;
+        @ApiModelProperty(value = "마케팅수신여부")
+        private boolean marketAgree;
         @ApiModelProperty(value = "회원 권한 리스트")
         private Set<RoleDto.ResAccountRole> userRoles = new HashSet<>();
 
@@ -77,6 +87,8 @@ public class AccountDto extends PageDto {
             this.username = account.getUsername();
             this.birth = account.getBirth();
             this.phone = account.getPhone();
+            this.activated = account.isActivated();
+            this.marketAgree = account.isMarketAgree();
             this.userRoles = account.getUserRoles().stream()
                     .map(RoleDto.ResAccountRole::new)
                     .collect(Collectors.toSet());

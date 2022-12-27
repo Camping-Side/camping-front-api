@@ -4,4 +4,4 @@ create table refresh_token
         primary key,
     rt_value varchar(255) null
 )
-    engine = MyISAM;
+    engine = InnoDB;

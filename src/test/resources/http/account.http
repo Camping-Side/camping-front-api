@@ -1,4 +1,7 @@
-GET http://localhost:9090/api/v1/accounts?page=0&size=6&username=admin
+GET http://localhost:9060/api/v1/accounts?page=0&size=6&username=admin
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 Accept: application/json
+
+### 단건조회
+GET http://localhost:9060/api/v1/accounts/1

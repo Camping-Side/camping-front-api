@@ -41,13 +41,13 @@ public class AccountController {
     private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/{id}")
-    public ResponseEntity<AccountDto.Res> findById(@PathVariable Long id) {
-        return ResponseEntity.ok(accountService.getUser(id));
+    public ResponseEntity<ResultDto<AccountDto.Res>> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(ResultDto.res(accountService.getUser(id)));
     }
 
     @GetMapping("/me")
-    public ResponseEntity<AccountDto.Res> findMyInfo() {
-        return ResponseEntity.ok(accountService.getMyInfo());
+    public ResponseEntity<ResultDto<AccountDto.Res>> findMyInfo() {
+        return ResponseEntity.ok(ResultDto.res(accountService.getMyInfo()));
     }
 
     @ApiOperation(value="사용자 리스트 조회", notes="사용자 리스트 조회")

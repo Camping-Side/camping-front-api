@@ -30,6 +30,10 @@ public class ResultDto<T> {
         return res(statusCode, HttpCode.getMessage(statusCode), null);
     }
 
+    public static<T> ResultDto<T> res(final T t) {
+        return res(HttpCode.SUCCESS.getCode(), HttpCode.SUCCESS.getMessage(), t);
+    }
+
     public static<T> ResultDto<T> res(final HttpStatus statusCode, final T t) {
         return res(statusCode, HttpCode.getMessage(statusCode), t);
     }

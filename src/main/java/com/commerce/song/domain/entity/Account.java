@@ -23,7 +23,7 @@ public class Account extends BaseEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(length = 30)
     private String username;
 
     @Column(unique = true)
@@ -43,6 +43,10 @@ public class Account extends BaseEntity implements Serializable {
     @Column(name = "activated", columnDefinition="tinyint(1) default 1")
     @Builder.Default
     private boolean activated = true;
+
+    @Column(name = "market_agree", columnDefinition="tinyint(1) default 1")
+    @Builder.Default
+    private boolean marketAgree = true;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade={CascadeType.ALL})
     @JoinTable(
