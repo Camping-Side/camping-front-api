@@ -5,6 +5,8 @@ import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -12,7 +14,8 @@ import java.io.Serializable;
 public class Vender extends BaseEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "vdr_id")
+    private Long vdrId;
 
     @Column(name = "vdr_nm", length = 50, nullable = false)
     private String vdrNm;
@@ -20,5 +23,8 @@ public class Vender extends BaseEntity implements Serializable {
     @Column(name = "vdr_sts", length = 2, nullable = false)
     @ColumnDefault("0")
     private String vdrSts;
+
+    @OneToMany(mappedBy = "vender")
+    private List<Product> products = new ArrayList<>();
 
 }

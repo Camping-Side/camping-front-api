@@ -1,10 +1,13 @@
 package com.commerce.song.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -12,7 +15,8 @@ import java.io.Serializable;
 public class Brand extends BaseEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "brand_id")
+    private Long brandId;
 
     @Column(name = "brand_name", length = 50, nullable = false)
     private String brandName;
@@ -32,4 +36,7 @@ public class Brand extends BaseEntity implements Serializable {
 
     @Column(name = "brand_img")
     private String brandImg;
+
+    @OneToMany(mappedBy = "brand")
+    private List<Product> products = new ArrayList<>();
 }
