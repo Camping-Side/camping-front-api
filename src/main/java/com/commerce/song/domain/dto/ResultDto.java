@@ -26,6 +26,10 @@ public class ResultDto<T> {
         this.resultData = null;
     }
 
+    public static<T> ResultDto<T> res() {
+        return res(HttpCode.SUCCESS.getCode(), HttpCode.SUCCESS.getMessage(), null);
+    }
+
     public static<T> ResultDto<T> res(final HttpStatus statusCode) {
         return res(statusCode, HttpCode.getMessage(statusCode), null);
     }

@@ -6,6 +6,7 @@ import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -48,6 +49,9 @@ public class Account extends BaseEntity implements Serializable {
     @Builder.Default
     private boolean marketAgree = true;
 
+    @Column(name="leave_date")
+    private LocalDateTime leaveDate;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade={CascadeType.ALL})
     @JoinTable(
             name = "account_roles",
@@ -55,6 +59,12 @@ public class Account extends BaseEntity implements Serializable {
             inverseJoinColumns = { @JoinColumn(name = "role_id")}
     )
     private Set<Role> userRoles = new HashSet<>();
+
+    // 회원 탈퇴 / 정지 (배치로 5년 지난 회원 실제 삭제처리)
+    public void leave() {
+        this.activated = false;
+        this.leaveDate = LocalDateTime.now();
+    }
 
 
 }

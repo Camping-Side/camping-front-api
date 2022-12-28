@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Slf4j
@@ -107,5 +108,13 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void resetPassword(AccountDto.ResetPasswordReq reqDto) {
         accountRepository.updatePassword(reqDto, passwordEncoder.encode("111111"));
+    }
+
+    @Transactional
+    @Override
+    public void deleteAccount(Long id) {
+        Account account = accountRepository.findById(id)
+                .orElseThrow(() -> new BadRequestException("존재하지 않는 아이디입니다."));
+        account.leave();
     }
 }

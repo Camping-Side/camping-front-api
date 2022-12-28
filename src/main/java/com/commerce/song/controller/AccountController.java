@@ -50,6 +50,12 @@ public class AccountController {
         return ResponseEntity.ok(ResultDto.res(accountService.getMyInfo()));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ResultDto> deleteAccount(@PathVariable Long id) {
+        accountService.deleteAccount(id);
+        return ResponseEntity.ok(ResultDto.res());
+    }
+
     @ApiOperation(value="사용자 리스트 조회", notes="사용자 리스트 조회")
     @GetMapping
     public ResponseEntity<ResultDto<Page<AccountDto.ResList>>> findAll(@Valid @ModelAttribute AccountDto.ReqList requestDto) {
