@@ -8,6 +8,7 @@ create table account
     password           varchar(255) null comment '비밀번호(암호화)',
     username           varchar(30) null comment '유저명',
     market_agree       tinyint(1)   null comment '마케팅 수신여부',
+    leave_date         datetime     null comment '탈퇴일자',
     created_date       datetime     null,
     last_modified_date datetime     null,
     created_by         bigint not null,

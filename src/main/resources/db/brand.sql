@@ -1,6 +1,6 @@
 create table brand
 (
-    id                 bigint auto_increment primary key,
+    brand_id                 bigint auto_increment primary key,
     brand_name         varchar(50)  not null comment '브랜드명',
     intro              varchar(100)  null comment '한줄소개',
     office_tel         int(12) null comment '대표 전화번호',

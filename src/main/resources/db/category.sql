@@ -1,6 +1,6 @@
 create table category
 (
-    id                 bigint auto_increment primary key,
+    category_id                 bigint auto_increment primary key,
     category_name      varchar(50)  not null comment '카테고리명',
     icon               varchar(50)  null comment '아이콘 클래스명',
     seq                int default 0 comment '순서(기본 0)',
@@ -12,6 +12,6 @@ create table category
     created_by         bigint not null,
     last_modified_by   bigint null,
     constraint FK_MENU_1
-        foreign key (parent_id) references category (id)
+        foreign key (parent_id) references category (category_id)
 )
     engine = InnoDB;
