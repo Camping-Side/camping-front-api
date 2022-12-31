@@ -20,7 +20,7 @@ public class SecurityUtil {
     public static Long getCurrentAccountId() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (authentication == null || authentication.getName() == null) {
+        if (authentication == null || authentication.getName() == null || !(authentication.getPrincipal() instanceof UserContextDto)) {
             throw  new SecurityContextAvailbleException("Security Context 에 인증 정보가 없습니다.");
         }
 

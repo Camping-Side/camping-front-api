@@ -26,6 +26,7 @@ import java.util.Set;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
     private final RoleRepository roleRepository;
@@ -60,13 +61,12 @@ public class AccountServiceImpl implements AccountService {
         accountRepository.save(account);
     }
 
-    @Transactional(readOnly = true)
     public AccountDto.Res getUser(Long id) {
         return accountRepository.findById(id)
                 .map(AccountDto.Res::new)
                 .orElseThrow(() -> new RuntimeException("유저 정보가 없습니다."));
     }
-    @Transactional(readOnly = true)
+
     public AccountDto.Res getMyInfo() {
         Account account = accountRepository.findByEmail(SecurityUtil.getCurrentEmail());
         if(account == null) throw new BadRequestException("유저 정보가 없습니다.");
@@ -116,5 +116,13 @@ public class AccountServiceImpl implements AccountService {
         Account account = accountRepository.findById(id)
                 .orElseThrow(() -> new BadRequestException("존재하지 않는 아이디입니다."));
         account.leave();
+    }
+
+    @Transactional
+    @Override
+    public void updateAccount(AccountDto.UpdateAccountReq req, Long id) {
+        Account account = accountRepository.findById(id)
+                .orElseThrow(() -> new BadRequestException("존재하지 않는 아이디입니다."));
+        account.updateByAdmin(req);
     }
 }

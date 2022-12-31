@@ -54,8 +54,8 @@ public class AuthController {
     }
 
     @PostMapping("/sign")
-    public ResponseEntity<ResultDto<Long>> signup(@Valid @RequestBody AccountDto accountDto) {
-        ResultDto<Long> result = authService.signup(accountDto);
+    public ResponseEntity<ResultDto<Long>> signup(@Valid @RequestBody AccountDto.SignAccountReq req) {
+        ResultDto<Long> result = authService.signup(req);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(result.getResultData())

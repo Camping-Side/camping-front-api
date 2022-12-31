@@ -15,11 +15,12 @@ Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 
 {
-  "username": "admin",
+  "username": "test",
+  "nickname": "nicktest",
   "password": "1111",
   "email" : "test@naver.com",
-  "age" : "15",
-  "activated" : "false"
+  "birth" : "19941126",
+  "phone" : "01012341234"
 }
 
 ###

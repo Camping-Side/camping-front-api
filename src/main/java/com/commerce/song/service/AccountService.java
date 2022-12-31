@@ -20,5 +20,6 @@ public interface AccountService {
     void resetPassword(AccountDto.ResetPasswordReq requestDto);
     void deleteUser(Long idx);
     void deleteAccount(Long id);
+    void updateAccount(AccountDto.UpdateAccountReq req, Long id);
 
 }

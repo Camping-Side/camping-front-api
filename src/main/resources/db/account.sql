@@ -7,6 +7,7 @@ create table account
     phone              varchar(12)  null comment '핸드폰번호',
     password           varchar(255) null comment '비밀번호(암호화)',
     username           varchar(30) null comment '유저명',
+    nickname           varchar(30) null comment '닉네임',
     market_agree       tinyint(1)   null comment '마케팅 수신여부',
     leave_date         datetime     null comment '탈퇴일자',
     created_date       datetime     null,

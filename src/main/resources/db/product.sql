@@ -24,7 +24,7 @@ create table product
     constraint FK_PRODUCT_2
         foreign key (brand_id) references brand (brand_id),
     constraint FK_PRODUCT_3
-        foreign key (vender_id) references vender (vender_id)
+        foreign key (vender_id) references vender (vdr_id)
 )
     engine = InnoDB;
 

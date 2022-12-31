@@ -49,7 +49,7 @@ public class AuthServiceImpl implements AuthService {
     private final RefreshTokenRepository refreshTokenRepository;
 
     @Transactional
-    public ResultDto<Long> signup(AccountDto reqDto) {
+    public ResultDto<Long> signup(AccountDto.SignAccountReq reqDto) {
         if(accountRepository.existsByEmail(reqDto.getEmail())) {
             throw new RuntimeException("이미 가입되어 있는 유저입니다.");
         }
@@ -58,6 +58,7 @@ public class AuthServiceImpl implements AuthService {
         roles.add(role);
         Account account = Account.builder()
                 .username(reqDto.getUsername())
+                .nickname(reqDto.getNickname())
                 .phone(reqDto.getPhone())
                 .email(reqDto.getEmail())
                 .password(passwordEncoder.encode(reqDto.getPassword()))
