@@ -1,5 +1,6 @@
 package com.commerce.song.domain.entity;
 
+import com.commerce.song.domain.dto.AccountDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -27,7 +28,10 @@ public class Account extends BaseEntity implements Serializable {
     @Column(length = 30)
     private String username;
 
-    @Column(unique = true)
+    @Column(length = 30)
+    private String nickname;
+
+    @Column(unique = true, nullable = false)
     private String email;
 
     @Column(length = 8)
@@ -45,9 +49,9 @@ public class Account extends BaseEntity implements Serializable {
     @Builder.Default
     private boolean activated = true;
 
-    @Column(name = "market_agree", columnDefinition="tinyint(1) default 1")
+    @Column(name = "market_agree", columnDefinition="tinyint(1) default 0")
     @Builder.Default
-    private boolean marketAgree = true;
+    private boolean marketAgree = false;
 
     @Column(name="leave_date")
     private LocalDateTime leaveDate;
@@ -64,6 +68,14 @@ public class Account extends BaseEntity implements Serializable {
     public void leave() {
         this.activated = false;
         this.leaveDate = LocalDateTime.now();
+    }
+
+    public void updateByAdmin(AccountDto.UpdateAccountReq req) {
+        this.username = req.getUsername();
+        this.activated = req.isActivated();
+        this.email = req.getEmail();
+        this.phone = req.getPhone();
+        this.nickname = req.getNickname();
     }
 
 

@@ -2,9 +2,14 @@ package com.commerce.song.domain.dto;
 
 import com.commerce.song.domain.entity.Account;
 import com.commerce.song.domain.entity.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -93,6 +98,39 @@ public class AccountDto extends PageDto {
                     .map(RoleDto.ResAccountRole::new)
                     .collect(Collectors.toSet());
         }
+    }
+
+    @Data
+    public static class UpdateAccountReq {
+        @ApiModelProperty(value = "이메일")
+        private String email;
+        @ApiModelProperty(value = "이름")
+        private String username;
+        @ApiModelProperty(value = "닉네임")
+        private String nickname;
+        @ApiModelProperty(value = "휴대폰번호")
+        private String phone;
+        @ApiModelProperty(value = "활성화여부") @NotNull
+        private boolean activated;
+    }
+
+    @Data
+    public static class SignAccountReq {
+        @ApiModelProperty(value = "이메일")
+        @Email(message = "이메일 양식을 입력해주세요.") @NotBlank(message = "이메일은 필수값입니다.")
+        private String email;
+        @ApiModelProperty(value = "이름")
+        private String username;
+        @ApiModelProperty(value = "닉네임")
+        private String nickname;
+        @ApiModelProperty(value = "비밀번호")
+        private String password;
+        @ApiModelProperty(value = "생년월일 8자리 YYYYMMDD")
+        @Size(min = 8, max = 8, message = "생년월일 8자리를 입력해주세요.")
+        private String birth;
+        @ApiModelProperty(value = "휴대폰번호(010XXXXXXXX)")
+        @Size(min = 11, max = 12, message = "휴대폰번호를 알맞게 입력해주세요.")
+        private String phone;
     }
 
     @Data

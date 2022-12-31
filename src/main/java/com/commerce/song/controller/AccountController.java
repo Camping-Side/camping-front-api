@@ -22,6 +22,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -56,15 +57,22 @@ public class AccountController {
         return ResponseEntity.ok(ResultDto.res());
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ResultDto> updateAccount(@PathVariable Long id
+            , @RequestBody @Validated AccountDto.UpdateAccountReq req) {
+        accountService.updateAccount(req, id);
+        return ResponseEntity.ok(ResultDto.res());
+    }
+
     @ApiOperation(value="사용자 리스트 조회", notes="사용자 리스트 조회")
     @GetMapping
-    public ResponseEntity<ResultDto<Page<AccountDto.ResList>>> findAll(@Valid @ModelAttribute AccountDto.ReqList requestDto) {
+    public ResponseEntity<ResultDto<Page<AccountDto.ResList>>> findAll(@Validated @ModelAttribute AccountDto.ReqList requestDto) {
         return ResponseEntity.ok(ResultDto.res(HttpStatus.OK, accountService.findAll(requestDto)));
     }
 
     @ApiOperation(value="계정찾기", notes="이름+휴대폰번호로 계정찾기")
     @PostMapping("/findEmail")
-    public ResponseEntity<AccountDto.FindEmailRes> checkEmailDup(@Valid @RequestBody AccountDto.FindEmailReq reqDto) {
+    public ResponseEntity<AccountDto.FindEmailRes> checkEmailDup(@Validated @RequestBody AccountDto.FindEmailReq reqDto) {
         return ResponseEntity.ok(accountService.findEmail(reqDto));
     }
 
