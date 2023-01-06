@@ -1,0 +1,10 @@
+GET http://localhost:9060/api/v1/products
+Content-Type: application/json
+X-Requested-With: XMLHttpRequest
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NzMwMjIxODB9._n-OOMG0KGr9Qu0ocOQf7tXEMKwxn_UTd8X7Y6cfq_R9sMRoIa0d3sgm8o186QZx8w82Ei8UPetbWLBmR0BQEQ
+
+{
+  "page": 0,
+  "size": 10
+}

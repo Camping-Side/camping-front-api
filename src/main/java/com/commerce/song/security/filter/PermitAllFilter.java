@@ -1,5 +1,10 @@
 package com.commerce.song.security.filter;
 
+import com.commerce.song.exception.ExceptionResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.intercept.InterceptorStatusToken;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
@@ -8,7 +13,9 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,16 +63,34 @@ public class PermitAllFilter extends FilterSecurityInterceptor {
                 fi.getRequest().setAttribute(FILTER_APPLIED, Boolean.TRUE);
             }
 
-            InterceptorStatusToken token = super.beforeInvocation(fi);
-
             try {
-                fi.getChain().doFilter(fi.getRequest(), fi.getResponse());
-            }
-            finally {
-                super.finallyInvocation(token);
+                InterceptorStatusToken token = beforeInvocation(fi);
+
+                try {
+                    fi.getChain().doFilter(fi.getRequest(), fi.getResponse());
+                }
+                finally {
+                    super.finallyInvocation(token);
+                }
+
+                super.afterInvocation(token, null);
+            } catch(Exception e) {
+                logger.warn("유저 권한이 불충분합니다.");
+                HttpServletResponse response = fi.getResponse();
+                ExceptionResponse es = new ExceptionResponse(LocalDateTime.now(), "유저 권한이 불충분합니다.");
+                ObjectMapper objectMapper = new ObjectMapper();
+                objectMapper.registerModule(new JavaTimeModule());
+                response.setStatus(HttpStatus.FORBIDDEN.value());
+                response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+                response.setCharacterEncoding("UTF-8");
+                try{
+                    response.getWriter().write(objectMapper.writeValueAsString(es));
+                }catch (IOException ioe){
+                    e.printStackTrace();
+                }
             }
 
-            super.afterInvocation(token, null);
+
         }
     }
 }

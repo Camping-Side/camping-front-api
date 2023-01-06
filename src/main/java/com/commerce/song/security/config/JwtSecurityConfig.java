@@ -19,6 +19,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.vote.AffirmativeBased;
+import org.springframework.security.access.vote.AuthenticatedVoter;
 import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -28,6 +29,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.expression.WebExpressionVoter;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
@@ -51,7 +53,6 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
     private final SecurityResourceService securityResourceService;
     private final String corsOrigin="http://localhost:3030";
     private String[] permitAllResources = {"/h2-console/**", "/swagger-ui.html/**", "/swagger-resources/**"
-            , "/api/v1/test", "/api/v1/accounts/*","/api/v1/accounts/**"
             , "/api/v1/auth/login", "/api/v1/auth/sign", "/api/v1/auth/reissue"};
 
 //    private final PasswordEncoder passwordEncoder;
@@ -89,12 +90,12 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
+                .addFilterBefore(customFilterSecurityInterceptor(), FilterSecurityInterceptor.class)
+                .apply(new JwtAdapter(jwtTokenProvider))
+        .and()
                 .authorizeRequests()
                 .anyRequest()
                 .authenticated()
-        .and()
-                .addFilterBefore(customFilterSecurityInterceptor(), FilterSecurityInterceptor.class)
-                .apply(new JwtAdapter(jwtTokenProvider))
 
 
         ;
@@ -104,30 +105,41 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PermitAllFilter customFilterSecurityInterceptor() throws Exception {
         PermitAllFilter permitAllFilter = new PermitAllFilter(permitAllResources);
-        permitAllFilter.setSecurityMetadataSource(urlFilterInvocationSecurityMetadataSource());
-        permitAllFilter.setAccessDecisionManager(affirmativeBased());
+        permitAllFilter.setSecurityMetadataSource(urlFilterInvocationSecurityMetadataSource(securityResourceService));
+        permitAllFilter.setAccessDecisionManager(affirmativeBased(securityResourceService));
         permitAllFilter.setAuthenticationManager(authenticationManagerBean());
+        permitAllFilter.setRejectPublicInvocations(true);
 
         return permitAllFilter;
     }
 
-    private AccessDecisionManager affirmativeBased() {
-        AffirmativeBased affirmativeBased = new AffirmativeBased(getAccessDecisionVoters());
+    @Bean
+    public AccessDecisionManager affirmativeBased(SecurityResourceService securityResourceService) {
+        AffirmativeBased affirmativeBased = new AffirmativeBased(getAccessDecisionVoters(securityResourceService));
+        affirmativeBased.setAllowIfAllAbstainDecisions(false);
         return affirmativeBased;
     }
 
-    private List<AccessDecisionVoter<? extends Object>> getAccessDecisionVoters() {
-        List<AccessDecisionVoter<? extends Object>> accessDecisionVoters = new ArrayList<>();
-        accessDecisionVoters.add(new RoleVoter());
-        return accessDecisionVoters;
+    private List<AccessDecisionVoter<? extends Object>> getAccessDecisionVoters(SecurityResourceService securityResourceService) {
+        AuthenticatedVoter authenticatedVoter = new AuthenticatedVoter();
+        WebExpressionVoter webExpressionVoter = new WebExpressionVoter();
+        RoleVoter roleVoter = new RoleVoter();
+//        IpAddressVoter ipAddressVoter = new IpAddressVoter(securityResourceService);
+
+        List<AccessDecisionVoter<? extends Object>> accessDecisionVoterList = Arrays.asList( authenticatedVoter, webExpressionVoter, roleVoter);
+        return accessDecisionVoterList;
+
+//        List<AccessDecisionVoter<? extends Object>> accessDecisionVoters = new ArrayList<>();
+//        accessDecisionVoters.add(new RoleVoter());
+//        return accessDecisionVoters;
     }
 
     @Bean
-    public FilterInvocationSecurityMetadataSource urlFilterInvocationSecurityMetadataSource() throws Exception {
-        return new UrlFilterInvocationSecurityMetadataSource(urlResourcesMapFactoryBean().getObject(), securityResourceService);
+    public FilterInvocationSecurityMetadataSource urlFilterInvocationSecurityMetadataSource(SecurityResourceService securityResourceService) throws Exception {
+        return new UrlFilterInvocationSecurityMetadataSource(urlResourcesMapFactoryBean(securityResourceService).getObject(), securityResourceService);
     }
 
-    private UrlResourcesMapFactoryBean urlResourcesMapFactoryBean() {
+    private UrlResourcesMapFactoryBean urlResourcesMapFactoryBean(SecurityResourceService securityResourceService) {
         UrlResourcesMapFactoryBean urlResourcesMapFactoryBean = new UrlResourcesMapFactoryBean();
         urlResourcesMapFactoryBean.setSecurityResourceService(securityResourceService);
 

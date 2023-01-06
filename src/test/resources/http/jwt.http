@@ -1,4 +1,4 @@
-# 로그인
+### 로그인 - 일반유저
 POST http://localhost:9060/api/v1/auth/login
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
@@ -6,7 +6,22 @@ X-Requested-With: XMLHttpRequest
 {
   "email": "user@gmail.com",
   "password": "1111"
+
+
 }
+
+### 로그인 - 어드민
+POST http://localhost:9060/api/v1/auth/login
+Content-Type: application/json
+X-Requested-With: XMLHttpRequest
+
+{
+  "email": "admin@gmail.com",
+  "password": "1111"
+
+
+}
+
 
 
 ### 회원가입 eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOIiwiZXhwIjoxNjE0NDg4MzQ0fQ.ixtCR8pv4JDD-nIIvSbrZJfIsLXvacZr-FLqGDPwk1jSuf2nx5Q4ROUBQVSf8HJEjN2zbaIqXooLroaNr36LDw
@@ -30,7 +45,7 @@ X-Requested-With: XMLHttpRequest
 
 ###
 GET http://localhost:9060/api/v1/admin/test
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NzE0NTg2MjZ9.MAnxXp-sOPPyRUJ9IagR_kbOMU3GhwrafWU2EXs3EvYavAron8bEWqIBCtH24AEoTly9bUyeoYgDpOqVmFRp5g
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NzMwMTc5MDh9.Y4GgtsLvJX9ZASM2t_877M_VH-LXVaMSk7pQ_BTZYEmKQR0-Grak-7929t1WaB-XyA_lsFAOudDfcid2h5QBaA
 
 ###
 POST http://localhost:9060/api/v1/auth/reissue
@@ -38,6 +53,6 @@ Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 
 {
-  "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NzE0NTgyNDB9.1okYsJse4FAHFOvhRXn_slJdnpuZjDE7YjcyS9YB3tpIJSCqk9dfMjydCyGKdQXRvc346amnhMFfyU1VwNidyA",
-  "refreshToken": "eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NzE1NDI4NDB9.eH5BbIwxdQiecwJ_P0YnVICwCNe6FuNFtpcIZ6tkTusIGC0UUJjORm_c3uX8gSxqH_srOJYIaClMnd6Z_waOXA"
+  "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NzMwMTc5MDh9.Y4GgtsLvJX9ZASM2t_877M_VH-LXVaMSk7pQ_BTZYEmKQR0-Grak-7929t1WaB-XyA_lsFAOudDfcid2h5QBaA",
+  "refreshToken": "eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NzMxMDI1MDh9.6iPUfhjhB1osDSutjdsT1NKAoVkwlwyNMXhTKzlVA2gPjdaKBtqGHRXGj8en7vN3u7j_y4l3L2GDrHbxIuR8_w"
 }
