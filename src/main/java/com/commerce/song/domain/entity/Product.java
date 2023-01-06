@@ -1,6 +1,9 @@
 package com.commerce.song.domain.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
@@ -9,6 +12,9 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "product")
 public class Product extends BaseEntity implements Serializable {
     @Id
@@ -21,15 +27,15 @@ public class Product extends BaseEntity implements Serializable {
 
     @Column(name = "tax_tp", length = 2, nullable = false)
     @ColumnDefault("0")
-    private String taxTp;
+    private Integer taxTp;
 
     @Column(name = "prd_tp", length = 2, nullable = false)
     @ColumnDefault("0")
-    private String prdTp;
+    private Integer prdTp;
 
     @Column(name = "prd_sts", length = 2, nullable = false)
     @ColumnDefault("0")
-    private String prdSts;
+    private Integer prdSts;
 
     @Column(name = "product_desc", columnDefinition = "LONGTEXT")
     private String productDesc;
