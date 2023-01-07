@@ -102,7 +102,7 @@ public class AccountDto extends PageDto {
 
     @Data
     public static class UpdateAccountReq {
-        @ApiModelProperty(value = "이메일")
+        @ApiModelProperty(value = "이메일") @NotNull(message = "이메일은 필수값입니다.")
         private String email;
         @ApiModelProperty(value = "이름")
         private String username;
@@ -110,8 +110,10 @@ public class AccountDto extends PageDto {
         private String nickname;
         @ApiModelProperty(value = "휴대폰번호")
         private String phone;
-        @ApiModelProperty(value = "활성화여부") @NotNull
+        @ApiModelProperty(value = "활성화여부") @NotNull(message = "활성화여부는 필수값입니다.")
         private boolean activated;
+        @ApiModelProperty(value = "회원 생년월일")
+        private String birth;
     }
 
     @Data
