@@ -44,24 +44,24 @@ public class DatabaseConfig {
     }
     // 스프링이 직접 제공하는 컨테이너 관리 EntityManager를 위한 EntityManagerFactory를 만들어준다.
     // 스프링이 제공하는 일관성 있는 데이터 엑세스 기술의 접근 방법 적용 가능
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
-        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        // ddl 실행 옵션
-        vendorAdapter.setGenerateDdl(true);
-        // sql show 옵션
-        vendorAdapter.setShowSql(true);
-
-        LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
-        entityManagerFactory.setDataSource(dataSource);
-        // entity scan 을 해준다.
-        entityManagerFactory.setPackagesToScan("com.commerce.song.domain.entity");
-        entityManagerFactory.setJpaVendorAdapter(vendorAdapter);
-        entityManagerFactory.afterPropertiesSet();
+//    @Bean
+//    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
+//        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+//        // ddl 실행 옵션
+//        vendorAdapter.setGenerateDdl(true);
+//        // sql show 옵션
+//        vendorAdapter.setShowSql(true);
+//
+//        LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
+//        entityManagerFactory.setDataSource(dataSource);
+//        // entity scan 을 해준다.
+//        entityManagerFactory.setPackagesToScan("com.commerce.song.domain.entity");
+//        entityManagerFactory.setJpaVendorAdapter(vendorAdapter);
+//        entityManagerFactory.afterPropertiesSet();
 //        entityManagerFactory.setJpaProperties(jpaProperties());
-
-        return entityManagerFactory;
-    }
+//
+//        return entityManagerFactory;
+//    }
 
     // transactional 설정
 //    @Bean
