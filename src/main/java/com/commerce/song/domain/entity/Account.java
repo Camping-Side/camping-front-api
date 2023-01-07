@@ -76,6 +76,7 @@ public class Account extends BaseEntity implements Serializable {
         this.email = req.getEmail();
         this.phone = req.getPhone();
         this.nickname = req.getNickname();
+        this.birth = req.getBirth();
     }
 
 

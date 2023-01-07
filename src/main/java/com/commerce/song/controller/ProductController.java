@@ -9,10 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Api(tags = "상품 rest api")
 @RestController
@@ -23,7 +20,7 @@ public class ProductController {
 
     @ApiOperation(value="상품 리스트 조회", notes = "상품 리스트 조회")
     @GetMapping
-    public ResultDto<Page<ProductDto.ResList>> findAll(@Validated @RequestBody ProductDto.ReqList req) {
+    public ResultDto<Page<ProductDto.ResList>> findAll(@Validated @ModelAttribute ProductDto.ReqList req) {
         Page<ProductDto.ResList> all = productService.findAll(req);
         return ResultDto.res(all);
     }
