@@ -30,13 +30,11 @@ jobs:
         with:
           files: ${{ env.RESOURCE_PATH }}
         env:
-          override.value: ${{ secrets.DI_FROM_SECRET }}
+#          override.value: ${{ secrets.DI_FROM_SECRET }}
           # override.value: 'from deploy.yaml' <-- 이렇게 사용해도 주입이 된다.
-          rds.hostname: ${{ secrets.DI_RDS_HOSTNAME }}
-          rds.port: ${{ secrets.DI_RDS_PORT }}
-          rds.dbname: ${{ secrets.DI_RDS_DBNAME }}
-          rds.username: ${{ secrets.DI_RDS_USERNAME }}
-          rds.password: ${{ secrets.DI_RDS_PASSWORD }}
+          spring.datasource.url: ${{ secrets.DI_RDS_URL }}
+          spring.datasource.username: ${{ secrets.DI_RDS_USERNAME }}
+          spring.datasource.password: ${{ secrets.DI_RDS_PASSWORD }}
           jwt.secret: $${{ secrets.DI_JWT_SECRET }}
 
 #      - name: Grant execute permission for gradlew
