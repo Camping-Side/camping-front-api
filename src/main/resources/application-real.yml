@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/task_agile?characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
-    username: scott
-    password: 1234
+    url: jdbc:mysql://${rds.hostname}:${rds.port}/${rds.dbname}?characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
+    username: ${rds.username}
+    password: ${rds.password}
     driver-class-name: com.mysql.jdbc.Driver
 
   jpa:
@@ -10,7 +10,7 @@ spring:
       ddl-auto: none
       # 기본키 생성전략
       use-new-id-generator-mappings: false
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     properties:
       hibernate:
         #        show_sql: ture
@@ -21,6 +21,8 @@ spring:
         # bulk
         order_inserts: true
         order_updates: true
+        dialect:
+          storage_engine: innodb
 
   devtools:
     livereload:
@@ -30,7 +32,7 @@ spring:
 
 jwt:
   header: Authorization
-  secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10
+  secret: ${jwt.secret}
   # 30분
   access-token-expire-time: 1800
   # 1일
@@ -57,4 +59,4 @@ mybatis:
 
 # 로그파일 저장 위치
 logserver:
-  path: C:\log
+  path: /tmp
