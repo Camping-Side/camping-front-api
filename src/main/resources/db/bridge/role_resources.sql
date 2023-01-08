@@ -8,4 +8,4 @@ create table roles_resources
     constraint FK_ROLES_RESOURCES_2
         foreign key (role_id) references role (role_id)
 )
-    engine = MyISAM;
+    engine = InnoDB;
