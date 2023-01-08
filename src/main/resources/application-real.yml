@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://${rds.hostname}:${rds.port}/${rds.dbname}?characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
+    url: ${rds.url}
     username: ${rds.username}
     password: ${rds.password}
     driver-class-name: com.mysql.cj.jdbc.Driver
