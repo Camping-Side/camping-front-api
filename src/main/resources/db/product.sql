@@ -39,6 +39,6 @@ create table product_img
     last_modified_by   bigint       null,
     primary key (product_id, seq),
     constraint FK_PRODUCT_IMG_1
-        foreign key (product_id) references product (id)
+        foreign key (product_id) references product (product_id)
 )
     engine = InnoDB;

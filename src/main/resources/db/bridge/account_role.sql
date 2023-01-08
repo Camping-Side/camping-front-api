@@ -8,4 +8,4 @@ create table account_roles
     constraint FK_ACCOUNT_ROLE_2
         foreign key (account_id) references account (id)
 )
-    engine = MyISAM;
+    engine = InnoDB;

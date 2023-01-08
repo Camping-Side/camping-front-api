@@ -11,7 +11,7 @@ create table category
     last_modified_date datetime     null,
     created_by         bigint not null,
     last_modified_by   bigint null,
-    constraint FK_MENU_1
+    constraint FK_CATEGORY_1
         foreign key (parent_id) references category (category_id)
 )
     engine = InnoDB;
