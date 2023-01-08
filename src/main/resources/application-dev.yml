@@ -7,10 +7,10 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
       # 기본키 생성전략
       use-new-id-generator-mappings: false
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     properties:
       hibernate:
         #        show_sql: ture
@@ -21,6 +21,8 @@ spring:
         # bulk
         order_inserts: true
         order_updates: true
+        dialect:
+          storage_engine: innodb
 
   devtools:
     livereload:
