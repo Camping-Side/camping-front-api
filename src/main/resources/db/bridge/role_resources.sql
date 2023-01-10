@@ -1,4 +1,4 @@
-create table roles_resources
+create table role_resources
 (
     resource_id bigint not null,
     role_id     bigint not null,
@@ -9,3 +9,4 @@ create table roles_resources
         foreign key (role_id) references role (role_id)
 )
     engine = InnoDB;
+
