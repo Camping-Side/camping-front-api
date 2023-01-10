@@ -52,7 +52,8 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final SecurityResourceService securityResourceService;
     private final String corsOrigin="http://localhost:3030";
-    private String[] permitAllResources = {"/h2-console/**", "/swagger-ui.html/**", "/swagger-resources/**"
+    private String[] permitAllResources = {"/h2-console/**", "/swagger-ui/**", "/swagger-resources/**"
+            , "/api/v1/test/**", "/api/v1/test" , "/api/v1/admin/test/**", "/v2/api-docs"
             , "/api/v1/auth/login", "/api/v1/auth/sign", "/api/v1/auth/reissue"};
 
 //    private final PasswordEncoder passwordEncoder;
