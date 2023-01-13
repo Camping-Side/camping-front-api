@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -29,6 +30,14 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException e, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        logger.warn("request : " + request.getDescription(false) + " // status :  " + HttpStatus.BAD_REQUEST  + " // details : " + e.getMessage(), e);
+        // 여러건 validation이 걸려도 최초 1건만 메시지로 내려줌
+        ExceptionResponse es = new ExceptionResponse(LocalDateTime.now(), e.getBindingResult().getAllErrors().get(0).getDefaultMessage(), request.getDescription(false));
+        return new ResponseEntity<>(es, HttpStatus.BAD_REQUEST);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleBindException(BindException e, HttpHeaders headers, HttpStatus status, WebRequest request) {
         logger.warn("request : " + request.getDescription(false) + " // status :  " + HttpStatus.BAD_REQUEST  + " // details : " + e.getMessage(), e);
         // 여러건 validation이 걸려도 최초 1건만 메시지로 내려줌
         ExceptionResponse es = new ExceptionResponse(LocalDateTime.now(), e.getBindingResult().getAllErrors().get(0).getDefaultMessage(), request.getDescription(false));

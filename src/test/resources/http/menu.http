@@ -1,11 +1,11 @@
 ###
-GET http://localhost:9090/api/v1/menus
+GET {{host}}/api/v1/menus
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 Accept: application/json
 
 ###
-POST http://localhost:9090/api/v1/menus
+POST {{host}}/api/v1/menus
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 
@@ -19,12 +19,12 @@ X-Requested-With: XMLHttpRequest
 }
 
 ###
-DELETE http://localhost:9090/api/v1/menus/17
+DELETE {{host}}/api/v1/menus/17
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 
 ###
-PUT http://localhost:9090/api/v1/menus/17
+PUT {{host}}/api/v1/menus/17
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 

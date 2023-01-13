@@ -65,17 +65,19 @@ public class ProductDto {
     }
 
     @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class ResList{
         @ApiModelProperty(value = "상품번호")
         private Long productId;
         @ApiModelProperty(value = "상품명")
         private String name;
         @ApiModelProperty(value = "과세타입")
-        private String taxTp;
+        private Integer taxTp;
         @ApiModelProperty(value = "상품타입")
-        private String prdTp;
+        private Integer prdTp;
         @ApiModelProperty(value = "상품상태")
-        private String prdSts;
+        private Integer prdSts;
         @ApiModelProperty(value = "상품설명")
         private String productDesc;
         @ApiModelProperty(value = "공급가")
