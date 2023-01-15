@@ -1,6 +1,7 @@
 package com.commerce.song.domain.dto;
 
 import com.commerce.song.util.HttpCode;
+import com.commerce.song.util.rescode.BaseCode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -14,43 +15,43 @@ import org.springframework.http.HttpStatus;
 @ApiModel
 public class ResultDto<T> {
     @ApiModelProperty(value = "결과 코드")
-    private Integer statusCode;
+    private String statusCode;
     @ApiModelProperty(value = "결과 메시지")
     private String resultMsg;
     @ApiModelProperty(value = "결과 데이터")
     private T resultData;
 
-    public ResultDto(final HttpStatus statusCode, final String resultMsg) {
-        this.statusCode = statusCode.value();
+    public ResultDto(final String code, final String resultMsg) {
+        this.statusCode = code;
         this.resultMsg = resultMsg;
         this.resultData = null;
     }
 
     public static<T> ResultDto<T> res() {
-        return res(HttpCode.SUCCESS.getCode(), HttpCode.SUCCESS.getMessage(), null);
+        return res("200", "처리가 완료되었습니다.", null);
     }
 
-    public static<T> ResultDto<T> res(final HttpStatus statusCode) {
-        return res(statusCode, HttpCode.getMessage(statusCode), null);
+    public static<T> ResultDto<T> res(final BaseCode code) {
+        return res(code.getCode(), code.getMsg(), null);
     }
 
     public static<T> ResultDto<T> res(final T t) {
-        return res(HttpCode.SUCCESS.getCode(), HttpCode.SUCCESS.getMessage(), t);
+        return res("200", "처리가 완료되었습니다.", t);
     }
 
-    public static<T> ResultDto<T> res(final HttpStatus statusCode, final T t) {
-        return res(statusCode, HttpCode.getMessage(statusCode), t);
+    public static<T> ResultDto<T> res(BaseCode code, final T t) {
+        return res(code.getCode(), code.getMsg() , t);
     }
 
-    public static<T> ResultDto<T> res(final HttpStatus statusCode, final String resultMsg) {
-        return res(statusCode, resultMsg, null);
+    public static<T> ResultDto<T> res(final BaseCode statusCode, final String customMsg) {
+        return res(statusCode.getCode(), customMsg, null);
     }
 
-    public static<T> ResultDto<T> res(final HttpStatus statusCode, final String resultMsg, final T t) {
+    public static<T> ResultDto<T> res(final String code, final String msg, final T t) {
         return ResultDto.<T>builder()
                 .resultData(t)
-                .statusCode(statusCode.value())
-                .resultMsg(resultMsg)
+                .statusCode(code)
+                .resultMsg(msg)
                 .build();
     }
 }

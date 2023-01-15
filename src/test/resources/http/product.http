@@ -3,3 +3,22 @@ Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 Accept: application/json
 Authorization: Bearer {{access_token}}
+
+
+### Image upload
+POST {{host}}/api/v1/aws/upload/image
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/json
+Authorization: Bearer {{access_token}}
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="S3.txt"
+
+// The 'dev_infra.png' file will be uploaded
+< C:\Users\dkask\Desktop\S3.txt
+
+--boundary
+Content-Disposition: form-data; name="folder";
+
+// A temporary 'input-second.txt' file with the 'Text' content will be created and uploaded
+product
