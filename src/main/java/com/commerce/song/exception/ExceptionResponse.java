@@ -14,6 +14,7 @@ public class ExceptionResponse {
     private LocalDateTime timestamp;
     private String message;
     private String detail;
+    private String code;
 
     public ExceptionResponse(LocalDateTime timestamp, String message) {
         this.timestamp = timestamp;

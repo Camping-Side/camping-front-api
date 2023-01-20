@@ -54,6 +54,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         adminRoleSet.add(userRole);
         createResourceIfNotFound("/api/v1/products", "GET", adminRoleSet, "url");
         createResourceIfNotFound("/api/v1/accounts", "GET", adminRoleSet, "url");
+        createResourceIfNotFound("/api/v1/aws/upload/image", "POST", adminRoleSet, "url");
 
 
         Set<Role> managerRoleSet = new HashSet<>();

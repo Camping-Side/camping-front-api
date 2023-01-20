@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 
 
 public class DslDateUtil {
-    private final static String COMPARE_DATE_FORMAT = "%Y%m%d";
-    private final static String READ_DATE_FORMAT = "%Y-%m-%d";
+    public final static String COMPARE_DATE_FORMAT = "%Y%m%d";
+    public final static String READ_DATE_FORMAT = "%Y-%m-%d";
 
     /**
      * DSL 시작날짜 비교(<=)
@@ -32,7 +32,7 @@ public class DslDateUtil {
      */
     public static BooleanExpression cprEndDate(DateTimePath<LocalDateTime> targetDate, String endDate) {
         return StringUtils.hasText(endDate) ?
-                DslDateUtil.getYMDFormat(targetDate).goe(endDate) : null;
+                DslDateUtil.getYMDFormat(targetDate).loe(endDate) : null;
     }
 
     /**
@@ -41,10 +41,20 @@ public class DslDateUtil {
      * @return StringTemplate
      */
     public static StringTemplate getYMDFormat(DateTimePath<LocalDateTime> date) {
+        return getYMDFormat(date, COMPARE_DATE_FORMAT);
+    }
+
+    /**
+     * QEntity 날짜속성을 format으로 변경
+     * @param date 대상 QEntity property
+     * @param format 변환 format
+     * @return StringTemplate
+     */
+    public static StringTemplate getYMDFormat(DateTimePath<LocalDateTime> date, String format) {
         return Expressions.stringTemplate(
                 "DATE_FORMAT({0}, {1})"
                 , date
-                , ConstantImpl.create(COMPARE_DATE_FORMAT)
+                , ConstantImpl.create(format)
         );
     }
 }

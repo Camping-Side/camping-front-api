@@ -10,6 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -21,5 +24,14 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Page<ProductDto.ResList> findAll(ProductDto.ReqList requestDto) {
         return productRepository.findAllToDtoPage(CustomUtil.convertPageVo(requestDto), requestDto);
+    }
+    @Override
+    public Long createProduct(ProductDto.createProductReq reqDto, List<MultipartFile> files) {
+        // files 업로드 로직
+
+        // 상품 save 로직
+
+
+        return 1L;
     }
 }

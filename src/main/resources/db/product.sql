@@ -3,7 +3,7 @@ create table product
     product_id         bigint auto_increment primary key,
     category_id        bigint       not null comment '카테고리 id',
     brand_id           bigint       not null comment '브랜드 id',
-    vender_id          bigint       not null comment '벤더사 id',
+    vdr_id             bigint       not null comment '벤더사 id',
     name               varchar(120) null comment '상품명',
     tax_tp             int(2)       not null default 0 comment '과세 타입(0: 과세, 1: 면세, 2: 영세)',
     prd_tp             int(2)       not null default 0 comment '상품 타입(0: 일반)',
@@ -24,7 +24,7 @@ create table product
     constraint FK_PRODUCT_2
         foreign key (brand_id) references brand (brand_id),
     constraint FK_PRODUCT_3
-        foreign key (vender_id) references vender (vdr_id)
+        foreign key (vdr_id) references vender (vdr_id)
 )
     engine = InnoDB;
 
@@ -42,3 +42,6 @@ create table product_img
         foreign key (product_id) references product (product_id)
 )
     engine = InnoDB;
+
+
+alter table product rename column vender_id to vdr_id;

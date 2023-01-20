@@ -1,10 +1,24 @@
-GET http://localhost:9060/api/v1/products
+GET {{host}}/api/v1/products?page=0&size=10&startDate=20220101&endDate=20230303&startRegDate=20220101&endRegDate=20240101&keywordType=0&keywordText=테스트
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NzMwMjIxODB9._n-OOMG0KGr9Qu0ocOQf7tXEMKwxn_UTd8X7Y6cfq_R9sMRoIa0d3sgm8o186QZx8w82Ei8UPetbWLBmR0BQEQ
+Authorization: Bearer {{access_token}}
 
-{
-  "page": 0,
-  "size": 10
-}
+
+### Image upload
+POST {{host}}/api/v1/aws/upload/image
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/json
+Authorization: Bearer {{access_token}}
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="S3.txt"
+
+// The 'dev_infra.png' file will be uploaded
+< C:\Users\dkask\Desktop\S3.txt
+
+--boundary
+Content-Disposition: form-data; name="folder";
+
+// A temporary 'input-second.txt' file with the 'Text' content will be created and uploaded
+product

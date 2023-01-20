@@ -7,9 +7,16 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
+import java.util.List;
 
 @Api(tags = "상품 rest api")
 @RestController
@@ -23,5 +30,19 @@ public class ProductController {
     public ResultDto<Page<ProductDto.ResList>> findAll(@Validated @ModelAttribute ProductDto.ReqList req) {
         Page<ProductDto.ResList> all = productService.findAll(req);
         return ResultDto.res(all);
+    }
+
+    @ApiOperation(value = "상품 추가")
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<ResultDto<Long>> createProduct(@Validated @RequestBody ProductDto.createProductReq reqDto
+            , @Validated @RequestPart List<MultipartFile> files) {
+        Long productId = productService.createProduct(reqDto, files);
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(productId)
+                .toUri();
+        return ResponseEntity.created(location)
+                .body(ResultDto.res(productId));
     }
 }
