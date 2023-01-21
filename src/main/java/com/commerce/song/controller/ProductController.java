@@ -33,10 +33,9 @@ public class ProductController {
     }
 
     @ApiOperation(value = "상품 추가")
-    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<ResultDto<Long>> createProduct(@Validated @RequestBody ProductDto.createProductReq reqDto
-            , @Validated @RequestPart List<MultipartFile> files) {
-        Long productId = productService.createProduct(reqDto, files);
+    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<ResultDto<Long>> createProduct(@Validated @ModelAttribute ProductDto.createProductReq reqDto) {
+        Long productId = productService.createProduct(reqDto);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")

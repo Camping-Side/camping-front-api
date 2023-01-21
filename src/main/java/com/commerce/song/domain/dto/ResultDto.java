@@ -1,13 +1,11 @@
 package com.commerce.song.domain.dto;
 
-import com.commerce.song.util.HttpCode;
-import com.commerce.song.util.rescode.BaseCode;
+import com.commerce.song.util.enums.rescode.BaseCode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import org.springframework.http.HttpStatus;
 
 @Data
 @AllArgsConstructor

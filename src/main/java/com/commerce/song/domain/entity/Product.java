@@ -1,14 +1,20 @@
 package com.commerce.song.domain.entity;
 
+import com.commerce.song.domain.dto.ProductDto;
+import com.commerce.song.util.DateUtil;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Entity
 @Getter
@@ -40,17 +46,59 @@ public class Product extends BaseEntity implements Serializable {
     @Column(name = "product_desc", columnDefinition = "LONGTEXT")
     private String productDesc;
 
-    @Column(name = "supply_prc", nullable = false, length = 15)
+    @Column(name = "supply_prc", nullable = false, length = 10)
     private Integer supplyPrc;
 
-    @Column(name = "sale_prc", nullable = false, length = 15)
+    @Column(name = "sale_prc", nullable = false, length = 10)
     private Integer salePrc;
 
-    @Column(name = "prd_prc", nullable = false, length = 15)
+    @Column(name = "prd_prc", nullable = false, length = 10)
     private Integer prdPrc;
 
-    @Column(name = "total_cnt", nullable = false, length = 11)
+    @Column(name = "total_cnt", nullable = false, length = 10)
     private Integer totalCnt;
+
+    @Column(name = "delry_cd", nullable = false, length = 10)
+    private String delryCd;
+
+    @Column(name = "delry_tp", nullable = false, length = 2)
+    private String delryTp;
+
+    @Column(name = "delry_base_start_amt")
+    private Integer delryBaseStartAmt;
+
+    @Column(name = "delry_amt", nullable = false)
+    private Integer delryAmt;
+
+    @Column(name = "delry_side_amt", nullable = false)
+    private Integer delrySideAmt;
+
+    @Column(name = "delry_jeju_amt", nullable = false)
+    private Integer delryJejuAmt;
+
+    @Column(name = "delry_out_addr", nullable = false)
+    private String delryOutAddr;
+
+    @Column(name = "delry_out_addr2", nullable = false)
+    private String delryOutAddr2;
+
+    @Column(name = "delry_ref_addr", nullable = false)
+    private String delryRefAddr;
+
+    @Column(name = "delry_ref_addr2", nullable = false)
+    private String delryRefAddr2;
+
+    @Column(name = "opt_type", nullable = false)
+    private Integer optType;
+
+    @Column(name = "opt_title1", length = 100)
+    private String optTitle1;
+
+    @Column(name = "opt_title2", length = 100)
+    private String optTitle2;
+
+    @Column(name = "opt_title3", length = 100)
+    private String optTitle3;
 
     @Column(name="start_date")
     private LocalDateTime startDate;
@@ -69,5 +117,23 @@ public class Product extends BaseEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vdr_id")
     private Vender vender;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    private List<ProductOption> productOptions;
+
+    public void of(Category category, Brand brand, Vender vender) {
+        this.category = category;
+        this.brand = brand;
+        this.vender = vender;
+    }
+
+    public void setSaleDate(String startDate, String endDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtil.FORMAT_DATE_NON_DASH);
+
+        if(StringUtils.hasText(startDate)) this.startDate = LocalDate.parse(startDate, formatter).atStartOfDay();
+
+        if(StringUtils.hasText(endDate)) this.endDate = LocalDate.parse(endDate, formatter).atStartOfDay();
+    }
+
 
 }

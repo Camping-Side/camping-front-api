@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface ProductService {
     Page<ProductDto.ResList> findAll(ProductDto.ReqList requestDto);
-    Long createProduct(ProductDto.createProductReq reqDto, List<MultipartFile> files);
+    Long createProduct(ProductDto.createProductReq reqDto);
 }

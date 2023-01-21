@@ -4,16 +4,19 @@ import com.commerce.song.domain.entity.Brand;
 import com.commerce.song.domain.entity.Category;
 import com.commerce.song.domain.entity.Product;
 import com.commerce.song.domain.entity.Vender;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -139,11 +142,11 @@ public class ProductDto {
 
         @ApiModelProperty(value = "판매시작일 8자리 YYYYMMDD")
         @Size(min = 8, max = 8, message = "판매시작일 8자리를 입력해주세요.")
-        private String startDate;
+        private String pStartDate;
 
         @ApiModelProperty(value = "판매종료일 8자리 YYYYMMDD")
         @Size(min = 8, max = 8, message = "판매종료일 8자리를 입력해주세요.")
-        private String endDate;
+        private String pEndDate;
 
         @ApiModelProperty(value = "카테고리 id")
         @Positive(message = "카테고리 id는 양수만 가능합니다.")
@@ -170,7 +173,7 @@ public class ProductDto {
 
         @ApiModelProperty(value = "배송비 부과 기준시작금액")
         @PositiveOrZero
-        @NotBlank(message = "배송비 부과 기준시작금액은 필수입니다.")
+        @NotNull(message = "배송비 부과 기준시작금액은 필수입니다.")
         private Integer delryBaseStartAmt;
 
         @ApiModelProperty(value = "기본 배송비")
@@ -203,6 +206,29 @@ public class ProductDto {
         @ApiModelProperty(value = "반품/교환 상세주소")
         @NotBlank(message = "반품/교환 상세주소는 필수입니다.")
         private String delryRefAddr2;
+
+        @ApiModelProperty(value = "옵션타입(0: 단건형, 1: 단독형, 2: 조합형)")
+        @NotNull(message = "옵션 타입은 필수입니다.")
+        private Integer optType;
+
+        @ApiModelProperty(value = "옵션타이틀1")
+        private String optTitle1;
+
+        @ApiModelProperty(value = "옵션타이틀2")
+        private String optTitle2;
+
+        @ApiModelProperty(value = "옵션타이틀3")
+        private String optTitle3;
+
+        @ApiModelProperty(value = "상품 이미지파일(최대 5개)")
+        @JsonIgnore
+        private List<MultipartFile> files;
+
+        @ApiModelProperty(value = "에디터 업로드 이미지 리스트")
+        private List<Long> uploadImgIds;
+
+        @ApiModelProperty(value = "상품 옵션 리스트")
+        private List<ProductOptionDto.createProductOptionReq> optionList;
 
 
 

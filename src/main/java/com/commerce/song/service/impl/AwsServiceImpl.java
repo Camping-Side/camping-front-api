@@ -10,7 +10,7 @@ import com.commerce.song.exception.AwsUploadException;
 import com.commerce.song.service.AwsService;
 import com.commerce.song.util.DateUtil;
 import com.commerce.song.util.FileUtil;
-import com.commerce.song.util.rescode.AwsCode;
+import com.commerce.song.util.enums.rescode.AwsCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,8 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.Random;
 
 @Service
