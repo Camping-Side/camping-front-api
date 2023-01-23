@@ -15,7 +15,6 @@ import com.commerce.song.util.enums.comm.CommImgType;
 import com.commerce.song.util.enums.rescode.AwsCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -69,12 +69,13 @@ public class ProductServiceImpl implements ProductService {
             uploadReq.setFolder("product");
             uploadReq.setImage(file);
             try {
-                ResultDto<String> uploadResult = awsService.uploadImage(uploadReq);
+                ResultDto<AwsDto.FileUploadRes> uploadResult = awsService.uploadImage(uploadReq);
                 CommImg img = CommImg.builder()
                         .refId(savedProduct.getProductId())
                         .type(CommImgType.PRODUCT.getCode())
                         .seq(fileIndex)
-                        .imgPath(uploadResult.getResultData())
+                        .imgPath(uploadResult.getResultData().getFileUrl())
+                        .awsPath(uploadResult.getResultData().getAwsUrl())
                         .build();
                 commImgRepository.save(img);
 
@@ -90,13 +91,21 @@ public class ProductServiceImpl implements ProductService {
 
         // 옵션 등록
 //        Integer optType = reqDto.getOptType();
-        List<ProductOptionDto.createProductOptionReq> optionList = reqDto.getOptionList();
-        for(ProductOptionDto.createProductOptionReq option : CustomUtil.safeList(optionList)) {
+        List<ProductOptionDto.CreateProductOptionReq> optionList = reqDto.getOptionList();
+        for(ProductOptionDto.CreateProductOptionReq option : CustomUtil.safeList(optionList)) {
             ProductOption productOption = CustomUtil.convertClass(option, ProductOption.class);
             productOption.setProduct(savedProduct);
             productOptionRepository.save(productOption);
         }
 
         return savedProduct.getProductId();
+    }
+    @Override
+    public ResultDto<ProductDto.Res> findById(Long id) {
+        Product product = productRepository.findProductEagerById(id)
+                .orElseThrow(() -> new BadRequestException("존재하지 않는 상품입니다."));
+        ProductDto.Res res = CustomUtil.convertClass(product, ProductDto.Res.class);
+
+        return ResultDto.res(res);
     }
 }

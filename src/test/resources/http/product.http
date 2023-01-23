@@ -23,6 +23,13 @@ Content-Disposition: form-data; name="folder";
 // A temporary 'input-second.txt' file with the 'Text' content will be created and uploaded
 product
 
+### Product get
+GET {{host}}/api/v1/products/2
+Content-Type: application/json
+X-Requested-With: XMLHttpRequest
+Accept: application/json
+Authorization: Bearer {{access_token}}
+
 ### Product create
 POST {{host}}/api/v1/products
 Content-Type: multipart/form-data; boundary=boundary

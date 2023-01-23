@@ -44,4 +44,12 @@ public class ProductController {
         return ResponseEntity.created(location)
                 .body(ResultDto.res(productId));
     }
+
+    @ApiOperation(value = "상품 조회")
+    @GetMapping("/{id}")
+    public ResultDto<ProductDto.Res> findById(@PathVariable Long id) {
+        return productService.findById(id);
+    }
+
+
 }

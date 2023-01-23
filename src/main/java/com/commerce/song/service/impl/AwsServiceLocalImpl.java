@@ -24,7 +24,12 @@ public class AwsServiceLocalImpl implements AwsService {
     }
 
     @Override
-    public ResultDto<String> uploadImage(AwsDto.ImageUploadReq req) throws IOException {
+    public ResultDto<AwsDto.FileUploadRes> uploadImage(AwsDto.ImageUploadReq req) throws IOException {
+        throw new AwsUploadException(AwsCode.AWS_ACCESS_LOCAL_FAILED);
+    }
+
+    @Override
+    public ResultDto<AwsCode> deleteImage(AwsDto.ImgDeleteReq req) throws IOException {
         throw new AwsUploadException(AwsCode.AWS_ACCESS_LOCAL_FAILED);
     }
 }

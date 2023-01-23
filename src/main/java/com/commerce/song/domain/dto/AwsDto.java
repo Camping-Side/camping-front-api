@@ -29,4 +29,13 @@ public class AwsDto {
         @ApiModelProperty(value = "AWS 도메인 제외 URL")
         private String fileUrl;
     }
+
+    @Data
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class ImgDeleteReq {
+        @ApiModelProperty(value = "삭제 이미지 id")
+        private Long CommImgId;
+    }
 }

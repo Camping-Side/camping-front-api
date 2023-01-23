@@ -31,4 +31,8 @@ public class CommImg  extends BaseEntity {
     @Column(name = "img_path")
     private String imgPath;
 
+    @Column(name = "aws_path")
+    private String awsPath;
+
+
 }

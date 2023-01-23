@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
@@ -15,6 +17,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -119,7 +122,13 @@ public class Product extends BaseEntity implements Serializable {
     private Vender vender;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-    private List<ProductOption> productOptions;
+    @Fetch(value = FetchMode.SUBSELECT)
+    private Set<ProductOption> productOptions;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JoinColumn(name = "ref_id")
+    private Set<CommImg> commImgs;
 
     public void of(Category category, Brand brand, Vender vender) {
         this.category = category;
