@@ -30,7 +30,7 @@ public class Vender extends BaseEntity implements Serializable {
     @ColumnDefault("0")
     private String vdrSts;
 
-    @OneToMany(mappedBy = "vender")
+    @OneToMany(mappedBy = "vender", fetch = FetchType.LAZY)
     private List<Product> products = new ArrayList<>();
 
 }

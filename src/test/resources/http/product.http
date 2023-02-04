@@ -22,3 +22,194 @@ Content-Disposition: form-data; name="folder";
 
 // A temporary 'input-second.txt' file with the 'Text' content will be created and uploaded
 product
+
+### Product get
+GET {{host}}/api/v1/products/2
+Content-Type: application/json
+X-Requested-With: XMLHttpRequest
+Accept: application/json
+Authorization: Bearer {{access_token}}
+
+### Product create
+POST {{host}}/api/v1/products
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/json
+Authorization: Bearer {{access_token}}
+
+--boundary
+Content-Disposition: form-data; name="name";
+
+테스트상품
+
+--boundary
+Content-Disposition: form-data; name="taxTp";
+
+0
+
+--boundary
+Content-Disposition: form-data; name="prdTp";
+
+0
+
+--boundary
+Content-Disposition: form-data; name="prdSts";
+
+0
+
+--boundary
+Content-Disposition: form-data; name="productDesc";
+
+상품설명테스트
+
+--boundary
+Content-Disposition: form-data; name="supplyPrc";
+
+5000
+
+--boundary
+Content-Disposition: form-data; name="salePrc";
+
+8000
+
+--boundary
+Content-Disposition: form-data; name="prdPrc";
+
+9000
+
+--boundary
+Content-Disposition: form-data; name="totalCnt";
+
+1000
+
+--boundary
+Content-Disposition: form-data; name="pStartDate";
+
+20221201
+
+--boundary
+Content-Disposition: form-data; name="pEndDate";
+
+20231231
+
+--boundary
+Content-Disposition: form-data; name="categoryId";
+
+2
+
+--boundary
+Content-Disposition: form-data; name="brandId";
+
+1
+
+--boundary
+Content-Disposition: form-data; name="vdrId";
+
+1
+
+--boundary
+Content-Disposition: form-data; name="delryCd";
+
+00AAB
+
+--boundary
+Content-Disposition: form-data; name="delryTp";
+
+1
+
+--boundary
+Content-Disposition: form-data; name="delryBaseStartAmt";
+
+30000
+
+--boundary
+Content-Disposition: form-data; name="delryAmt";
+
+2500
+
+--boundary
+Content-Disposition: form-data; name="delrySideAmt";
+
+3000
+
+--boundary
+Content-Disposition: form-data; name="delryJejuAmt";
+
+3000
+
+--boundary
+Content-Disposition: form-data; name="delryOutAddr";
+
+출고지주소1
+
+--boundary
+Content-Disposition: form-data; name="delryOutAddr2";
+
+출고지주소2
+
+--boundary
+Content-Disposition: form-data; name="delryRefAddr";
+
+반품교환주소1
+
+--boundary
+Content-Disposition: form-data; name="delryRefAddr2";
+
+반품교환주소2
+
+--boundary
+Content-Disposition: form-data; name="optType";
+
+2
+
+--boundary
+Content-Disposition: form-data; name="optTitle1";
+
+스타일
+
+--boundary
+Content-Disposition: form-data; name="optTitle2";
+
+컬러
+
+--boundary
+Content-Disposition: form-data; name="optTitle3";
+
+사이즈
+
+--boundary
+Content-Disposition: form-data; name="optionList[0].optValue1";
+
+나이스스타일
+
+--boundary
+Content-Disposition: form-data; name="optionList[0].optValue2";
+
+검정
+
+--boundary
+Content-Disposition: form-data; name="optionList[0].optValue3";
+
+95
+
+--boundary
+Content-Disposition: form-data; name="optionList[0].optSupplyPrc";
+
+1000
+
+--boundary
+Content-Disposition: form-data; name="optionList[0].optPrc";
+
+2000
+
+--boundary
+Content-Disposition: form-data; name="optionList[0].optCnt";
+
+1000
+
+--boundary
+Content-Disposition: form-data; name="files"; filename="dev_infra.png"
+
+// The 'dev_infra.png' file will be uploaded
+< C:\Users\dkask\Desktop\dev_infra.png
+
+

@@ -1,7 +1,9 @@
 package com.commerce.song.security.filter;
 
 import com.commerce.song.exception.ExceptionResponse;
+import com.commerce.song.exception.JwtNotAvailbleException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -10,6 +12,7 @@ import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
+import org.springframework.web.util.NestedServletException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -62,6 +65,7 @@ public class PermitAllFilter extends FilterSecurityInterceptor {
             if (fi.getRequest() != null && observeOncePerRequest) {
                 fi.getRequest().setAttribute(FILTER_APPLIED, Boolean.TRUE);
             }
+            HttpServletResponse response = fi.getResponse();
 
             try {
                 InterceptorStatusToken token = beforeInvocation(fi);
@@ -74,23 +78,32 @@ public class PermitAllFilter extends FilterSecurityInterceptor {
                 }
 
                 super.afterInvocation(token, null);
+            } catch(NestedServletException e) {
+                resWrite(response, HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+            } catch(JwtNotAvailbleException e) {
+                resWrite(response, HttpStatus.FORBIDDEN, e.getMessage());
             } catch(Exception e) {
-                logger.warn("유저 권한이 불충분합니다.");
-                HttpServletResponse response = fi.getResponse();
-                ExceptionResponse es = new ExceptionResponse(LocalDateTime.now(), "유저 권한이 불충분합니다.");
-                ObjectMapper objectMapper = new ObjectMapper();
-                objectMapper.registerModule(new JavaTimeModule());
-                response.setStatus(HttpStatus.FORBIDDEN.value());
-                response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-                response.setCharacterEncoding("UTF-8");
-                try{
-                    response.getWriter().write(objectMapper.writeValueAsString(es));
-                }catch (IOException ioe){
-                    e.printStackTrace();
-                }
+                resWrite(response, HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
             }
 
 
+        }
+    }
+
+    private void resWrite(HttpServletResponse response, HttpStatus status, String msg) {
+        logger.warn(msg);
+        ExceptionResponse es = new ExceptionResponse(LocalDateTime.now(), msg);
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
+        response.setStatus(status.value());
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        response.setCharacterEncoding("UTF-8");
+        try{
+            response.getWriter().write(objectMapper.writeValueAsString(es));
+        }catch (IOException ioe){
+            ioe.printStackTrace();
         }
     }
 }

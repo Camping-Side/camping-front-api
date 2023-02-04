@@ -43,6 +43,6 @@ public class Brand extends BaseEntity implements Serializable {
     @Column(name = "brand_img")
     private String brandImg;
 
-    @OneToMany(mappedBy = "brand")
+    @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
     private List<Product> products = new ArrayList<>();
 }

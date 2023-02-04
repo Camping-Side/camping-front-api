@@ -49,7 +49,12 @@ public class AccountRepositoryImpl implements AccountRepositoryCustom {
 
     @Override
     public Long updatePassword(AccountDto.ResetPasswordReq reqDto, String password) {
-        return query.update(account).set(account.password, password).where(emailEq(reqDto.getEmail()),phoneEq(reqDto.getPhone())).execute();
+        return query.update(account)
+                .set(account.password, password)
+                .where(
+                        emailEq(reqDto.getEmail())
+                        ,phoneEq(reqDto.getPhone())
+                ).execute();
     }
 
     private BooleanExpression emailEq(String email) {

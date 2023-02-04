@@ -2,27 +2,29 @@ package com.commerce.song.service.impl;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.commerce.song.domain.dto.AwsDto;
 import com.commerce.song.domain.dto.ResultDto;
+import com.commerce.song.domain.entity.CommImg;
 import com.commerce.song.exception.AwsUploadException;
+import com.commerce.song.repository.CommImgRepository;
 import com.commerce.song.service.AwsService;
 import com.commerce.song.util.DateUtil;
 import com.commerce.song.util.FileUtil;
-import com.commerce.song.util.rescode.AwsCode;
+import com.commerce.song.util.enums.rescode.AwsCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.Random;
 
 @Service
@@ -31,6 +33,7 @@ import java.util.Random;
 @Profile({"dev", "real"})
 public class AwsServiceImpl implements AwsService {
     private final AmazonS3Client amazonS3Client;
+    private final CommImgRepository commImgRepository;
 
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
@@ -39,7 +42,7 @@ public class AwsServiceImpl implements AwsService {
     private String serverIp;
 
     @Override
-    public ResultDto<String> uploadImage(AwsDto.ImageUploadReq req) throws IOException {
+    public ResultDto<AwsDto.FileUploadRes> uploadImage(AwsDto.ImageUploadReq req) throws IOException {
         MultipartFile file = req.getImage();
         if(!FileUtil.isImgFile(file.getInputStream(), file.getOriginalFilename())) {
             throw new AwsUploadException(AwsCode.AWS_IMAGE_TYPE_FAILED);
@@ -52,7 +55,8 @@ public class AwsServiceImpl implements AwsService {
         }
 
         String url = uploadResult.getResultData().getFileUrl();
-        return ResultDto.res(serverIp + "/image/" + url);
+        uploadResult.getResultData().setFileUrl(serverIp + "/image/" + url);
+        return uploadResult;
     }
 
     @Override
@@ -81,5 +85,23 @@ public class AwsServiceImpl implements AwsService {
                 .build();
 
         return ResultDto.res(AwsCode.AWS_FILE_UPLOAD_SUCCESS, res);
+    }
+
+    @Override
+    @Transactional
+    public ResultDto<AwsCode> deleteImage(AwsDto.ImgDeleteReq req){
+        Long commImgId = req.getCommImgId();
+        CommImg commImg = commImgRepository.findById(commImgId)
+                .orElseThrow(() -> new AwsUploadException(AwsCode.AWS_FILE_FOUND_FAILED));
+
+        commImgRepository.deleteById(commImg.getImgId());
+
+        try {
+            amazonS3Client.deleteObject(new DeleteObjectRequest(bucket, commImg.getAwsPath()));
+        } catch(Exception e) {
+            throw new AwsUploadException(AwsCode.AWS_FILE_DELETE_FAILED);
+        }
+
+        return ResultDto.res(AwsCode.AWS_FILE_DELETE_SUCCESS);
     }
 }

@@ -23,22 +23,26 @@ import javax.validation.Valid;
 public class AccountController {
     private final AccountService accountService;
 
+    @ApiOperation(value = "사용자 조회")
     @GetMapping("/{id}")
     public ResultDto<AccountDto.Res> findById(@PathVariable Long id) {
         return ResultDto.res(accountService.getUser(id));
     }
 
+    @ApiOperation(value = "자신 정보 조회")
     @GetMapping("/me")
     public ResultDto<AccountDto.Res> findMyInfo() {
         return ResultDto.res(accountService.getMyInfo());
     }
 
+    @ApiOperation(value = "사용자 삭제")
     @DeleteMapping("/{id}")
     public ResultDto deleteAccount(@PathVariable Long id) {
         accountService.deleteAccount(id);
         return ResultDto.res();
     }
 
+    @ApiOperation(value = "사용자 수정")
     @PutMapping("/{id}")
     public ResultDto updateAccount(@PathVariable Long id
             , @RequestBody @Validated AccountDto.UpdateAccountReq req) {

@@ -3,6 +3,7 @@ package com.commerce.song.controller;
 import com.commerce.song.domain.dto.AwsDto;
 import com.commerce.song.domain.dto.ResultDto;
 import com.commerce.song.service.AwsService;
+import com.commerce.song.util.enums.rescode.AwsCode;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -20,7 +21,13 @@ public class AwsController {
 
     @PostMapping(value = "/upload/image", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResultDto<String> uploadImage(@ModelAttribute AwsDto.ImageUploadReq req) throws IOException {
-        return awsService.uploadImage(req);
+        ResultDto<AwsDto.FileUploadRes> result = awsService.uploadImage(req);
+        return ResultDto.res(result.getResultData().getFileUrl());
+    }
+
+    @PostMapping(value = "/delete/image")
+    public ResultDto<AwsCode> deleteImage(@RequestBody AwsDto.ImgDeleteReq req) throws Exception {
+        return awsService.deleteImage(req);
     }
 
 }

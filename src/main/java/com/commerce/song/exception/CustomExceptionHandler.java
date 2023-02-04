@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import javax.naming.AuthenticationException;
 import javax.persistence.EntityNotFoundException;
+import javax.validation.UnexpectedTypeException;
 import java.security.InvalidParameterException;
 import java.time.LocalDateTime;
 
@@ -28,11 +29,19 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return super.handleExceptionInternal(e, es, headers, status, request);
     }
 
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException e, HttpHeaders headers, HttpStatus status, WebRequest request) {
         logger.warn("request : " + request.getDescription(false) + " // status :  " + HttpStatus.BAD_REQUEST  + " // details : " + e.getMessage(), e);
         // 여러건 validation이 걸려도 최초 1건만 메시지로 내려줌
         ExceptionResponse es = new ExceptionResponse(LocalDateTime.now(), e.getBindingResult().getAllErrors().get(0).getDefaultMessage(), request.getDescription(false), null);
+        return new ResponseEntity<>(es, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(UnexpectedTypeException.class)
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(UnexpectedTypeException e, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        logger.warn("request : " + request.getDescription(false) + " // status :  " + HttpStatus.BAD_REQUEST  + " // details : " + e.getMessage(), e);
+        ExceptionResponse es = new ExceptionResponse(LocalDateTime.now(), e.getMessage(), request.getDescription(false), null);
         return new ResponseEntity<>(es, HttpStatus.BAD_REQUEST);
     }
 
