@@ -59,7 +59,7 @@ public class ProductController {
     }
 
     @ApiOperation(value = "상품 수정")
-    @PutMapping("/{id}")
+    @PostMapping(value = "/{id}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResultDto updateById(@PathVariable Long id, @Validated @ModelAttribute ProductDto.updateProductReq reqDto) {
         return ResultDto.res();
     }

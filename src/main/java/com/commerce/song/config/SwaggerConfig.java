@@ -52,8 +52,8 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.ant("/api/**"))
-//                .paths(PathSelectors.any())
+//                .paths(PathSelectors.ant("/api/v1/test"))
+                .paths(PathSelectors.any())
                 .build();
     }
     @Bean
