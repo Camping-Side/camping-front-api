@@ -36,7 +36,7 @@ public class AccountDto extends PageDto {
 
     @Data
     public static class ResList {
-        @ApiModelProperty(value = "회원 번호")
+        @ApiModelProperty(value = "회원 번호", example = "0")
         private Long id;
         @ApiModelProperty(value = "회원 이름")
         private String username;
@@ -68,8 +68,9 @@ public class AccountDto extends PageDto {
     }
 
     @Data
+    @NoArgsConstructor
     public static class Res {
-        @ApiModelProperty(value = "회원 번호")
+        @ApiModelProperty(value = "회원 번호", example = "0")
         private Long id;
         @ApiModelProperty(value = "회원 이름")
         private String username;

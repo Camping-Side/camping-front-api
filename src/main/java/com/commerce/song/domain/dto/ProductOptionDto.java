@@ -37,13 +37,13 @@ public class ProductOptionDto {
         @ApiModelProperty(value = "상품옵션값3")
         private String optValue3;
 
-        @ApiModelProperty(value = "옵션 공급가")
+        @ApiModelProperty(value = "옵션 공급가", example = "0")
         private Integer optSupplyPrc;
 
-        @ApiModelProperty(value = "옵션 금액")
+        @ApiModelProperty(value = "옵션 금액", example = "0")
         private Integer optPrc;
 
-        @ApiModelProperty(value = "옵션 재고수량")
+        @ApiModelProperty(value = "옵션 재고수량", example = "0")
         private Integer optCnt;
     }
 
@@ -61,13 +61,13 @@ public class ProductOptionDto {
         @ApiModelProperty(value = "상품옵션값3")
         private String optValue3;
 
-        @ApiModelProperty(value = "옵션 공급가")
+        @ApiModelProperty(value = "옵션 공급가", example = "0")
         private Integer optSupplyPrc;
 
-        @ApiModelProperty(value = "옵션 금액")
+        @ApiModelProperty(value = "옵션 금액", example = "0")
         private Integer optPrc;
 
-        @ApiModelProperty(value = "옵션 재고수량")
+        @ApiModelProperty(value = "옵션 재고수량", example = "0")
         private Integer optCnt;
 
     }

@@ -36,6 +36,25 @@ client.test("로그인 성공 검증", function() {
 });
 %}
 
+### 로그인 - 마스터
+POST {{host}}/api/v1/auth/login
+Content-Type: application/json
+X-Requested-With: XMLHttpRequest
+
+{
+  "email": "master@camping.kr",
+  "password": "1111"
+}
+> {%
+client.test("로그인 성공 검증", function() {
+   client.assert(response.status === 200,  "로그인 실패");
+   client.global.set("access_token", response.body.resultData.accessToken);
+   client.global.set("refresh_token", response.body.resultData.refreshToken);
+   client.log(client.global.get("access_token"));
+   client.log(client.global.get("refresh_token"));
+});
+%}
+
 ### 회원가입
 POST {{host}}/api/v1/auth/sign
 Content-Type: application/json

@@ -14,7 +14,7 @@ public class VenderDto {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class ProductRes {
-        @ApiModelProperty(value = "벤더 id")
+        @ApiModelProperty(value = "벤더 id", example = "0")
         private Long vdrId;
         @ApiModelProperty(value = "벤더명")
         private String vdrNm;
