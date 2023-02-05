@@ -1,15 +1,16 @@
 #GET http://localhost:9060/api/v1/accounts?page=0&size=6&username=admin
-GET http://localhost:9060/api/v1/accounts?page=0&size=6
+GET {{host}}/api/v1/accounts?page=0&size=6
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTiIsImV4cCI6MTY3MzA3NDc1NX0.gvOBU2lpj0pa-UWK6Y1e7oRAUV_b50JPXx7uFFNkSY5Xx7yqH71cWo82nHXTeOPtCYMfB974gkoj9yFc5o0J2A
 
 ### 단건조회
-GET http://localhost:9060/api/v1/accounts/1
+GET {{host}}/api/v1/accounts/1
 
 ### 회원수정
-PUT http://localhost:9060/api/v1/accounts/1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NzI0ODMxMDN9.sx4IHtDpXXKtf6ytFq9CsXJLJMIpF348EeX2UfHEe1S_V1v1l7-qZwkRs5T0gU4zuTgxcMRN8cKMwU4CJtwQ5g
+PUT {{host}}/api/v1/accounts/1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9VU0VSLFJPTEVfTUFOQUdFUixST0xFX0FETUlOIiwiZXhwIjoxNjczMTEwOTI3fQ.X-5LRWIKl9Ci9Fh-xCKBw3LZeSHNu_uIQAIMKib1Qt5ZPlojb2nXDOlbBCPTKjReX94kjEFvlEjjJFgnK3eQKw
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 

@@ -54,6 +54,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         adminRoleSet.add(userRole);
         createResourceIfNotFound("/api/v1/products", "GET", adminRoleSet, "url");
         createResourceIfNotFound("/api/v1/accounts", "GET", adminRoleSet, "url");
+        createResourceIfNotFound("/api/v1/aws/upload/image", "POST", adminRoleSet, "url");
 
 
         Set<Role> managerRoleSet = new HashSet<>();
@@ -71,7 +72,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         Category category1 = createCategoryIfNotFound("카테고리1", null);
         Category category2 = createCategoryIfNotFound("카테고리2", category1);
 
-        Product product1 = createProductIfNotFound("테스트상품", LocalDateTime.now(), LocalDateTime.now(), 0,0 , 0, "상품설명이다", 5000, 4000, 2000, 1000, brand1, category2, vender1);
+//        Product product1 = createProductIfNotFound("테스트상품", LocalDateTime.now(), LocalDateTime.now(), 0,0 , 0, "상품설명이다", 5000, 4000, 2000, 1000, brand1, category2, vender1);
 
 
     }

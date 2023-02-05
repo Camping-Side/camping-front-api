@@ -70,7 +70,7 @@ public class AuthServiceImpl implements AuthService {
 
         Account savedAccount = accountRepository.save(account);
 
-        return ResultDto.res(HttpStatus.OK, savedAccount.getId());
+        return ResultDto.res(savedAccount.getId());
     }
 
     @Transactional
@@ -109,7 +109,7 @@ public class AuthServiceImpl implements AuthService {
 
         refreshTokenRepository.save(refreshToken);
 
-        return ResultDto.res(HttpStatus.OK, tokenDto);
+        return ResultDto.res(tokenDto);
     }
 
     // 토큰 재발급급
@@ -137,7 +137,7 @@ public class AuthServiceImpl implements AuthService {
         RefreshToken newRefreshToken = refreshToken.updateValue(token.getRefreshToken());
         refreshTokenRepository.save(newRefreshToken);
 
-        return ResultDto.res(HttpStatus.OK, token);
+        return ResultDto.res(token);
     }
 
 }

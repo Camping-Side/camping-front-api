@@ -1,31 +1,43 @@
 ### 로그인 - 일반유저
-POST http://localhost:9060/api/v1/auth/login
+POST {{host}}/api/v1/auth/login
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 
 {
   "email": "user@gmail.com",
   "password": "1111"
-
-
 }
 
+> {%
+client.test("로그인 성공 검증", function() {
+   client.assert(response.status === 200,  "로그인 실패");
+   client.global.set("access_token", response.body.resultData.accessToken);
+   client.global.set("access_token", response.body.resultData.refreshToken);
+   client.log(client.global.get("access_token"));
+});
+%}
+
 ### 로그인 - 어드민
-POST http://localhost:9060/api/v1/auth/login
+POST {{host}}/api/v1/auth/login
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 
 {
   "email": "admin@gmail.com",
   "password": "1111"
-
-
 }
+> {%
+client.test("로그인 성공 검증", function() {
+   client.assert(response.status === 200,  "로그인 실패");
+   client.global.set("access_token", response.body.resultData.accessToken);
+   client.global.set("refresh_token", response.body.resultData.refreshToken);
+   client.log(client.global.get("access_token"));
+   client.log(client.global.get("refresh_token"));
+});
+%}
 
-
-
-### 회원가입 eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOIiwiZXhwIjoxNjE0NDg4MzQ0fQ.ixtCR8pv4JDD-nIIvSbrZJfIsLXvacZr-FLqGDPwk1jSuf2nx5Q4ROUBQVSf8HJEjN2zbaIqXooLroaNr36LDw
-POST http://localhost:9060/api/v1/auth/sign
+### 회원가입
+POST {{host}}/api/v1/auth/sign
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 
@@ -39,20 +51,29 @@ X-Requested-With: XMLHttpRequest
 }
 
 ###
-GET http://localhost:9090/api/v1/accounts/1
+GET {{host}}/api/v1/accounts/1
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 
 ###
-GET http://localhost:9060/api/v1/admin/test
+GET {{host}}/api/v1/admin/test
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NzMwMTc5MDh9.Y4GgtsLvJX9ZASM2t_877M_VH-LXVaMSk7pQ_BTZYEmKQR0-Grak-7929t1WaB-XyA_lsFAOudDfcid2h5QBaA
 
 ###
-POST http://localhost:9060/api/v1/auth/reissue
+POST {{host}}/api/v1/auth/reissue
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 
 {
-  "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NzMwMTc5MDh9.Y4GgtsLvJX9ZASM2t_877M_VH-LXVaMSk7pQ_BTZYEmKQR0-Grak-7929t1WaB-XyA_lsFAOudDfcid2h5QBaA",
-  "refreshToken": "eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NzMxMDI1MDh9.6iPUfhjhB1osDSutjdsT1NKAoVkwlwyNMXhTKzlVA2gPjdaKBtqGHRXGj8en7vN3u7j_y4l3L2GDrHbxIuR8_w"
+  "accessToken": "{{access_token}}",
+  "refreshToken": "{{refresh_token}}"
 }
+
+> {%
+client.test("토큰 재발행 검증", function() {
+   client.assert(response.status === 200,  "토큰 재발행 실패");
+   client.global.set("access_token", response.body.resultData.accessToken);
+   client.global.set("refresh_token", response.body.resultData.refreshToken);
+   client.log(client.global.get("access_token"));
+});
+%}

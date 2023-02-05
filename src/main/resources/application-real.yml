@@ -30,6 +30,22 @@ spring:
     restart:
       enabled: true
 
+cloud:
+  aws:
+    credentials:
+      access-key: ${aws.access}
+      secret-key: ${aws.secret}
+    s3:
+      bucket: ${aws.s3.bucketname}
+    region:
+      static: ${aws.region}
+    stack:
+      auto: false
+
+my:
+  server:
+    ip: http://43.200.32.212
+
 jwt:
   header: Authorization
   secret: ${jwt.secret}

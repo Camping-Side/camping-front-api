@@ -5,9 +5,7 @@ import com.commerce.song.domain.dto.ResultDto;
 import com.commerce.song.domain.entity.Menu;
 import com.commerce.song.service.MenuService;
 import com.commerce.song.util.CustomUtil;
-import com.commerce.song.util.HttpCode;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -30,9 +28,9 @@ public class MenuController {
 //    }
 
     @GetMapping
-    public ResponseEntity<ResultDto<List<Menu>>> findAll() {
+    public ResultDto<List<Menu>> findAll() {
         List<Menu> allMenu = menuService.getAllMenu();
-        return ResponseEntity.ok(ResultDto.res(HttpStatus.OK, HttpCode.getMessage(HttpStatus.OK), allMenu));
+        return ResultDto.res(allMenu);
     }
 
     @PostMapping
@@ -43,25 +41,25 @@ public class MenuController {
                 .buildAndExpand(savedMenu.getId())
                 .toUri();
         return ResponseEntity.created(location)
-                .body(ResultDto.res(HttpStatus.OK, savedMenu.getId()));
+                .body(ResultDto.res(savedMenu.getId()));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ResultDto> deleteMenu(@PathVariable Long id) {
+    public ResultDto deleteMenu(@PathVariable Long id) {
         menuService.delete(id);
-        return ResponseEntity.ok(ResultDto.res(HttpStatus.OK));
+        return ResultDto.res();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResultDto> updateMenu(@PathVariable Long id,
+    public ResultDto updateMenu(@PathVariable Long id,
                                                @RequestBody @Valid MenuDto menuDto) {
         menuService.update(id, CustomUtil.convertClass(menuDto, Menu.class), menuDto.getParentId());
-        return ResponseEntity.ok(ResultDto.res(HttpStatus.OK));
+        return ResultDto.res();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ResultDto<Menu>> findById(@PathVariable Long id) {
+    public ResultDto<Menu> findById(@PathVariable Long id) {
         Menu findMenu = menuService.findById(id);
-        return ResponseEntity.ok(ResultDto.res(HttpStatus.OK, CustomUtil.convertClass(findMenu, Menu.class)));
+        return ResultDto.res(CustomUtil.convertClass(findMenu, Menu.class));
     }
 }
