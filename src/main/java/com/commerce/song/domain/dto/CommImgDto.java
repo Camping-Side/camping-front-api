@@ -14,9 +14,9 @@ public class CommImgDto {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class ProductImgDto {
-        @ApiModelProperty(value = "이미지 id")
+        @ApiModelProperty(value = "이미지 id", example = "0")
         private Long imgId;
-        @ApiModelProperty(value = "순서")
+        @ApiModelProperty(value = "순서", example = "0")
         private Integer seq;
         @ApiModelProperty(value = "이미지 경로")
         private String imgPath;

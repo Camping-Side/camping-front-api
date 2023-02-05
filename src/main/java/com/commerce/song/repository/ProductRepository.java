@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface ProductRepository extends JpaRepository<Product, Long>, ProductRepositoryCustom {
     Product findByName(String name);
 
-    @Query("select p from Product p join fetch p.brand join fetch p.category join fetch p.vender left join fetch p.productOptions left join fetch p.commImgs where p.productId = :id")
+    @Query("select distinct p from Product p join fetch p.brand join fetch p.category join fetch p.vender left join fetch p.productOptions left join fetch p.commImgs where p.productId = :id")
     Optional<Product> findProductEagerById(Long id);
 }

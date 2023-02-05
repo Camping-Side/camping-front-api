@@ -66,6 +66,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         Account adminAccount = createAccountIfNotFound("admin", "1111", "admin@gmail.com", "19941126", adminRoleSet, "01011111111");
         Account managerAccount = createAccountIfNotFound("manager", "1111", "manager@gmail.com", "19931111", managerRoleSet, "01011111111");
         Account userAccount = createAccountIfNotFound("user", "1111", "user@gmail.com", "19921122", userRoleSet, "01011111111");
+        Account masterAccount = createAccountIfNotFound("master", "1111", "master@camping.kr", "19921122", userRoleSet, "01011111111");
 
         Vender vender1 = createVenderIfNotFound("테스트벤더", "0");
         Brand brand1 = createBrandIfNotFound("테스트브랜드", "테스트브랜드입니다.");

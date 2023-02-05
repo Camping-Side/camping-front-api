@@ -2,9 +2,11 @@ package com.commerce.song.security.filter;
 
 import com.commerce.song.exception.ExceptionResponse;
 import com.commerce.song.exception.JwtNotAvailbleException;
+import com.commerce.song.util.SecurityUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.apache.commons.codec.binary.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.intercept.InterceptorStatusToken;
@@ -45,7 +47,9 @@ public class PermitAllFilter extends FilterSecurityInterceptor {
             }
         }
 
-        if(permitAll) {
+        // local 마스터 계정이면 pass
+        String userEmail = SecurityUtil.getCurrentEmail();
+        if(StringUtils.equals("master@camping.kr",userEmail) || permitAll) {
             return null;
         }
 

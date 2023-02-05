@@ -121,12 +121,11 @@ public class Product extends BaseEntity implements Serializable {
     @JoinColumn(name = "vdr_id")
     private Vender vender;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-    @Fetch(value = FetchMode.SUBSELECT)
-    private Set<ProductOption> productOptions;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @Fetch(value = FetchMode.SUBSELECT)
+    private List<ProductOption> productOptions;
 
     @OneToMany(fetch = FetchType.LAZY)
-    @Fetch(value = FetchMode.SUBSELECT)
     @JoinColumn(name = "ref_id")
     private Set<CommImg> commImgs;
 

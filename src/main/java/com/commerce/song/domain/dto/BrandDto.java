@@ -14,7 +14,7 @@ public class BrandDto {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class ProductRes {
-        @ApiModelProperty(value = "브랜드 id")
+        @ApiModelProperty(value = "브랜드 id", example = "0")
         private Long brandId;
         @ApiModelProperty(value = "브랜드명")
         private String brandName;

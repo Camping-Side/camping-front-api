@@ -7,6 +7,10 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJhd
 
 ### 단건조회
 GET {{host}}/api/v1/accounts/1
+Content-Type: application/json
+X-Requested-With: XMLHttpRequest
+Accept: application/json
+Authorization: Bearer {{access_token}}
 
 ### 회원수정
 PUT {{host}}/api/v1/accounts/1
