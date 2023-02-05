@@ -14,7 +14,7 @@ public class CategoryDto {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class ProductRes {
-        @ApiModelProperty(value = "카테고리 id")
+        @ApiModelProperty(value = "카테고리 id", example = "0")
         private Long categoryId;
 
         @ApiModelProperty(value = "카테고리 이름")
