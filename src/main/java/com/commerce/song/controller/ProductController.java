@@ -52,4 +52,15 @@ public class ProductController {
     }
 
 
+    @ApiOperation(value = "상품 삭제")
+    @DeleteMapping("/{id}")
+    public ResultDto deleteById(@PathVariable Long id) {
+        return ResultDto.res();
+    }
+
+    @ApiOperation(value = "상품 수정")
+    @PutMapping("/{id}")
+    public ResultDto updateById(@PathVariable Long id, @Validated @ModelAttribute ProductDto.updateProductReq reqDto) {
+        return ResultDto.res();
+    }
 }
