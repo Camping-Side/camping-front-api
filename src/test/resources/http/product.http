@@ -82,12 +82,12 @@ Content-Disposition: form-data; name="totalCnt";
 1000
 
 --boundary
-Content-Disposition: form-data; name="pStartDate";
+Content-Disposition: form-data; name="startDate";
 
 20221201
 
 --boundary
-Content-Disposition: form-data; name="pEndDate";
+Content-Disposition: form-data; name="endDate";
 
 20231231
 

@@ -56,7 +56,7 @@ public class ProductServiceImpl implements ProductService {
         // 상품 save 로직
         Product product = CustomUtil.convertClass(reqDto, Product.class);
         product.of(category, brand, vender);
-        product.setSaleDate(reqDto.getPStartDate(), reqDto.getPEndDate());
+        product.setSaleDate(reqDto.getStartDate(), reqDto.getEndDate());
         Product savedProduct = productRepository.save(product);
 
         // files 업로드 로직
