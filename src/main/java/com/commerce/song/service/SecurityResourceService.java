@@ -28,9 +28,9 @@ public class SecurityResourceService {
             List<ConfigAttribute> configAttributeList = new ArrayList<>();
             // resource 하나당 여러개의 권한정보가 매핑 됨. 1대 다
             re.getRoleSet().forEach(role -> {
-                configAttributeList.add(new SecurityConfig(role.getRoleName()));
+                configAttributeList.add(new SecurityConfig(role.getRoleNm()));
             });
-            result.put(new AntPathRequestMatcher(re.getResourceName(), re.getHttpMethod()), configAttributeList);
+            result.put(new AntPathRequestMatcher(re.getResourceNm(), re.getHttpMethod()), configAttributeList);
         });
 
         return result;

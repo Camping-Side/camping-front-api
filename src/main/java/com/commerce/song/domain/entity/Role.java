@@ -22,8 +22,8 @@ public class Role extends BaseEntity implements Serializable {
     @Column(name = "role_id")
     private Long id;
 
-    @Column(name = "role_name")
-    private String roleName;
+    @Column(name = "role_nm")
+    private String roleNm;
 
     @Column(name = "role_desc")
     private String roleDesc;
@@ -32,6 +32,6 @@ public class Role extends BaseEntity implements Serializable {
     private Set<Account> accounts = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roleSet")
-    @OrderBy("orderNum desc")
+    @OrderBy("seq desc")
     private Set<Resources> resourcesSet = new LinkedHashSet<>();
 }

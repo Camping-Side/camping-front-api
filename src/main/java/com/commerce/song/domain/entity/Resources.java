@@ -21,17 +21,17 @@ public class Resources extends BaseEntity implements Serializable {
     @Column(name = "resource_id")
     private Long id;
 
-    @Column(name = "resource_name")
-    private String resourceName;
+    @Column(name = "resource_nm")
+    private String resourceNm;
 
     @Column(name = "http_method")
     private String httpMethod;
 
-    @Column(name = "order_num")
-    private int orderNum;
+    @Column(name = "seq")
+    private int seq;
 
-    @Column(name = "resource_type")
-    private String resourceType;
+    @Column(name = "resource_tp")
+    private String resourceTp;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "role_resources", joinColumns = {

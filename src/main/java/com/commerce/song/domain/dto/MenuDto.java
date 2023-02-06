@@ -9,7 +9,7 @@ import java.util.List;
 @NoArgsConstructor
 public class MenuDto {
     private Long id;
-    private String menuName;
+    private String menuNm;
     private String icon;
     private String path;
     private Integer menuSeq;
@@ -20,9 +20,9 @@ public class MenuDto {
     private List<MenuDto> child = new ArrayList<>();
 
     @QueryProjection
-    public MenuDto(Long id, String menuName, String icon, String path, Integer menuSeq, Integer menuLevel, String menuUseYn, MenuDto parent, List<MenuDto> child) {
+    public MenuDto(Long id, String menuNm, String icon, String path, Integer menuSeq, Integer menuLevel, String menuUseYn, MenuDto parent, List<MenuDto> child) {
         this.id = id;
-        this.menuName = menuName;
+        this.menuNm = menuNm;
         this.icon = icon;
         this.path = path;
         this.menuSeq = menuSeq;
@@ -35,7 +35,7 @@ public class MenuDto {
     @Data
     public static class ResList {
         private Long id;
-        private String menuName;
+        private String menuNm;
         private String icon;
         private String path;
         private Integer menuSeq;

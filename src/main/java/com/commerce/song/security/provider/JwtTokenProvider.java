@@ -112,7 +112,7 @@ public class JwtTokenProvider implements InitializingBean {
         }
 
         Set<Role> userRoles = account.getUserRoles();
-        Set<String> roleSet = userRoles.stream().map(Role::getRoleName).collect(Collectors.toSet());
+        Set<String> roleSet = userRoles.stream().map(Role::getRoleNm).collect(Collectors.toSet());
 
         UserContextDto user = UserContextDto.builder()
                 .account(account)

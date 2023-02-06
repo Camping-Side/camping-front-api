@@ -55,7 +55,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
                         DslUtil.cprNumEq(product.prdSts, reqDto.getPrdSts()),
                         DslUtil.cprNumEq(product.prdTp, reqDto.getPrdTp()),
                         DslUtil.cprNumEq(product.taxTp, reqDto.getTaxTp()),
-                        dynamicSearch(reqDto.getKeywordType(), reqDto.getKeywordText())
+                        dynamicSearch(reqDto.getKeywordTp(), reqDto.getKeywordText())
                 )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())

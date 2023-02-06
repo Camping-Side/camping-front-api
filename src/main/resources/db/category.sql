@@ -1,7 +1,7 @@
 create table category
 (
     category_id                 bigint auto_increment primary key,
-    category_name      varchar(50)  not null comment '카테고리명',
+    category_nm      varchar(50)  not null comment '카테고리명',
     icon               varchar(50)  null comment '아이콘 클래스명',
     seq                int default 0 comment '순서(기본 0)',
     level              int default 0 comment '계층레벨(기본 0)',

@@ -18,6 +18,6 @@ public class CategoryDto {
         private Long categoryId;
 
         @ApiModelProperty(value = "카테고리 이름")
-        private String categoryName;
+        private String categoryNm;
     }
 }

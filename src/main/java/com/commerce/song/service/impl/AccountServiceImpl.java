@@ -35,7 +35,7 @@ public class AccountServiceImpl implements AccountService {
     @Transactional
     @Override
     public Account createUser(Account account) {
-        Role role = roleRepository.findByRoleName("ROLE_USER");
+        Role role = roleRepository.findByRoleNm("ROLE_USER");
         Set<Role> roles = new HashSet<>();
         roles.add(role);
         account.setUserRoles(roles);
@@ -52,7 +52,7 @@ public class AccountServiceImpl implements AccountService {
         if(accountDto.getUserRoles() != null){
             Set<Role> roles = new HashSet<>();
             accountDto.getUserRoles().forEach(role -> {
-                Role r = roleRepository.findByRoleName(role.getRoleName());
+                Role r = roleRepository.findByRoleNm(role.getRoleNm());
                 roles.add(r);
             });
             account.setUserRoles(roles);

@@ -72,7 +72,7 @@ public class ProductServiceImpl implements ProductService {
                 ResultDto<AwsDto.FileUploadRes> uploadResult = awsService.uploadImage(uploadReq);
                 CommImg img = CommImg.builder()
                         .refId(savedProduct.getProductId())
-                        .type(CommImgType.PRODUCT.getCode())
+                        .tp(CommImgType.PRODUCT.getCode())
                         .seq(fileIndex)
                         .imgPath(uploadResult.getResultData().getFileUrl())
                         .awsPath(uploadResult.getResultData().getAwsUrl())
