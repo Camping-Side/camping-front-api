@@ -15,7 +15,7 @@ public class RoleDto {
     @ApiModelProperty(value = "권한 번호")
     private Long id;
     @ApiModelProperty(value = "권한 이름")
-    private String roleName;
+    private String roleNm;
     @ApiModelProperty(value = "권한 설명")
     private String roleDesc;
 
@@ -24,10 +24,10 @@ public class RoleDto {
     @NoArgsConstructor
     public static class ResAccountRole {
         @ApiModelProperty(value = "권한 이름")
-        private String roleName;
+        private String roleNm;
 
         public ResAccountRole(Role role) {
-            this.roleName = role.getRoleName();
+            this.roleNm = role.getRoleNm();
         }
 
     }

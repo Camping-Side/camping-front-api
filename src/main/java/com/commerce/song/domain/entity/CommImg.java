@@ -22,8 +22,8 @@ public class CommImg  extends BaseEntity {
     @Column(name = "ref_id")
     private Long refId;
 
-    @Column(name = "type")
-    private Integer type;
+    @Column(name = "tp")
+    private Integer tp;
 
     @Column(name = "seq")
     private Integer seq;

@@ -24,8 +24,8 @@ public class Brand extends BaseEntity implements Serializable {
     @Column(name = "brand_id")
     private Long brandId;
 
-    @Column(name = "brand_name", length = 50, nullable = false)
-    private String brandName;
+    @Column(name = "brand_nm", length = 50, nullable = false)
+    private String brandNm;
 
     @Column(length = 100)
     private String intro;

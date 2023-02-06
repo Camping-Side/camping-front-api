@@ -17,8 +17,8 @@ public class Menu extends BaseEntity{
 //    @Column(name = "menu_id")
     private Long id;
 
-    @Column(name = "menu_name")
-    private String menuName;
+    @Column(name = "menu_nm")
+    private String menuNm;
 
     @Column(name = "icon")
     private String icon;
@@ -51,8 +51,8 @@ public class Menu extends BaseEntity{
         this.parent = menu;
     }
 
-    public Menu(String menuName, String icon, String path, Integer menuSeq, Integer menuLevel, String menuUseYn) {
-        this.menuName = menuName;
+    public Menu(String menuNm, String icon, String path, Integer menuSeq, Integer menuLevel, String menuUseYn) {
+        this.menuNm = menuNm;
         this.icon = icon;
         this.path = path;
         this.menuSeq = menuSeq;
@@ -61,7 +61,7 @@ public class Menu extends BaseEntity{
     }
 
     public void updateMenu(Menu menu) {
-        this.menuName = menu.menuName;
+        this.menuNm = menu.menuNm;
         this.menuUseYn = menu.menuUseYn;
         this.icon = menu.icon;
         this.menuSeq = menu.menuSeq;

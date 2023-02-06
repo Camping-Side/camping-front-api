@@ -15,14 +15,14 @@ import lombok.NoArgsConstructor;
 @ApiModel
 public class ResultDto<T> {
     @ApiModelProperty(value = "결과 코드")
-    private String statusCode;
+    private String stsCd;
     @ApiModelProperty(value = "결과 메시지")
     private String resultMsg;
     @ApiModelProperty(value = "결과 데이터")
     private T resultData;
 
     public ResultDto(final String code, final String resultMsg) {
-        this.statusCode = code;
+        this.stsCd = code;
         this.resultMsg = resultMsg;
         this.resultData = null;
     }
@@ -50,7 +50,7 @@ public class ResultDto<T> {
     public static<T> ResultDto<T> res(final String code, final String msg, final T t) {
         return ResultDto.<T>builder()
                 .resultData(t)
-                .statusCode(code)
+                .stsCd(code)
                 .resultMsg(msg)
                 .build();
     }

@@ -55,7 +55,7 @@ public class ProductDto {
         @ApiModelProperty(value = "과세 타입(0: 과세, 1: 면세, 2: 영세)", example = "0")
         private Integer taxTp;
         @ApiModelProperty(value = "검색 키워드 타입(0: 상품명)", example = "0")
-        private Integer keywordType;
+        private Integer keywordTp;
         @ApiModelProperty(value = "검색 키워드")
         private String keywordText;
 //        @ApiModelProperty(value = "카테고리 id")
@@ -148,16 +148,16 @@ public class ProductDto {
         private String delryTp;
 
         @ApiModelProperty(value = "배송비 부과 기준시작금액", example = "0")
-        private Integer delryBaseStartAmt;
+        private Integer delryBaseStartPrc;
 
         @ApiModelProperty(value = "기본 배송비", example = "0")
-        private Integer delryAmt;
+        private Integer delryPrc;
 
         @ApiModelProperty(value = "도서산간 배송비", example = "0")
-        private Integer delrySideAmt;
+        private Integer delrySidePrc;
 
         @ApiModelProperty(value = "제주도 배송비", example = "0")
-        private Integer delryJejuAmt;
+        private Integer delryJejuPrc;
 
         @ApiModelProperty(value = "출고지 주소")
         private String delryOutAddr;
@@ -172,7 +172,7 @@ public class ProductDto {
         private String delryRefAddr2;
 
         @ApiModelProperty(value = "옵션타입(0: 단건형, 1: 단독형, 2: 조합형)")
-        private Integer optType;
+        private Integer optTp;
 
         @ApiModelProperty(value = "옵션타이틀1")
         private String optTitle1;
@@ -271,22 +271,22 @@ public class ProductDto {
         @ApiModelProperty(value = "배송비 부과 기준시작금액", example = "0", required = true)
         @PositiveOrZero
         @NotNull(message = "배송비 부과 기준시작금액은 필수입니다.")
-        private Integer delryBaseStartAmt;
+        private Integer delryBaseStartPrc;
 
         @ApiModelProperty(value = "기본 배송비", example = "0", required = true)
         @NotNull(message = "배송비는 필수값입니다.")
         @PositiveOrZero
-        private Integer delryAmt;
+        private Integer delryPrc;
 
         @ApiModelProperty(value = "도서산간 배송비", example = "0", required = true)
         @NotNull(message = "도서산간 배송비는 필수값입니다.")
         @PositiveOrZero
-        private Integer delrySideAmt;
+        private Integer delrySidePrc;
 
         @ApiModelProperty(value = "제주도 배송비", example = "0", required = true)
         @NotNull(message = "제주도 배송비는 필수값입니다.")
         @PositiveOrZero
-        private Integer delryJejuAmt;
+        private Integer delryJejuPrc;
 
         @ApiModelProperty(value = "출고지 주소", required = true)
         @NotBlank(message = "출고지 주소는 필수입니다.")
@@ -306,7 +306,7 @@ public class ProductDto {
 
         @ApiModelProperty(value = "옵션타입(0: 단건형, 1: 단독형, 2: 조합형)", example = "0", required = true)
         @NotNull(message = "옵션 타입은 필수입니다.")
-        private Integer optType;
+        private Integer optTp;
 
         @ApiModelProperty(value = "옵션타이틀1")
         private String optTitle1;
@@ -392,22 +392,22 @@ public class ProductDto {
         @ApiModelProperty(value = "배송비 부과 기준시작금액", example = "0", required = true)
         @PositiveOrZero
         @NotNull(message = "배송비 부과 기준시작금액은 필수입니다.")
-        private Integer delryBaseStartAmt;
+        private Integer delryBaseStartPrc;
 
         @ApiModelProperty(value = "기본 배송비", example = "0", required = true)
         @NotNull(message = "배송비는 필수값입니다.")
         @PositiveOrZero
-        private Integer delryAmt;
+        private Integer delryPrc;
 
         @ApiModelProperty(value = "도서산간 배송비", example = "0", required = true)
         @NotNull(message = "도서산간 배송비는 필수값입니다.")
         @PositiveOrZero
-        private Integer delrySideAmt;
+        private Integer delrySidePrc;
 
         @ApiModelProperty(value = "제주도 배송비", example = "0", required = true)
         @NotNull(message = "제주도 배송비는 필수값입니다.")
         @PositiveOrZero
-        private Integer delryJejuAmt;
+        private Integer delryJejuPrc;
 
         @ApiModelProperty(value = "출고지 주소", required = true)
         @NotBlank(message = "출고지 주소는 필수입니다.")
@@ -427,7 +427,7 @@ public class ProductDto {
 
         @ApiModelProperty(value = "옵션타입(0: 단건형, 1: 단독형, 2: 조합형)", example = "0", required = true)
         @NotNull(message = "옵션 타입은 필수입니다.")
-        private Integer optType;
+        private Integer optTp;
 
         @ApiModelProperty(value = "옵션타이틀1")
         private String optTitle1;

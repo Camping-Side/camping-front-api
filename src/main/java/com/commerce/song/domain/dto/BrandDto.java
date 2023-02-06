@@ -17,6 +17,6 @@ public class BrandDto {
         @ApiModelProperty(value = "브랜드 id", example = "0")
         private Long brandId;
         @ApiModelProperty(value = "브랜드명")
-        private String brandName;
+        private String brandNm;
     }
 }

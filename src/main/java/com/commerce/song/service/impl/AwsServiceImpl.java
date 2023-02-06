@@ -50,7 +50,7 @@ public class AwsServiceImpl implements AwsService {
 
         ResultDto<AwsDto.FileUploadRes> uploadResult = uploadFile(req.getFolder(), file);
 
-        if(!AwsCode.AWS_FILE_UPLOAD_SUCCESS.getCode().equals(uploadResult.getStatusCode())) {
+        if(!AwsCode.AWS_FILE_UPLOAD_SUCCESS.getCode().equals(uploadResult.getStsCd())) {
             throw new AwsUploadException();
         }
 

@@ -15,23 +15,23 @@ import java.util.Set;
 @AllArgsConstructor
 public class ResourcesDto {
     private String id;
-    private String resourceName;
+    private String resourceNm;
     private String httpMethod;
-    private int orderNum;
-    private String resourceType;
+    private int seq;
+    private String resourceTp;
     private String roleName;
     private Set<Role> roleSet;
 
     @Data
     public static class ReqList extends PageDto {
         @ApiModelProperty(value = "리소스명")
-        private String resourceName;
+        private String resourceNm;
 
         @ApiModelProperty(value = "method")
         private String httpMethod;
 
-        @ApiModelProperty(value = "resourceType")
-        private String resourceType;
+        @ApiModelProperty(value = "resourceTp")
+        private String resourceTp;
 
         @ApiModelProperty(value = "Role id")
         private String roleId;
@@ -44,13 +44,13 @@ public class ResourcesDto {
         @ApiModelProperty(value = "resource id")
         private String id;
         @ApiModelProperty(value = "리소스명")
-        private String resourceName;
+        private String resourceNm;
         @ApiModelProperty(value = "method")
         private String httpMethod;
         @ApiModelProperty(value = "순서", example = "0")
-        private Integer orderNum;
+        private Integer seq;
         @ApiModelProperty(value = "리소스 타입")
-        private String resourceType;
+        private String resourceTp;
         @ApiModelProperty(value = "생성일")
         private String createdDate;
         @ApiModelProperty(value = "생성자 id", example = "0")

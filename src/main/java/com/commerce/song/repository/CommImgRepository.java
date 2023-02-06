@@ -10,6 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 public interface CommImgRepository extends JpaRepository<CommImg, Long> {
 
     @Modifying(clearAutomatically = true)
-    @Query("update CommImg c set c.type = 98 where c.imgId = ?1")
+    @Query("update CommImg c set c.tp = 98 where c.imgId = ?1")
     int updateConfirmTypeByImgId(@NonNull Long imgId);
 }

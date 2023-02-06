@@ -67,7 +67,7 @@ public class AccountRepositoryImpl implements AccountRepositoryCustom {
         return hasText(username) ? account.username.contains(username) : null;
     }
     private BooleanExpression userRoleEq(List<String> userRoles) {
-        return userRoles.size() != 0 ? account.userRoles.any().roleName.in(userRoles) : null;
+        return userRoles.size() != 0 ? account.userRoles.any().roleNm.in(userRoles) : null;
     }
 
 }
