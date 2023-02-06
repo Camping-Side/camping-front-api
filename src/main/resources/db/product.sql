@@ -1,3 +1,5 @@
+drop table if exists product;
+
 create table product
 (
     product_id         bigint auto_increment primary key,

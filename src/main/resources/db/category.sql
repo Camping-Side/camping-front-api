@@ -1,3 +1,5 @@
+drop table if exists category;
+
 create table category
 (
     category_id                 bigint auto_increment primary key,

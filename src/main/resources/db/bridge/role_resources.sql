@@ -1,3 +1,5 @@
+drop table if exists role_resources;
+
 create table role_resources
 (
     resource_id bigint not null,

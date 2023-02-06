@@ -1,3 +1,6 @@
+drop table if exists resources;
+
+
 create table resources
 (
     resource_id        bigint auto_increment not null primary key,
