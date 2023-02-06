@@ -39,7 +39,7 @@ public class MenuRepositoryTest {
         PageRequest pageRequest = PageRequest.of(0, 3);
         Page<Menu> allToDto = menuRepository.findAllToDtoPage(pageRequest);
 
-        assertThat(allToDto.getContent().get(0).getMenuName()).isEqualTo("메뉴1");
-        assertThat(allToDto.getContent().get(0).getChild().get(0).getMenuName()).isEqualTo("메뉴2");
+        assertThat(allToDto.getContent().get(0).getMenuNm()).isEqualTo("메뉴1");
+        assertThat(allToDto.getContent().get(0).getChild().get(0).getMenuNm()).isEqualTo("메뉴2");
     }
 }

@@ -3,6 +3,8 @@
 -- 단독형 : 옵션 구성이 있지만 구성단위를 제외한 모든 것은 상품데이터에 종속
 -- 조합형 : 각 옵션 구성에 옵션가, 재고수량
 -- 옵션 기준은
+drop table if exists product_option;
+
 create table product_option
 (
     opt_id bigint auto_increment primary key,
