@@ -1,3 +1,5 @@
+drop table if exists account_roles;
+
 create table account_roles
 (
     account_id bigint not null,

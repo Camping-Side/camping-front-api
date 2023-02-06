@@ -1,3 +1,4 @@
+drop table if exists role;
 create table role
 (
     role_id        bigint auto_increment not null primary key,

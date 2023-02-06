@@ -1,3 +1,5 @@
+drop table if exists brand;
+
 create table brand
 (
     brand_id                 bigint auto_increment primary key,

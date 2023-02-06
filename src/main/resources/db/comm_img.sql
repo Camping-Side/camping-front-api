@@ -1,3 +1,4 @@
+drop table if exists comm_img;
 
 create table comm_img
 (

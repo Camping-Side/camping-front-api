@@ -1,3 +1,5 @@
+drop table if exists menu;
+
 create table menu
 (
     id                 bigint auto_increment primary key,
