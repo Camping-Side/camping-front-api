@@ -53,7 +53,7 @@ public class AuthServiceImpl implements AuthService {
         if(accountRepository.existsByEmail(reqDto.getEmail())) {
             throw new RuntimeException("이미 가입되어 있는 유저입니다.");
         }
-        Role role = roleRepository.findByRoleName("ROLE_USER");
+        Role role = roleRepository.findByRoleNm("ROLE_USER");
         Set<Role> roles = new HashSet<>();
         roles.add(role);
         Account account = Account.builder()
@@ -86,7 +86,7 @@ public class AuthServiceImpl implements AuthService {
         }
 
         Set<Role> userRoles = account.getUserRoles();
-        Set<String> roleSet = userRoles.stream().map(Role::getRoleName).collect(Collectors.toSet());
+        Set<String> roleSet = userRoles.stream().map(Role::getRoleNm).collect(Collectors.toSet());
 
         UserContextDto user = UserContextDto.builder()
                 .account(account)

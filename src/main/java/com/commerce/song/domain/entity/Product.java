@@ -67,17 +67,17 @@ public class Product extends BaseEntity implements Serializable {
     @Column(name = "delry_tp", nullable = false, length = 2)
     private String delryTp;
 
-    @Column(name = "delry_base_start_amt")
-    private Integer delryBaseStartAmt;
+    @Column(name = "delry_base_start_prc")
+    private Integer delryBaseStartPrc;
 
-    @Column(name = "delry_amt", nullable = false)
-    private Integer delryAmt;
+    @Column(name = "delry_prc", nullable = false)
+    private Integer delryPrc;
 
-    @Column(name = "delry_side_amt", nullable = false)
-    private Integer delrySideAmt;
+    @Column(name = "delry_side_prc", nullable = false)
+    private Integer delrySidePrc;
 
-    @Column(name = "delry_jeju_amt", nullable = false)
-    private Integer delryJejuAmt;
+    @Column(name = "delry_jeju_prc", nullable = false)
+    private Integer delryJejuPrc;
 
     @Column(name = "delry_out_addr", nullable = false)
     private String delryOutAddr;
@@ -91,8 +91,8 @@ public class Product extends BaseEntity implements Serializable {
     @Column(name = "delry_ref_addr2", nullable = false)
     private String delryRefAddr2;
 
-    @Column(name = "opt_type", nullable = false)
-    private Integer optType;
+    @Column(name = "opt_tp", nullable = false)
+    private Integer optTp;
 
     @Column(name = "opt_title1", length = 100)
     private String optTitle1;

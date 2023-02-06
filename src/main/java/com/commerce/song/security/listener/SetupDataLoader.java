@@ -80,15 +80,15 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Resources createResourceIfNotFound(String resourceName, String httpMethod, Set<Role> roleSet, String resourceType) {
-        Resources resources = resourcesRepository.findByResourceNameAndHttpMethod(resourceName, httpMethod);
+        Resources resources = resourcesRepository.findByResourceNmAndHttpMethod(resourceName, httpMethod);
 
         if (resources == null) {
             resources = Resources.builder()
-                    .resourceName(resourceName)
+                    .resourceNm(resourceName)
                     .roleSet(roleSet)
                     .httpMethod(httpMethod)
-                    .resourceType(resourceType)
-                    .orderNum(count.incrementAndGet())
+                    .resourceTp(resourceType)
+                    .seq(count.incrementAndGet())
                     .build();
         }
         return resourcesRepository.save(resources);
@@ -113,11 +113,11 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Role createRoleIfNotFound(String roleName, String roleDesc) {
-        Role role = roleRepository.findByRoleName(roleName);
+        Role role = roleRepository.findByRoleNm(roleName);
 
         if(role == null) {
             role = Role.builder()
-                    .roleName(roleName)
+                    .roleNm(roleName)
                     .roleDesc(roleDesc)
                     .build();
         }
@@ -126,11 +126,11 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Brand createBrandIfNotFound(String brandName, String intro) {
-        Brand brand = brandRepository.findByBrandName(brandName);
+        Brand brand = brandRepository.findByBrandNm(brandName);
 
         if(brand == null) {
             brand = Brand.builder()
-                    .brandName(brandName)
+                    .brandNm(brandName)
                     .intro(intro)
                     .build();
         }
@@ -138,11 +138,11 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     }
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Category createCategoryIfNotFound(String categoryName, Category parent) {
-        Category category = categoryRepository.findByCategoryName(categoryName);
+        Category category = categoryRepository.findByCategoryNm(categoryName);
 
         if(category == null) {
             category = Category.builder()
-                    .categoryName(categoryName)
+                    .categoryNm(categoryName)
                     .parent(parent)
                     .build();
         }

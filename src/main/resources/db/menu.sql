@@ -1,7 +1,7 @@
 create table menu
 (
     id                 bigint auto_increment primary key,
-    menu_name          varchar(50)  not null comment '메뉴 이름',
+    menu_nm          varchar(50)  not null comment '메뉴 이름',
     icon               varchar(50)  null comment '아이콘 클래스명',
     path               varchar(255) null comment '메뉴 이동경로',
     menu_seq           int default 0 comment '메뉴 순서(기본 0)',
