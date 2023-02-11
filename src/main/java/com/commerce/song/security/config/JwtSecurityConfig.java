@@ -55,7 +55,7 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
     private String[] permitAllResources = {"/h2-console/**", "/swagger-ui/**", "/swagger-resources/**" // swagger3
             , "/swagger-ui.html", "/webjars/springfox-swagger-ui/**" // swaggger2
             , "/api/v1/test/**", "/api/v1/test" , "/api/v1/admin/test/**", "/v2/api-docs"
-            , "/api/v1/auth/login", "/api/v1/auth/sign", "/api/v1/auth/reissue"};
+            , "/api/v1/auth/login", "/api/v1/auth/sign", "/api/v1/auth/reissue", "/api/v1/accounts/checkPhoneDup", "/api/v1/accounts/checkEmailDup"};
 
 //    private final PasswordEncoder passwordEncoder;
 
