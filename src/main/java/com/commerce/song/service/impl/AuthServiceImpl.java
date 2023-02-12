@@ -78,11 +78,11 @@ public class AuthServiceImpl implements AuthService {
 
         Account account = accountRepository.findByEmail(reqDto.getEmail());
         if(account == null || !passwordEncoder.matches(reqDto.getPassword(), account.getPassword())) {
-            throw new BadCredentialsException("Invalid password");
+            throw new BadRequestException("로그인 정보가 올바르지 않습니다.");
         }
 
         if(!account.isActivated()) {
-            throw new BadCredentialsException("expired account");
+            throw new BadRequestException("로그인이 불가능합니다.");
         }
 
         Set<Role> userRoles = account.getUserRoles();
