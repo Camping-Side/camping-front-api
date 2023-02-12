@@ -8,6 +8,7 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -29,16 +30,18 @@ public class JwtExceptionFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
         }catch (JwtNotAvailbleException e){
             //토큰의 유효기간 만료
-            writeJwtException(response, e);
+            writeException(response, HttpStatus.UNAUTHORIZED, e);
+        }catch(AccessDeniedException e) {
+            writeException(response, HttpStatus.FORBIDDEN, e);
         }
     }
 
 
-    private void writeJwtException(HttpServletResponse response, RuntimeException e) {
+    private void writeException(HttpServletResponse response, HttpStatus status, RuntimeException e) {
         ExceptionResponse es = new ExceptionResponse(LocalDateTime.now(), e.getMessage());
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
-        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        response.setStatus(status.value());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setCharacterEncoding("UTF-8");
         try{

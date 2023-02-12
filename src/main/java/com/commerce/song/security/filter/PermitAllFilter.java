@@ -10,6 +10,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.apache.commons.codec.binary.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.intercept.InterceptorStatusToken;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
@@ -59,10 +60,17 @@ public class PermitAllFilter extends FilterSecurityInterceptor {
                 return null;
             }
         } catch (SecurityContextAvailbleException e) {
-            return super.beforeInvocation(object);
+            logger.info("마스터 계정 예외 케이스...");
         }
-
-        return super.beforeInvocation(object);
+        /**
+         * rejectPublicInvocations true를 주면 모든 리소스에 권한을 체크하게 되는데
+         * 권한이 없으면 던지는 Exception이 IllegalArgumentException 이다.
+         */
+        try {
+            return super.beforeInvocation(object);
+        } catch(IllegalArgumentException e) {
+            throw new AccessDeniedException("권한이 없습니다.");
+        }
     }
 
     public void invoke(FilterInvocation fi) throws IOException, ServletException {
@@ -94,6 +102,8 @@ public class PermitAllFilter extends FilterSecurityInterceptor {
             } catch(NestedServletException e) {
                 resWrite(response, HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
             } catch(JwtNotAvailbleException e) {
+                resWrite(response, HttpStatus.UNAUTHORIZED, e.getMessage());
+            } catch(AccessDeniedException e) {
                 resWrite(response, HttpStatus.FORBIDDEN, e.getMessage());
             } catch(Exception e) {
                 resWrite(response, HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
