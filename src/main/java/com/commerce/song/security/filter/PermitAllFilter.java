@@ -69,7 +69,7 @@ public class PermitAllFilter extends FilterSecurityInterceptor {
         try {
             return super.beforeInvocation(object);
         } catch(IllegalArgumentException e) {
-            throw new AccessDeniedException("권한이 없습니다.");
+            throw new JwtNotAvailbleException("접근 권한이 없습니다.");
         }
     }
 
