@@ -2,6 +2,7 @@ package com.commerce.song.security.filter;
 
 import com.commerce.song.exception.ExceptionResponse;
 import com.commerce.song.exception.JwtNotAvailbleException;
+import com.commerce.song.exception.SecurityContextAvailbleException;
 import com.commerce.song.util.SecurityUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -47,10 +48,18 @@ public class PermitAllFilter extends FilterSecurityInterceptor {
             }
         }
 
-        // local 마스터 계정이면 pass
-        String userEmail = SecurityUtil.getCurrentEmail();
-        if(StringUtils.equals("master@camping.kr",userEmail) || permitAll) {
+        if(permitAll) {
             return null;
+        }
+
+        // local 마스터 계정이면 pass
+        try {
+            String userEmail = SecurityUtil.getCurrentEmail();
+            if(StringUtils.equals("master@camping.kr",userEmail)) {
+                return null;
+            }
+        } catch (SecurityContextAvailbleException e) {
+            return super.beforeInvocation(object);
         }
 
         return super.beforeInvocation(object);
