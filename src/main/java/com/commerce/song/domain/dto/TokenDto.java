@@ -19,6 +19,10 @@ public class TokenDto {
     private String accessToken;
     @ApiModelProperty(value = "재발급 토근")
     private String refreshToken;
+    @ApiModelProperty(value = "유저이메일")
+    private String email;
+    @ApiModelProperty(value = "유저아이디")
+    private Long id;
     @ApiModelProperty(value = "유저명")
     private String username;
     @ApiModelProperty(value = "토큰만료시간", example = "0")
