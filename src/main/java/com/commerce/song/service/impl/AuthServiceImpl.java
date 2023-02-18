@@ -102,6 +102,8 @@ public class AuthServiceImpl implements AuthService {
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         // 인증정보를 기반으로 토큰정보 가져옴
         TokenDto tokenDto = jwtTokenProvider.createToken(authenticationToken);
+        tokenDto.setId(account.getId());
+        tokenDto.setUsername(account.getUsername());
 
         RefreshToken refreshToken = RefreshToken.builder()
                 .key(reqDto.getEmail())
