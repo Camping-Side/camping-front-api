@@ -28,7 +28,7 @@ public class Vender extends BaseEntity implements Serializable {
 
     @Column(name = "vdr_sts", length = 2, nullable = false)
     @ColumnDefault("0")
-    private String vdrSts;
+    private Integer vdrSts;
 
     @OneToMany(mappedBy = "vender", fetch = FetchType.LAZY)
     private List<Product> products = new ArrayList<>();
