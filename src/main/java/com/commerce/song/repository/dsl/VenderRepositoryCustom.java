@@ -1,6 +1,5 @@
 package com.commerce.song.repository.dsl;
 
-import com.commerce.song.domain.dto.ProductDto;
 import com.commerce.song.domain.dto.VenderDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
