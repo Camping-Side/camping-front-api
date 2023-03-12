@@ -7,6 +7,7 @@ import com.commerce.song.domain.entity.Account;
 import com.commerce.song.domain.entity.RefreshToken;
 import com.commerce.song.domain.entity.Role;
 import com.commerce.song.exception.BadRequestException;
+import com.commerce.song.exception.JwtNotAvailbleException;
 import com.commerce.song.repository.AccountRepository;
 import com.commerce.song.repository.RefreshTokenRepository;
 import com.commerce.song.repository.RoleRepository;
@@ -78,11 +79,11 @@ public class AuthServiceImpl implements AuthService {
 
         Account account = accountRepository.findByEmail(reqDto.getEmail());
         if(account == null || !passwordEncoder.matches(reqDto.getPassword(), account.getPassword())) {
-            throw new BadCredentialsException("Invalid password");
+            throw new BadRequestException("로그인 정보가 올바르지 않습니다.");
         }
 
         if(!account.isActivated()) {
-            throw new BadCredentialsException("expired account");
+            throw new BadRequestException("로그인이 불가능합니다.");
         }
 
         Set<Role> userRoles = account.getUserRoles();
@@ -101,6 +102,8 @@ public class AuthServiceImpl implements AuthService {
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         // 인증정보를 기반으로 토큰정보 가져옴
         TokenDto tokenDto = jwtTokenProvider.createToken(authenticationToken);
+        tokenDto.setId(account.getId());
+        tokenDto.setUsername(account.getUsername());
 
         RefreshToken refreshToken = RefreshToken.builder()
                 .key(reqDto.getEmail())
@@ -123,11 +126,11 @@ public class AuthServiceImpl implements AuthService {
 
         // member id 기반으로 refresh token 값 가져옴
         RefreshToken refreshToken = refreshTokenRepository.findByKey(authentication.getName())
-                .orElseThrow(() -> new RuntimeException("로그아웃 된 사용자입니다."));
+                .orElseThrow(() -> new JwtNotAvailbleException("로그아웃 된 사용자입니다."));
 
         // refresh token 일치하는지 검사
         if(!refreshToken.getValue().equals(reqDto.getRefreshToken())) {
-            throw new RuntimeException("토큰의 유저 정보가 일치하지 않습니다.");
+            throw new JwtNotAvailbleException("토큰의 유저 정보가 일치하지 않습니다.");
         }
 
         // 신규 토큰 생성

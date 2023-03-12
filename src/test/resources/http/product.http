@@ -2,7 +2,6 @@ GET {{host}}/api/v1/products?page=0&size=10&startDate=20220101&endDate=20230303&
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 Accept: application/json
-Authorization: Bearer {{access_token}}
 
 
 ### Image upload

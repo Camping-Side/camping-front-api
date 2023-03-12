@@ -68,7 +68,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         Account userAccount = createAccountIfNotFound("user", "1111", "user@gmail.com", "19921122", userRoleSet, "01011111111");
         Account masterAccount = createAccountIfNotFound("master", "1111", "master@camping.kr", "19921122", userRoleSet, "01011111111");
 
-        Vender vender1 = createVenderIfNotFound("테스트벤더", "0");
+        Vender vender1 = createVenderIfNotFound("테스트벤더", 0);
         Brand brand1 = createBrandIfNotFound("테스트브랜드", "테스트브랜드입니다.");
         Category category1 = createCategoryIfNotFound("카테고리1", null);
         Category category2 = createCategoryIfNotFound("카테고리2", category1);
@@ -149,7 +149,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         return categoryRepository.save(category);
     }
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public Vender createVenderIfNotFound(String vdrName, String vdrSts) {
+    public Vender createVenderIfNotFound(String vdrName, Integer vdrSts) {
         Vender vender = venderRepository.findByVdrNm(vdrName);
 
         if(vender == null) {
