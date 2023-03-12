@@ -9,6 +9,9 @@ public class DslUtil {
     public static BooleanExpression cprNumEq(NumberPath<Integer> target, Integer number) {
         return number == null ? null : target.eq(number);
     }
+    public static BooleanExpression cprNumEq(NumberPath<Long> target, Long number) {
+        return number == null ? null : target.eq(number);
+    }
     public static BooleanExpression cprStrEq(StringPath target, String str) {
         return StringUtils.hasText(str) ? target.eq(str) : null;
     }

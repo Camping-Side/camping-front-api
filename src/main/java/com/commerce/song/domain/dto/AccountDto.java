@@ -198,4 +198,14 @@ public class AccountDto extends PageDto {
         private String phone;
     }
 
+    @Data
+    public static class RoleAccountRes {
+        @ApiModelProperty(value = "회원 번호", example = "0")
+        private Long id;
+        @ApiModelProperty(value = "회원 이메일")
+        private String email;
+        @ApiModelProperty(value = "회원 이름")
+        private String username;
+    }
+
 }
