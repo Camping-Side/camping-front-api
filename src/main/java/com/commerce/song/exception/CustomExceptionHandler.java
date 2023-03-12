@@ -60,13 +60,6 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(es, HttpStatus.UNAUTHORIZED);
     }
 
-    @ExceptionHandler(BadRequestException.class)
-    protected ResponseEntity<ExceptionResponse> handler(BadRequestException e, WebRequest request) {
-        logger.warn("request : " + request.getDescription(false) + " // status :  " + HttpStatus.BAD_REQUEST  + " // details : " + e.getMessage(), e);
-        ExceptionResponse es = new ExceptionResponse(LocalDateTime.now(), e.getMessage(), request.getDescription(false), null);
-        return new ResponseEntity<>(es, HttpStatus.BAD_REQUEST);
-    }
-
     @ExceptionHandler(BusinessException.class)
     protected ResponseEntity<ExceptionResponse> handler(BusinessException e, WebRequest request) {
         logger.warn("request : " + request.getDescription(false) + " // status :  " + HttpStatus.INTERNAL_SERVER_ERROR  + " // details : " + e.getMessage(), e);

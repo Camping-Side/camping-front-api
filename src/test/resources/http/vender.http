@@ -1,6 +1,0 @@
-### Venders get
-GET {{host}}/api/v1/venders?page=0&size=1000
-Content-Type: application/json
-X-Requested-With: XMLHttpRequest
-Accept: application/json
-Authorization: Bearer {{access_token}}

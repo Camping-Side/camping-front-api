@@ -1,8 +1,8 @@
 package com.commerce.song.controller;
 
 import com.commerce.song.domain.dto.ResultDto;
-import com.commerce.song.domain.dto.VenderDto;
-import com.commerce.song.service.VenderService;
+import com.commerce.song.domain.dto.SpecialPlanDto;
+import com.commerce.song.service.SpecialPlanService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -13,16 +13,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(tags = "벤더사 rest api")
+@Api(tags = "특별전 api")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/venders")
-public class VenderController {
-    private final VenderService venderService;
+@RequestMapping("/api/v1/specialplans")
+public class SpecialController {
 
-    @ApiOperation(value = "벤더 리스트 조회")
+    private final SpecialPlanService specialPlanService;
+
+    @ApiOperation(value ="기획전 리스트 조회", notes = "기획전 리스트 조회")
     @GetMapping
-    public ResultDto<Page<VenderDto.ResList>> findAll(@Validated @ModelAttribute VenderDto.ReqList req) {
-        return ResultDto.res(venderService.findAll(req));
+    public ResultDto<Page<SpecialPlanDto.ResSpecialPlan>> findAll(@Validated @ModelAttribute SpecialPlanDto.ResSpecialPlan req){
+        Page<SpecialPlanDto.ResSpecialPlan> list = specialPlanService.findAll(req);
+        return ResultDto.res(list);
     }
 }

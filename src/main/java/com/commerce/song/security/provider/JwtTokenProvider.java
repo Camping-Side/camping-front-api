@@ -90,7 +90,7 @@ public class JwtTokenProvider implements InitializingBean {
                 .accessToken(accessToken)
                 .accessTokenExpiresIn(accessTokenExpiresIn.getTime())
                 .refreshToken(refreshToken)
-                .email(authentication.getName())
+                .username(authentication.getName())
                 .build();
 
     }
