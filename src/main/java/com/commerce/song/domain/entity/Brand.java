@@ -11,6 +11,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -45,4 +46,7 @@ public class Brand extends BaseEntity implements Serializable {
 
     @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
     private List<Product> products = new ArrayList<>();
+
+    @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
+    private Set<Equipment> brand;
 }
