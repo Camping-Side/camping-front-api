@@ -1,4 +1,4 @@
-package com.commerce.song.util.enums.comm;
+package com.commerce.song.domain.enums.comm;
 
 public enum CommImgType {
     PRODUCT(0, "상품타입"),

@@ -1,6 +1,6 @@
 package com.commerce.song.domain.dto;
 
-import com.commerce.song.util.enums.rescode.BaseCode;
+import com.commerce.song.domain.enums.rescode.BaseCode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;

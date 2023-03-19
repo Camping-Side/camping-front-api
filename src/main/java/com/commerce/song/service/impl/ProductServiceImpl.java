@@ -11,8 +11,8 @@ import com.commerce.song.repository.*;
 import com.commerce.song.service.AwsService;
 import com.commerce.song.service.ProductService;
 import com.commerce.song.util.CustomUtil;
-import com.commerce.song.util.enums.comm.CommImgType;
-import com.commerce.song.util.enums.rescode.AwsCode;
+import com.commerce.song.domain.enums.comm.CommImgType;
+import com.commerce.song.domain.enums.rescode.AwsCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service

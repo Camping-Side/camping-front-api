@@ -1,4 +1,4 @@
-package com.commerce.song.util.enums.rescode;
+package com.commerce.song.domain.enums.rescode;
 
 public interface BaseCode {
     String getCode();

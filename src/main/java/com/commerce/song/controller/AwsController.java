@@ -3,12 +3,11 @@ package com.commerce.song.controller;
 import com.commerce.song.domain.dto.AwsDto;
 import com.commerce.song.domain.dto.ResultDto;
 import com.commerce.song.service.AwsService;
-import com.commerce.song.util.enums.rescode.AwsCode;
+import com.commerce.song.domain.enums.rescode.AwsCode;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 

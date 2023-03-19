@@ -1,7 +1,7 @@
 package com.commerce.song.exception;
 
 
-import com.commerce.song.util.enums.rescode.AwsCode;
+import com.commerce.song.domain.enums.rescode.AwsCode;
 
 public class AwsUploadException extends RuntimeException{
     private static final long serialVersionUID = 1L;

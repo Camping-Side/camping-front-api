@@ -1,4 +1,4 @@
-package com.commerce.song.util.enums.rescode;
+package com.commerce.song.domain.enums.rescode;
 
 public enum AwsCode implements BaseCode {
     AWS_FILE_UPLOAD_SUCCESS("AS000", "파일 업로드에 성공했습니다."),

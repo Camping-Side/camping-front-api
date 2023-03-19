@@ -13,7 +13,7 @@ import com.commerce.song.repository.CommImgRepository;
 import com.commerce.song.service.AwsService;
 import com.commerce.song.util.DateUtil;
 import com.commerce.song.util.FileUtil;
-import com.commerce.song.util.enums.rescode.AwsCode;
+import com.commerce.song.domain.enums.rescode.AwsCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
