@@ -1,7 +1,7 @@
 create table community
 (
     community_id        bigint auto_increment primary key,
-    code                bigint  not null comment '게시글 타입',
+    code                bigint       null comment '게시글 타입',
     title               longtext     null comment '게시글 제목',
     content             longtext     null comment '게시글 내용',
     location            varchar(255) null comment '위치',

@@ -27,7 +27,7 @@ public class Community extends BaseEntity implements Serializable {
     @Column(name = "code")
     private Integer code; //community_tp
 
-    @Column
+    @Column(name = "content", columnDefinition = "LONGTEXT")
     private String content;
 
     @Column
