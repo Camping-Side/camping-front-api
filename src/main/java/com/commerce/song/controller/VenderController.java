@@ -1,6 +1,5 @@
 package com.commerce.song.controller;
 
-import com.commerce.song.domain.dto.ResultDto;
 import com.commerce.song.domain.dto.VenderDto;
 import com.commerce.song.service.VenderService;
 import io.swagger.annotations.Api;

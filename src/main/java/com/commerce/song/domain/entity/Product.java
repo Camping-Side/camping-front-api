@@ -1,7 +1,6 @@
 package com.commerce.song.domain.entity;
 
 import com.commerce.song.domain.dto.ProductDto;
-import com.commerce.song.util.DateUtil;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -3,7 +3,6 @@ package com.commerce.song.service.impl;
 import com.commerce.song.domain.dto.VenderDto;
 import com.commerce.song.repository.VenderRepository;
 import com.commerce.song.service.VenderService;
-import com.commerce.song.util.CustomUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;

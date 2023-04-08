@@ -1,8 +1,6 @@
 package com.commerce.song.service;
 
 import com.commerce.song.domain.dto.AwsDto;
-import com.commerce.song.domain.dto.ResultDto;
-import com.commerce.song.domain.enums.rescode.AwsCode;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;

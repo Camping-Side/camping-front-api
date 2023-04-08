@@ -1,14 +1,11 @@
 package com.commerce.song.service.impl;
 
 import com.commerce.song.domain.dto.AccountDto;
-import com.commerce.song.domain.dto.ResultDto;
 import com.commerce.song.domain.entity.Account;
 import com.commerce.song.domain.entity.Role;
-import com.commerce.song.exception.BadRequestException;
 import com.commerce.song.repository.AccountRepository;
 import com.commerce.song.repository.RoleRepository;
 import com.commerce.song.service.AccountService;
-import com.commerce.song.util.CustomUtil;
 import com.commerce.song.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

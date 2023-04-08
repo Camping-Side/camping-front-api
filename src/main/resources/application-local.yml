@@ -11,7 +11,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
       # 기본키 생성전략
       use-new-id-generator-mappings: false
     database-platform: org.hibernate.dialect.MySQL8Dialect
@@ -38,8 +38,8 @@ spring:
 cloud:
   aws:
     credentials:
-      access-key: abcde
-      secret-key: abcde
+      access-key: AKIAQD6MS4U4TX4KMF7N
+      secret-key: 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
     s3:
       bucket: camping-kr
     region:

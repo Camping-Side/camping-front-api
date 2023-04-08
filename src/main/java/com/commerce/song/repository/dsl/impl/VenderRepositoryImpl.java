@@ -2,8 +2,6 @@ package com.commerce.song.repository.dsl.impl;
 
 import com.commerce.song.domain.dto.VenderDto;
 import com.commerce.song.repository.dsl.VenderRepositoryCustom;
-import com.commerce.song.util.dsl.DslDateUtil;
-import com.commerce.song.util.dsl.DslUtil;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;

@@ -1,7 +1,6 @@
 package com.commerce.song.service;
 
 import com.commerce.song.domain.dto.AccountDto;
-import com.commerce.song.domain.dto.ResultDto;
 import com.commerce.song.domain.dto.TokenDto;
 
 public interface AuthService {

@@ -1,17 +1,14 @@
 package com.commerce.song.controller;
 
 import com.commerce.song.domain.dto.AccountDto;
-import com.commerce.song.domain.dto.ResultDto;
-import com.commerce.song.security.provider.JwtTokenProvider;
 import com.commerce.song.service.AccountService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import com.camping.common.domain.dto.ResultDto;
 
 import javax.validation.Valid;
 

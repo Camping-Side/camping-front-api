@@ -1,10 +1,8 @@
 package com.commerce.song.service.impl;
 
 import com.commerce.song.domain.dto.BrandDto;
-import com.commerce.song.domain.dto.VenderDto;
 import com.commerce.song.repository.BrandRepository;
 import com.commerce.song.service.BrandService;
-import com.commerce.song.util.CustomUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;

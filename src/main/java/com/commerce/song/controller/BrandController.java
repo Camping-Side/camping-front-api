@@ -1,7 +1,6 @@
 package com.commerce.song.controller;
 
 import com.commerce.song.domain.dto.BrandDto;
-import com.commerce.song.domain.dto.ResultDto;
 import com.commerce.song.service.BrandService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

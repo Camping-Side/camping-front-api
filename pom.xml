@@ -17,7 +17,18 @@
         <java.version>11</java.version>
         <swagger.version>2.9.2</swagger.version>
     </properties>
+    <repositories>
+        <repository>
+            <id>common-snapshot</id>
+            <url>https://github.com/Camping-Side/camping-api-common/tree/master/snapshots</url>
+        </repository>
+    </repositories>
     <dependencies>
+        <dependency>
+            <groupId>com.camping</groupId>
+            <artifactId>common</artifactId>
+            <version>0.0.2-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jdbc</artifactId>
@@ -146,14 +157,11 @@
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>2.13.3</version>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.apache.tika/tika-core -->
         <dependency>
-            <groupId>org.apache.tika</groupId>
-            <artifactId>tika-core</artifactId>
-            <version>2.6.0</version>
+            <groupId>com.camping</groupId>
+            <artifactId>common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
 
 
         <!--        <dependency>-->
