@@ -9,10 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommentDto {
-    private Long commentId;
-    private Long communityId;
-    private String content;
-    private Long parentId;
-    private Integer sts;
+public class KeywordDto {
+    private Long keywordId;
+    private Long campingInfo;
 }

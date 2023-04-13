@@ -64,8 +64,6 @@ public class Account extends BaseEntity implements Serializable {
     )
     private Set<Role> userRoles = new HashSet<>();
 
-    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
-    private Set<CommunityLike> likeId;
 
     // 회원 탈퇴 / 정지 (배치로 5년 지난 회원 실제 삭제처리)
     public void leave() {
