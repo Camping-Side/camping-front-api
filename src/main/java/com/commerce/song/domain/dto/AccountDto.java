@@ -1,5 +1,6 @@
 package com.commerce.song.domain.dto;
 
+import com.camping.common.domain.dto.PageDto;
 import com.commerce.song.domain.entity.Account;
 import com.commerce.song.domain.entity.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;

@@ -1,6 +1,6 @@
 package com.commerce.song.security.filter;
 
-import com.commerce.song.exception.ExceptionResponse;
+import com.camping.common.exception.ExceptionResponse;
 import com.commerce.song.exception.JwtNotAvailbleException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;

@@ -1,5 +1,6 @@
 package com.commerce.song.service;
 
+import com.camping.common.domain.dto.ResultDto;
 import com.commerce.song.domain.dto.ProductDto;
 import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;

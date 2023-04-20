@@ -1,5 +1,7 @@
 package com.commerce.song.domain.dto;
 
+import com.camping.common.domain.dto.BaseDto;
+import com.camping.common.domain.dto.PageDto;
 import com.commerce.song.domain.entity.Role;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -52,7 +54,7 @@ public class RoleDto {
 
     @Setter
     @Getter
-    public static class ResList extends BaseDto{
+    public static class ResList extends BaseDto {
         @ApiModelProperty(value = "권한 번호")
         private Long id;
         @ApiModelProperty(value = "권한 이름")

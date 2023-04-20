@@ -1,5 +1,6 @@
 package com.commerce.song.domain.dto;
 
+import com.camping.common.domain.dto.PageDto;
 import com.commerce.song.domain.entity.Role;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;

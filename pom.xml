@@ -5,11 +5,11 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.0</version>
+        <version>2.7.9</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.commerce</groupId>
-    <artifactId>song</artifactId>
+    <groupId>com.camping</groupId>
+    <artifactId>front-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>song</name>
     <description>commerce server</description>
@@ -19,16 +19,11 @@
     </properties>
     <repositories>
         <repository>
-            <id>common-snapshot</id>
-            <url>https://github.com/Camping-Side/camping-api-common/tree/master/snapshots</url>
+            <id>common-release</id>
+            <url>https://maven.pkg.github.com/Camping-Side/camping-api-common</url>
         </repository>
     </repositories>
     <dependencies>
-        <dependency>
-            <groupId>com.camping</groupId>
-            <artifactId>common</artifactId>
-            <version>0.0.2-SNAPSHOT</version>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jdbc</artifactId>
@@ -81,6 +76,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.32</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -157,24 +153,12 @@
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>2.13.3</version>
         </dependency>
+
         <dependency>
             <groupId>com.camping</groupId>
             <artifactId>common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0.9-REALEASE</version>
         </dependency>
-
-
-        <!--        <dependency>-->
-<!--            <groupId>io.springfox</groupId>-->
-<!--            <artifactId>springfox-swagger2</artifactId>-->
-<!--            <version>${swagger.version}</version>-->
-<!--        </dependency>-->
-
-<!--        <dependency>-->
-<!--            <groupId>io.springfox</groupId>-->
-<!--            <artifactId>springfox-swagger-ui</artifactId>-->
-<!--            <version>${swagger.version}</version>-->
-<!--        </dependency>-->
 
 
     </dependencies>
@@ -199,6 +183,10 @@
                         </exclude>
                     </excludes>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>com.mysema.maven</groupId>

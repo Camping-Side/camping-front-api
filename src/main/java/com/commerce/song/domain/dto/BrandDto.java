@@ -1,5 +1,7 @@
 package com.commerce.song.domain.dto;
 
+import com.camping.common.domain.dto.BaseDto;
+import com.camping.common.domain.dto.PageDto;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 

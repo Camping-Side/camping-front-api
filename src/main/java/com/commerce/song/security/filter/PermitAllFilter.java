@@ -1,5 +1,6 @@
 package com.commerce.song.security.filter;
 
+import com.camping.common.exception.ExceptionResponse;
 import com.commerce.song.exception.JwtNotAvailbleException;
 import com.commerce.song.exception.SecurityContextAvailbleException;
 import com.commerce.song.util.SecurityUtil;

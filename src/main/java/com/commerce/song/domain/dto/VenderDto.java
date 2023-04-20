@@ -1,5 +1,7 @@
 package com.commerce.song.domain.dto;
 
+import com.camping.common.domain.dto.BaseDto;
+import com.camping.common.domain.dto.PageDto;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
@@ -18,14 +20,14 @@ public class VenderDto {
     }
 
     @Data
-    public static class ReqList extends PageDto{
+    public static class ReqList extends PageDto {
         @ApiModelProperty(value = "벤더사 상태(0: 신청, 1: 심사중, 2: 승인, 3: 거절)")
         private Integer vdrSts;
     }
 
     @Setter
     @Getter
-    public static class ResList extends BaseDto{
+    public static class ResList extends BaseDto {
         @ApiModelProperty(value = "벤더사id")
         private Long vdrId;
         @ApiModelProperty(value = "벤더사명")
