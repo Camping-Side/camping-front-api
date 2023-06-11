@@ -1,5 +1,6 @@
 package com.commerce.song.domain.dto;
 
+import com.camping.common.domain.dto.PageDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -171,7 +172,7 @@ public class ProductDto {
         @ApiModelProperty(value = "반품/교환 상세주소")
         private String delryRefAddr2;
 
-        @ApiModelProperty(value = "옵션타입(0: 단건형, 1: 단독형, 2: 조합형)")
+        @ApiModelProperty(value = "옵션타입(0: 단건형, 1: 단독형, 2: 조합형)", example = "0")
         private Integer optTp;
 
         @ApiModelProperty(value = "옵션타이틀1")

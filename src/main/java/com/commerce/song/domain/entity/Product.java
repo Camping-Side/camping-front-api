@@ -1,7 +1,8 @@
 package com.commerce.song.domain.entity;
 
+import com.camping.common.domain.entity.BaseEntity;
+import com.camping.common.util.DateUtil;
 import com.commerce.song.domain.dto.ProductDto;
-import com.commerce.song.util.DateUtil;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

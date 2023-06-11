@@ -1,67 +1,19 @@
-spring:
-  datasource:
-    url: ${rds.url}
-    username: ${rds.username}
-    password: ${rds.password}
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
-  jpa:
-    hibernate:
-      ddl-auto: none
-      # 기본키 생성전략
-      use-new-id-generator-mappings: false
-    database-platform: org.hibernate.dialect.MySQL8Dialect
-    properties:
-      hibernate:
-        #        show_sql: ture
-        format_sql: true
-        # 여러개 쿼리 나가야할 것을 in으로 한번에 가져옴
-        default_batch_fetch_size: 100
-        jdbc.batch_size: 50
-        # bulk
-        order_inserts: true
-        order_updates: true
-        dialect:
-          storage_engine: innodb
-
-  devtools:
-    livereload:
-      enabled: true
-    restart:
-      enabled: true
-
-cloud:
-  aws:
-    credentials:
-      access-key: ${aws.access}
-      secret-key: ${aws.secret}
-    s3:
-      bucket: ${aws.s3.bucketname}
-    region:
-      static: ${aws.region}
-    stack:
-      auto: false
-
-my:
-  server:
-    ip: http://43.200.32.212
-
-jwt:
-  header: Authorization
-  secret: ${jwt.secret}
-  # 30분
-  access-token-expire-time: 1800
-  # 1일
-  refresh-token-expire-time: 86400
-
-logging:
-  level:
-    root: info
-    org.hibernate.SQL: debug
-    org.hibernate.type: trace
-
 server:
-  port: 9080
+  port: 0
+#  max-http-header-size: 40KB
+
+spring:
+  application:
+    name: front-service
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+
+eureka:
+  instance:
+    #    hostname? ?? ip? ? ??? application.name? ?? user-service??
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
 
 mybatis:
   #   위치 설정
@@ -70,9 +22,12 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
   #  패키지명 생략
-  type-aliases-package: com.tgc.instaautoserver.domain.entity.mapper
+  type-aliases-package: com.commerce.song.domain.mapper
 # mapper log level
 
-# 로그파일 저장 위치
-logserver:
-  path: /tmp
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, busrefresh, info

@@ -5,15 +5,15 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.camping.common.domain.dto.ResultDto;
+import com.camping.common.domain.enums.rescode.AwsCode;
+import com.camping.common.exception.AwsUploadException;
+import com.camping.common.util.DateUtil;
+import com.camping.common.util.FileUtil;
 import com.commerce.song.domain.dto.AwsDto;
-import com.commerce.song.domain.dto.ResultDto;
 import com.commerce.song.domain.entity.CommImg;
-import com.commerce.song.exception.AwsUploadException;
 import com.commerce.song.repository.CommImgRepository;
 import com.commerce.song.service.AwsService;
-import com.commerce.song.util.DateUtil;
-import com.commerce.song.util.FileUtil;
-import com.commerce.song.util.enums.rescode.AwsCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,7 +30,7 @@ import java.util.Random;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-@Profile({"dev", "real"})
+@Profile({"local","dev", "real"})
 public class AwsServiceImpl implements AwsService {
     private final AmazonS3Client amazonS3Client;
     private final CommImgRepository commImgRepository;
@@ -44,8 +44,10 @@ public class AwsServiceImpl implements AwsService {
     @Override
     public ResultDto<AwsDto.FileUploadRes> uploadImage(AwsDto.ImageUploadReq req) throws IOException {
         MultipartFile file = req.getImage();
-        if(!FileUtil.isImgFile(file.getInputStream(), file.getOriginalFilename())) {
-            throw new AwsUploadException(AwsCode.AWS_IMAGE_TYPE_FAILED);
+        try(InputStream inputStream = file.getInputStream()) {
+            if (!FileUtil.isImgFile(inputStream, file.getOriginalFilename())) {
+                throw new AwsUploadException(AwsCode.AWS_IMAGE_TYPE_FAILED);
+            }
         }
 
         ResultDto<AwsDto.FileUploadRes> uploadResult = uploadFile(req.getFolder(), file);

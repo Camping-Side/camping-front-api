@@ -1,16 +1,14 @@
 package com.commerce.song.repository.dsl.impl;
 
+import com.camping.common.util.dsl.DslDateUtil;
+import com.camping.common.util.dsl.DslUtil;
 import com.commerce.song.domain.dto.ProductDto;
-import com.commerce.song.domain.entity.Product;
 import com.commerce.song.repository.dsl.ProductRepositoryCustom;
-import com.commerce.song.util.dsl.DslDateUtil;
-import com.commerce.song.util.dsl.DslUtil;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -52,9 +50,9 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
                         DslDateUtil.cprEndDate(product.endDate, reqDto.getEndDate()),
                         DslDateUtil.cprStartDate(product.createdDate, reqDto.getStartRegDate()),
                         DslDateUtil.cprEndDate(product.createdDate, reqDto.getEndRegDate()),
-                        DslUtil.cprNumEq(product.prdSts, reqDto.getPrdSts()),
-                        DslUtil.cprNumEq(product.prdTp, reqDto.getPrdTp()),
-                        DslUtil.cprNumEq(product.taxTp, reqDto.getTaxTp()),
+                        DslUtil.cprEq(product.prdSts, reqDto.getPrdSts()),
+                        DslUtil.cprEq(product.prdTp, reqDto.getPrdTp()),
+                        DslUtil.cprEq(product.taxTp, reqDto.getTaxTp()),
                         dynamicSearch(reqDto.getKeywordTp(), reqDto.getKeywordText())
                 )
                 .offset(pageable.getOffset())
@@ -74,7 +72,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
 
         // 상품명
         if(keywordType.equals(0)) {
-            return DslUtil.cprStrLike(product.name, keywordText);
+            return DslUtil.cprLike(product.name, keywordText);
         }
 
         return null;

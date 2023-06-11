@@ -1,9 +1,9 @@
 package com.commerce.song.security.filter;
 
-import com.commerce.song.exception.ExceptionResponse;
+import com.camping.common.exception.ExceptionResponse;
+import com.camping.common.exception.SecurityContextAvailbleException;
+import com.camping.common.util.SecurityUtil;
 import com.commerce.song.exception.JwtNotAvailbleException;
-import com.commerce.song.exception.SecurityContextAvailbleException;
-import com.commerce.song.util.SecurityUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -69,7 +69,7 @@ public class PermitAllFilter extends FilterSecurityInterceptor {
         try {
             return super.beforeInvocation(object);
         } catch(IllegalArgumentException e) {
-            throw new JwtNotAvailbleException("접근 권한이 없습니다.");
+            throw new JwtNotAvailbleException(request.getRequestURI() + " - 접근 권한이 없습니다.");
         }
     }
 

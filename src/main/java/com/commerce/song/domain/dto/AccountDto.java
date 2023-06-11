@@ -1,5 +1,6 @@
 package com.commerce.song.domain.dto;
 
+import com.camping.common.domain.dto.PageDto;
 import com.commerce.song.domain.entity.Account;
 import com.commerce.song.domain.entity.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -196,6 +197,16 @@ public class AccountDto extends PageDto {
         private String email;
         @ApiModelProperty(value = "회원 휴대폰번호")
         private String phone;
+    }
+
+    @Data
+    public static class RoleAccountRes {
+        @ApiModelProperty(value = "회원 번호", example = "0")
+        private Long id;
+        @ApiModelProperty(value = "회원 이메일")
+        private String email;
+        @ApiModelProperty(value = "회원 이름")
+        private String username;
     }
 
 }

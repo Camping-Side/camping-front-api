@@ -1,18 +1,18 @@
 package com.commerce.song.service.impl;
 
+import com.camping.common.domain.dto.ResultDto;
+import com.camping.common.domain.enums.rescode.AwsCode;
+import com.camping.common.exception.AwsUploadException;
+import com.camping.common.exception.BadRequestException;
+import com.camping.common.util.CustomUtil;
 import com.commerce.song.domain.dto.AwsDto;
 import com.commerce.song.domain.dto.ProductDto;
 import com.commerce.song.domain.dto.ProductOptionDto;
-import com.commerce.song.domain.dto.ResultDto;
 import com.commerce.song.domain.entity.*;
-import com.commerce.song.exception.AwsUploadException;
-import com.commerce.song.exception.BadRequestException;
 import com.commerce.song.repository.*;
 import com.commerce.song.service.AwsService;
 import com.commerce.song.service.ProductService;
-import com.commerce.song.util.CustomUtil;
-import com.commerce.song.util.enums.comm.CommImgType;
-import com.commerce.song.util.enums.rescode.AwsCode;
+import com.commerce.song.domain.enums.comm.CommImgType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service

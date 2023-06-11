@@ -1,5 +1,5 @@
 ### 로그인 - 일반유저
-POST {{host}}/api/v1/auth/login
+POST {{gateway-host}}/front-service/api/v1/auth/login
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 
@@ -18,7 +18,7 @@ client.test("로그인 성공 검증", function() {
 %}
 
 ### 로그인 - 어드민
-POST {{host}}/api/v1/auth/login
+POST {{gateway-host}}/front-service/api/v1/auth/login
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 
@@ -37,7 +37,7 @@ client.test("로그인 성공 검증", function() {
 %}
 
 ### 로그인 - 마스터
-POST {{host}}/api/v1/auth/login
+POST {{gateway-host}}/front-service/api/v1/auth/login
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 

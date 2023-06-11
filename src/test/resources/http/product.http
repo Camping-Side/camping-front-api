@@ -2,20 +2,19 @@ GET {{host}}/api/v1/products?page=0&size=10&startDate=20220101&endDate=20230303&
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 Accept: application/json
-Authorization: Bearer {{access_token}}
 
 
 ### Image upload
-POST {{host}}/api/v1/aws/upload/image
+POST {{gateway-host}}/front-service/api/v1/aws/upload/image
 Content-Type: multipart/form-data; boundary=boundary
 Accept: application/json
 Authorization: Bearer {{access_token}}
 
 --boundary
-Content-Disposition: form-data; name="image"; filename="S3.txt"
+Content-Disposition: form-data; name="image"; filename="dev_infra.txt"
 
 // The 'dev_infra.png' file will be uploaded
-< C:\Users\dkask\Desktop\S3.txt
+< C:\Users\dkask\Desktop\dev_infra.png
 
 --boundary
 Content-Disposition: form-data; name="folder";
