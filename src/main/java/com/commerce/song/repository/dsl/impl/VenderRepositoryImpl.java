@@ -33,7 +33,7 @@ public class VenderRepositoryImpl implements VenderRepositoryCustom {
                 )
                 .from(vender)
                 .where(
-                        DslUtil.cprNumEq(vender.vdrSts, reqDto.getVdrSts())
+                        DslUtil.cprEq(vender.vdrSts, reqDto.getVdrSts())
                 )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())

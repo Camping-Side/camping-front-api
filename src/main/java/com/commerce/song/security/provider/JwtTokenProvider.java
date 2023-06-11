@@ -1,35 +1,26 @@
 package com.commerce.song.security.provider;
 
+import com.camping.common.domain.dto.UserContextDto;
 import com.commerce.song.domain.dto.TokenDto;
 import com.commerce.song.domain.entity.Account;
 import com.commerce.song.domain.entity.Role;
 import com.commerce.song.exception.JwtNotAvailbleException;
 import com.commerce.song.repository.AccountRepository;
-import com.commerce.song.security.common.AccountContext;
-import com.commerce.song.security.domain.UserContextDto;
 import com.commerce.song.security.token.CustomContextToken;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Key;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -115,7 +106,7 @@ public class JwtTokenProvider implements InitializingBean {
         Set<String> roleSet = userRoles.stream().map(Role::getRoleNm).collect(Collectors.toSet());
 
         UserContextDto user = UserContextDto.builder()
-                .account(account)
+                .id(account.getId())
                 .username(account.getEmail())
                 .password(account.getPassword())
                 .roles(roleSet).build();

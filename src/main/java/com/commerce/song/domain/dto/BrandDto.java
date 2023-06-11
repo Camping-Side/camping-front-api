@@ -20,6 +20,7 @@ public class BrandDto {
     }
 
     @Data
+    @EqualsAndHashCode(callSuper = false)
     public static class ReqList extends PageDto {
         @ApiModelProperty(value = "브랜드 id", example = "0")
         private Long brandId;

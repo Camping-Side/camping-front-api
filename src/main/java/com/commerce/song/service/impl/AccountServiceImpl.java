@@ -2,24 +2,22 @@ package com.commerce.song.service.impl;
 
 import com.camping.common.exception.BadRequestException;
 import com.camping.common.util.CustomUtil;
+import com.camping.common.util.SecurityUtil;
 import com.commerce.song.domain.dto.AccountDto;
 import com.commerce.song.domain.entity.Account;
 import com.commerce.song.domain.entity.Role;
 import com.commerce.song.repository.AccountRepository;
 import com.commerce.song.repository.RoleRepository;
 import com.commerce.song.service.AccountService;
-import com.commerce.song.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 @Slf4j

@@ -1,5 +1,6 @@
 package com.commerce.song.domain.entity;
 
+import com.camping.common.domain.entity.BaseEntity;
 import com.commerce.song.domain.dto.AccountDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;

@@ -21,7 +21,7 @@ public class VenderDto {
 
     @Data
     public static class ReqList extends PageDto {
-        @ApiModelProperty(value = "벤더사 상태(0: 신청, 1: 심사중, 2: 승인, 3: 거절)")
+        @ApiModelProperty(value = "벤더사 상태(0: 신청, 1: 심사중, 2: 승인, 3: 거절)", example = "0")
         private Integer vdrSts;
     }
 
@@ -32,7 +32,7 @@ public class VenderDto {
         private Long vdrId;
         @ApiModelProperty(value = "벤더사명")
         private String vdrNm;
-        @ApiModelProperty(value = "벤더사 상태(0: 신청, 1: 심사중, 2: 승인, 3: 거절)")
+        @ApiModelProperty(value = "벤더사 상태(0: 신청, 1: 심사중, 2: 승인, 3: 거절)", example = "0")
         private Integer vdrSts;
 
         public ResList(Long vdrId, String vdrNm, Integer vdrSts, String createdDate, Long createdBy, String lastModifiedDate, Long lastModifiedBy) {

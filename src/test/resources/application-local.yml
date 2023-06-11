@@ -38,8 +38,8 @@ spring:
 cloud:
   aws:
     credentials:
-      access-key: abcde
-      secret-key: abcde
+      access-key: AKIAQD6MS4U43HMA5C4L
+      secret-key: 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
     s3:
       bucket: camping-kr
     region:

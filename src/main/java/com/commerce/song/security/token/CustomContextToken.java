@@ -1,6 +1,6 @@
 package com.commerce.song.security.token;
 
-import com.commerce.song.security.domain.UserContextDto;
+import com.camping.common.domain.dto.UserContextDto;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 

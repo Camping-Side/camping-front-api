@@ -1,0 +1,24 @@
+### config encrypt
+POST http://localhost:9888/encrypt
+
+1q2w3e4r5t!!
+
+### config decrypt
+POST http://localhost:9888/decrypt
+
+bd53a8f9bee3611865aecc3b04e154b1547fda4354f570c82943379860aea276b8e868d3355f155a98175fbc1bfd4609212135934f7b9116a9232e928daa41f5fdab956f2c56c21c2b7584a170e44008f24995537f49e239931e6d0eadb41eefd1ff4398e336c434a462945680b03f2caf2563cdcca69ee9b32258b10cca77ac
+
+### config
+GET http://localhost:9888/camping/local
+
+### actuator info
+POST {{gateway-host}}/front-service/actuator/info
+Authorization: Bearer {{access_token}}
+
+### actuator refresh
+POST {{gateway-host}}/front-service/actuator/refresh
+Authorization: Bearer {{access_token}}
+
+### actuator bus refresh
+POST {{gateway-host}}/front-service/actuator/busrefresh
+Authorization: Bearer {{access_token}}

@@ -1,7 +1,7 @@
 package com.commerce.song.config;
 
-import com.commerce.song.exception.SecurityContextAvailbleException;
-import com.commerce.song.util.SecurityUtil;
+import com.camping.common.exception.SecurityContextAvailbleException;
+import com.camping.common.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.stereotype.Component;

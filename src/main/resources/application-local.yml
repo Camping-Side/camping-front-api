@@ -1,75 +1,19 @@
-spring:
-  servlet:
-    multipart:
-      max-file-size: 10MB
-      max-request-size: 20MB
-  datasource:
-    url: jdbc:mysql://localhost:3306/task_agile?characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
-    username: scott
-    password: 1234
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
-  jpa:
-    hibernate:
-      ddl-auto: create
-      # 기본키 생성전략
-      use-new-id-generator-mappings: false
-    database-platform: org.hibernate.dialect.MySQL8Dialect
-    properties:
-      hibernate:
-        #        show_sql: ture
-        format_sql: true
-        # 여러개 쿼리 나가야할 것을 in으로 한번에 가져옴
-        default_batch_fetch_size: 100
-        jdbc.batch_size: 50
-        # bulk
-        order_inserts: true
-        order_updates: true
-        dialect:
-          storage_engine: innodb
-    open-in-view: false
-
-  devtools:
-    livereload:
-      enabled: true
-    restart:
-      enabled: true
-
-cloud:
-  aws:
-    credentials:
-      access-key: AKIAQD6MS4U4TX4KMF7N
-      secret-key: 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
-    s3:
-      bucket: camping-kr
-    region:
-      static: ap-northeast-2
-    stack:
-      auto: false
-
-my:
-  server:
-    ip: http://43.200.32.212
-
-jwt:
-  header: Authorization
-  secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10
-  # 30분
-  access-token-expire-time: 18000
-#  access-token-expire-time: 10
-  # 1일
-  refresh-token-expire-time: 86400
-#  refresh-token-expire-time: 10
-
-logging:
-  level:
-    root: info
-    org.hibernate.SQL: debug
-    org.hibernate.type: trace
-
 server:
-  port: 9060
+  port: 0
 #  max-http-header-size: 40KB
+
+spring:
+  application:
+    name: front-service
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+
+eureka:
+  instance:
+    #    hostname? ?? ip? ? ??? application.name? ?? user-service??
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
 
 mybatis:
   #   위치 설정
@@ -78,9 +22,12 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
   #  패키지명 생략
-  type-aliases-package: com.tgc.instaautoserver.domain.entity.mapper
+  type-aliases-package: com.commerce.song.domain.mapper
 # mapper log level
 
-# 로그파일 저장 위치
-logserver:
-  path: C:\log
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, busrefresh, info

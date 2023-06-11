@@ -1,5 +1,6 @@
 package com.commerce.song.domain.entity;
 
+import com.camping.common.domain.entity.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -16,7 +16,7 @@ import java.io.IOException;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-@Profile({"local"})
+@Profile({"local2"})
 public class AwsServiceLocalImpl implements AwsService {
     @Override
     public ResultDto<AwsDto.FileUploadRes> uploadFile(String folder, MultipartFile file) throws IOException {

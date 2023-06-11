@@ -38,9 +38,9 @@ public class BrandRepositoryImpl implements BrandRepositoryCustom {
                 )
                 .from(brand)
                 .where(
-                        DslUtil.cprNumEq(brand.brandId, reqDto.getBrandId())
-                        , DslUtil.cprStrLike(brand.brandNm, reqDto.getBrandNm())
-                        , DslUtil.cprStrEq(brand.useYn, reqDto.getUseYn())
+                        DslUtil.cprEq(brand.brandId, reqDto.getBrandId())
+                        , DslUtil.cprLike(brand.brandNm, reqDto.getBrandNm())
+                        , DslUtil.cprEq(brand.useYn, reqDto.getUseYn())
                 )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())

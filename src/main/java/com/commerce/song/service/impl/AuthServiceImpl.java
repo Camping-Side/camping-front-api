@@ -1,6 +1,7 @@
 package com.commerce.song.service.impl;
 
 import com.camping.common.domain.dto.ResultDto;
+import com.camping.common.domain.dto.UserContextDto;
 import com.camping.common.exception.BadRequestException;
 import com.commerce.song.domain.dto.AccountDto;
 import com.commerce.song.domain.dto.TokenDto;
@@ -11,28 +12,19 @@ import com.commerce.song.exception.JwtNotAvailbleException;
 import com.commerce.song.repository.AccountRepository;
 import com.commerce.song.repository.RefreshTokenRepository;
 import com.commerce.song.repository.RoleRepository;
-import com.commerce.song.security.domain.UserContextDto;
 import com.commerce.song.security.provider.JwtTokenProvider;
 import com.commerce.song.security.token.CustomContextToken;
 import com.commerce.song.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -90,7 +82,7 @@ public class AuthServiceImpl implements AuthService {
         Set<String> roleSet = userRoles.stream().map(Role::getRoleNm).collect(Collectors.toSet());
 
         UserContextDto user = UserContextDto.builder()
-                .account(account)
+                .id(account.getId())
                 .username(account.getEmail())
                 .password(account.getPassword())
                 .roles(roleSet).build();

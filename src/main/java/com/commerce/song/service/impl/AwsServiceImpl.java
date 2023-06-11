@@ -30,7 +30,7 @@ import java.util.Random;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-@Profile({"dev", "real"})
+@Profile({"local","dev", "real"})
 public class AwsServiceImpl implements AwsService {
     private final AmazonS3Client amazonS3Client;
     private final CommImgRepository commImgRepository;
@@ -44,8 +44,10 @@ public class AwsServiceImpl implements AwsService {
     @Override
     public ResultDto<AwsDto.FileUploadRes> uploadImage(AwsDto.ImageUploadReq req) throws IOException {
         MultipartFile file = req.getImage();
-        if(!FileUtil.isImgFile(file.getInputStream(), file.getOriginalFilename())) {
-            throw new AwsUploadException(AwsCode.AWS_IMAGE_TYPE_FAILED);
+        try(InputStream inputStream = file.getInputStream()) {
+            if (!FileUtil.isImgFile(inputStream, file.getOriginalFilename())) {
+                throw new AwsUploadException(AwsCode.AWS_IMAGE_TYPE_FAILED);
+            }
         }
 
         ResultDto<AwsDto.FileUploadRes> uploadResult = uploadFile(req.getFolder(), file);

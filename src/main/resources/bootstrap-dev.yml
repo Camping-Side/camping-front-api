@@ -1,0 +1,5 @@
+spring:
+  cloud:
+    config:
+      uri: http://43.200.32.212:8888
+      name: camping
